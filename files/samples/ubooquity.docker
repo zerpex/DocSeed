@@ -1,0 +1,19 @@
+#############
+# Ubooquity #
+#############
+
+  ubooquity:
+    restart: always
+    image: cromigon/ubooquity
+    container_name: seedbox_ubooquity
+    hostname: library
+    volumes:
+      - LIBRARY:/opt/data:ro
+      - ./files/ubooquity/conf:/opt/ubooquity-data:rw
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - UID=1069
+      - GID=1069
+      - TZ=Europe/Paris
+    ports:
+      - "5003:2202"

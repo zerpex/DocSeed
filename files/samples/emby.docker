@@ -1,0 +1,21 @@
+########
+# Emby #
+########
+
+  emby:
+    image: emby/embyserver
+    container_name: seedbox_emby
+    restart: always
+    hostname: video
+    volumes:
+      - MOVIES:/data:ro
+      - ./files/emby/conf:/config:rw
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - APP_UID=1069
+      - APP_GID=1069
+    ports:
+      - "8096:8096"
+      - "8920:8920"
+      - "7359:7359/udp"
+      - "1900:1900/udp"

@@ -1,0 +1,24 @@
+############
+# Madsonic #
+############
+
+  madsonic:
+    restart: always
+    image: madsonic/alpine-madsonic
+    container_name: seedbox_madsonic
+    hostname: zik
+    volumes:
+      - MUSIC:/media:ro
+      - PODCASTS:/podcasts:ro
+      - PLAYLISTS:/playlists:ro
+      - ./files/madsonic/conf:/config:rw
+      - ./files/start/madsonic_start.sh:/usr/local/bin/start.sh:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - GID=1069
+      - UID=1069
+      - CONTEXT_PATH=/
+      - SSL=no
+      - TERM=xterm
+    ports:
+      - "5004:4040"

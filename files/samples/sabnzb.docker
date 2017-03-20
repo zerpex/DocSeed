@@ -1,0 +1,21 @@
+##########
+# SabNZB #
+##########
+
+  sabnzbd:
+    image: linuxserver/sabnzbd
+    container_name: seedbox_sabnzdb
+    restart: always
+    hostname: newsgroups
+    volumes:
+      - INCOMING:/downloads:rw
+      - ./files/sabnzdb/temp_dls:/incomplete-downloads:rw
+      - ./files/sabnzdb/conf:/config:rw
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - WEBROOT=/
+      - PUID=1069
+      - PGID=1069
+      - TZ=Europe/Paris
+    ports:
+      - "5002:8080"
