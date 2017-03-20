@@ -1,6 +1,3 @@
-[Flood](https://github.com/jfurrow/flood)
-[Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood)
-
 # seedbox_docker
 
 ## Description :
