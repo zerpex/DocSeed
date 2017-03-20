@@ -18,10 +18,13 @@ This script automatically install some services to any debian based distro using
 2- Place yourself on the folder :  
 `cd seedbox`
 
-2- Execute :  
+2b- OPTIONNAL (_and only if you know what you are doing !_)  
+- You can change docker options in `./files/samples/*.docker` where "*" is the app you want to change.
+
+3- Execute :  
 `./seedbox_docker.sh`
 
-3- Answer questions :)
+4- Answer questions :)
 
 ## Notes :
 - If not found, it will automatically install docker and docker-compose
