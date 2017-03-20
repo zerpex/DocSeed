@@ -9,11 +9,11 @@ This script automatically install some services to any debian based distro using
 - Libresonic	   => Music streaming platform 
 
 ## Use :
-| 1- Clone this repository :
-| `git clone https://github.com/zerpex/seedbox_docker.git seedbox`
+1- Clone this repository :  
+`git clone https://github.com/zerpex/seedbox_docker.git seedbox`
 
-| 2- Execute :
-| `./seedbox_docker.sh`
+2- Execute :  
+`./seedbox_docker.sh`
 
 ## Notes :
 - If not found, it will automatically install docker and docker-compose
