@@ -8,8 +8,8 @@
 #      - Ubooquity	   => Comics streaming platform
 #      - Madsonic	   => Music streaming platform
 #
-# author       : zer ( cg.cpam@gmail.com )
-# Last updated : 2017 02 23
+# author       : zerpex ( zerpex@gmail.com )
+# Last updated : 2017 03 20
 # Version 1
 
 if [ ! -f /etc/debian_version ];
