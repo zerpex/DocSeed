@@ -35,7 +35,7 @@ This script automatically install some services to any debian based distro using
 docker stop seedbox_ubooquity
 docker run --rm -ti -v /seedbox/docker/files/ubooquity/conf:/opt/ubooquity-data -v /seedbox/librairie:/opt/data -p 5003:2202 cromigon/ubooquity:latest -webadmin
 ```
-  - Let it run and open your browser to : http://<your-ip>:5003/admin
+  - Let it run and open your browser to : `http://<your-ip>:5003/admin`
   - Configure Ubooquity as you wish and close docker (CTRL-Z) in the terminal
   - Restart ubooquity container :
 ```
