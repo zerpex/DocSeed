@@ -1,49 +1,53 @@
+[Flood](https://github.com/jfurrow/flood)
+[Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood)
+
 # seedbox_docker
 
 ## Description :
 This script automatically install some services to any debian based distro using docker and docker-compose.
-- uTorrent	   => Torrents downloader with a modern web UI ( Flood )
-- SabNZB             => Newsgroups downloader
-- Emby	           => Video streaming platform
-- Ubooquity	   => Comics streaming platform
-- Libresonic	   => Music streaming platform 
+- [rTorrent](https://github.com/rakshasa/rtorrent) : Torrents downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood).
+- [SabNZB](https://sabnzbd.org/) : Newsgroups downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-sabnzbd).
+- [Emby](https://emby.media/) : Video streaming platform dockerized by [Emby.media](https://hub.docker.com/r/emby/embyserver/).
+- [Ubooquity](https://vaemendis.net/ubooquity/) : Comics streaming platform dockerized by [Cromigon](https://github.com/cromigon/ubooquity-docker).
+- [Libresonic](https://github.com/Libresonic/libresonic) : Music streaming platform dockerized by [linuxserver.io](https://github.com/linuxserver/docker-libresonic)
 
-## Use :
-1- Clone this repository :  
+## How to use this script :
+1- Clone this repository :
 `git clone https://github.com/zerpex/seedbox_docker.git seedbox`
 
-2- Execute :  
+2- Execute :
 `./seedbox_docker.sh`
+
+3- Answer questions :)
 
 ## Notes :
 - If not found, it will automatically install docker and docker-compose
 - Default dirs set to /home/seedbox
+- Access apps through :
 
-**uTorrent** : `<your-ip>:5001`  
+**uTorrent** : `<your-ip>:5001`
  user and pass will be asked at first start
 
-**SabNZB** : `<your-ip>:5002`  
- user :  
+**SabNZB** : `<your-ip>:5002`
+ user :
  pass :
 
-**Emby** : `<your-ip>/emby`  
+**Emby** : `<your-ip>/emby`
  user and pass will be asked at first start
 
-**Ubooquity** : `<your-ip>:5003`  
+**Ubooquity** : `<your-ip>:5003`
  Admin interface is disabled by default for security reasons. In order to set up the application, you have to activate it :
-```
-docker stop seedbox_ubooquity
-docker run --rm -ti -v /seedbox/docker/files/ubooquity/conf:/opt/ubooquity-data -v /seedbox/librairie:/opt/data -p 5003:2202 cromigon/ubooquity:latest -webadmin
-```
+  - Stop Ubooquity container :
+`docker stop seedbox_ubooquity`
+  - Run the container with admin interface enabled :
+`docker run --rm -ti -v /seedbox/docker/files/ubooquity/conf:/opt/ubooquity-data -v /seedbox/librairie:/opt/data -p 5003:2202 cromigon/ubooquity:latest -webadmin`
   - Let it run and open your browser to : `http://<your-ip>:5003/admin`
   - Configure Ubooquity as you wish and close docker (CTRL-Z) in the terminal
   - Restart ubooquity container :
-```
-docker start seedbox_ubooquity
-```
+`docker start seedbox_ubooquity`
 
-**Libresonic** : `<your-ip>:5004`  
- user : admin  
+**Libresonic** : `<your-ip>:5004`
+ user : admin
  pass : admin
 
 ## To do :
