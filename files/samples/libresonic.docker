@@ -1,22 +1,23 @@
-############
-# Madsonic #
-############
+##############
+# Libresonic #
+##############
 
-  madsonic:
+  libresonic:
     restart: always
-    image: madsonic/alpine-madsonic
-    container_name: seedbox_madsonic
+    image: linuxserver/libresonic
+    container_name: seedbox_libresonic
     hostname: zik
     volumes:
-      - MUSIC:/media:ro
+      - MUSIC:/music:ro
       - PODCASTS:/podcasts:ro
       - PLAYLISTS:/playlists:ro
-      - ./files/madsonic/conf:/config:rw
+      - MEDIA:/media:ro
+      - ./files/libresonic/conf:/config:rw
       - ./files/start/madsonic_start.sh:/usr/local/bin/start.sh:ro
       - /etc/localtime:/etc/localtime:ro
     environment:
-      - GID=1069
-      - UID=1069
+      - PGID=1069
+      - PUID=1069
       - CONTEXT_PATH=/
       - SSL=no
       - TERM=xterm

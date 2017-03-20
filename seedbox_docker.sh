@@ -6,10 +6,10 @@
 #      - SabNZB        => Newsgroups downloader
 #      - Emby		   => Video streaming platform
 #      - Ubooquity	   => Comics streaming platform
-#      - Madsonic	   => Music streaming platform
+#      - Libresonic	   => Music streaming platform
 #
-# author       : zerpex ( zerpex@gmail.com )
-# Last updated : 2017 03 20
+# author       : zer ( cg.cpam@gmail.com )
+# Last updated : 2017 02 23
 # Version 1
 
 if [ ! -f /etc/debian_version ];
@@ -79,32 +79,40 @@ then
 	fi
 fi
 
-echo "Madsonic (y/n) ?"
-read Md
+echo "Libresonic (y/n) ?"
+read Ls
 then
 	echo "Path to your music ( default to /home/seebox/media/music ):"
-	read Md_MUSIC
-	if [ -z "$Md_MUSIC" ]
+	read Ls_MUSIC
+	if [ -z "$Ls_MUSIC" ]
 	then
-		Md_MUSIC="/home/seebox/media/music"
-		mkdir -p $Md_MUSIC
-		chown -R seedbox:seedbox $Md_MUSIC
+		Ls_MUSIC="/home/seebox/media/music"
+		mkdir -p $Ls_MUSIC
+		chown -R seedbox:seedbox $Ls_MUSIC
 	fi
 	echo "Path to your podcasts ( default to /home/seebox/media/podcast ):"
-	read Md_PODCAST
-	if [ -z "$Md_PODCAST" ]
+	read Ls_PODCAST
+	if [ -z "$Ls_PODCAST" ]
 	then
-		Md_PODCAST="/home/seebox/media/podcast"
-		mkdir -p $Md_PODCAST
-		chown -R seedbox:seedbox $Md_PODCAST
+		Ls_PODCAST="/home/seebox/media/podcast"
+		mkdir -p $Ls_PODCAST
+		chown -R seedbox:seedbox $Ls_PODCAST
 	fi
 	echo "Path to your playlists ( default to /home/seebox/media/playlist ):"
-	read Md_PLAYLIST
-	if [ -z "$Md_PLAYLIST" ]
+	read Ls_PLAYLIST
+	if [ -z "$Ls_PLAYLIST" ]
 	then
-		Md_PLAYLIST="/home/seebox/media/playlist"
-		mkdir -p $Md_PLAYLIST
-		chown -R seedbox:seedbox $Md_PLAYLIST
+		Ls_PLAYLIST="/home/seebox/media/playlist"
+		mkdir -p $Ls_PLAYLIST
+		chown -R seedbox:seedbox $Ls_PLAYLIST
+	fi
+	echo "Path to your other media ( default to /home/seebox/media/other ):"
+	read Ls_OTHER
+	if [ -z "$Ls_OTHER" ]
+	then
+		Ls_OTHERS="/home/seebox/media/other"
+		mkdir -p $Ls_OTHER
+		chown -R seedbox:seedbox $Ls_OTHER
 	fi
 fi
 
@@ -145,12 +153,13 @@ then
 	sudo sed -i 's/LIBRARY/'"$Ub_LIBRARY"'/g' docker-compose.yml
 fi
 
-if [ "$Md" == "y" ]
+if [ "$Ls" == "y" ]
 then
-	cat files/samples/madsonic.docker >> docker-compose.yml
-	sudo sed -i 's/MUSIC/'"$Md_MUSIC"'/g' docker-compose.yml
-	sudo sed -i 's/PODCASTS/'"$Md_PODCAST"'/g' docker-compose.yml
-	sudo sed -i 's/PLAYLISTS/'"$Md_PLAYLISTS"'/g' docker-compose.yml
+	cat files/samples/libresonic.docker >> docker-compose.yml
+	sudo sed -i 's/MUSIC/'"$Ls_MUSIC"'/g' docker-compose.yml
+	sudo sed -i 's/PODCASTS/'"$Ls_PODCAST"'/g' docker-compose.yml
+	sudo sed -i 's/PLAYLISTS/'"$Ls_PLAYLISTS"'/g' docker-compose.yml
+	sudo sed -i 's/MEDIA/'"$Ls_OTHER"'/g' docker-compose.yml
 fi
 
 cat files/samples/foot.docker >> docker-compose.yml
