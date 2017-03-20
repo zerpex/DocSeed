@@ -12,10 +12,13 @@ This script automatically install some services to any debian based distro using
 - [Libresonic](https://github.com/Libresonic/libresonic) : Music streaming platform dockerized by [linuxserver.io](https://github.com/linuxserver/docker-libresonic)
 
 ## How to use this script :
-1- Clone this repository :
+1- Clone this repository :  
 `git clone https://github.com/zerpex/seedbox_docker.git seedbox`
 
-2- Execute :
+2- Place yourself on the folder :  
+`cd seedbox`
+
+2- Execute :  
 `./seedbox_docker.sh`
 
 3- Answer questions :)
