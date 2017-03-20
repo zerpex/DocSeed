@@ -10,7 +10,7 @@ This script automatically install some services to any debian based distro using
 
 # Use :
 - Clone this repository :
-  git clone https://github.com/zerpex/seedbox_docker.git
+  git clone https://github.com/zerpex/seedbox_docker.git seedbox
 - Execute ./seedbox_docker.sh
 
 #Notes :
