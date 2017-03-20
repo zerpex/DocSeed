@@ -19,17 +19,17 @@ This script automatically install some services to any debian based distro using
 - If not found, it will automatically install docker and docker-compose
 - Default dirs set to /home/seedbox
 
-**uTorrent** : `<your-ip>:5001`
+**uTorrent** : `<your-ip>:5001`  
  user and pass will be asked at first start
 
-**SabNZB** : `<your-ip>:5002`
- user :
+**SabNZB** : `<your-ip>:5002`  
+ user :  
  pass :
 
-**Emby** : `<your-ip>/emby`
+**Emby** : `<your-ip>/emby`  
  user and pass will be asked at first start
 
-**Ubooquity** : `<your-ip>:5003`
+**Ubooquity** : `<your-ip>:5003`  
  Admin interface is disabled by default for security reasons. In order to set up the application, you have to activate it :
 ```
 docker stop seedbox_ubooquity
@@ -42,8 +42,8 @@ docker run --rm -ti -v /seedbox/docker/files/ubooquity/conf:/opt/ubooquity-data 
 docker start seedbox_ubooquity
 ```
 
-**Libresonic** : `<your-ip>:5004`
- user : admin
+**Libresonic** : `<your-ip>:5004`  
+ user : admin  
  pass : admin
 
 ## To do :
