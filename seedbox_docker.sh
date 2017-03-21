@@ -172,6 +172,27 @@ then
         fi
 fi
 
+echo "Headphones (y/n) ?"
+read Hp
+then
+        echo "Path to your Comics incoming folder ( default to /home/seebox/media/incoming ):"
+        read Hp_ZICINC
+        if [ -z "$Hp_ZICINC" ]
+        then
+                Hp_ZICINC="/home/seebox/media/incoming"
+                mkdir -p $Hp_ZICINC
+                chown -R seedbox:seedbox $Hp_ZICINC
+        fi
+        echo "Path to your Comics ( default to /home/seebox/media/comics ):"
+        read Hp_ZIC
+        if [ -z "$Hp_ZIC" ]
+        then
+                Hp_ZIC="/home/seebox/media/comics"
+                mkdir -p $Hp_ZIC
+                chown -R seedbox:seedbox $Hp_ZIC
+        fi
+fi
+
 if [ ! -s /usr/bin/docker ]
 then
         sudo apt-get -y update
@@ -233,6 +254,13 @@ then
         cat files/samples/mylar.docker >> docker-compose.yml
         sudo sed -i 's/BDINC/'"$My_BDINC"'/g' docker-compose.yml
         sudo sed -i 's/BDS/'"$My_BDS"'/g' docker-compose.yml
+fi
+
+if [ "$Hp" == "y" ]
+then
+        cat files/samples/headphones.docker >> docker-compose.yml
+        sudo sed -i 's/ZICINC/'"$Hp_ZICINC"'/g' docker-compose.yml
+        sudo sed -i 's/ZIC/'"$Hp_ZIC"'/g' docker-compose.yml
 fi
 
 cat files/samples/foot.docker >> docker-compose.yml

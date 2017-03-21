@@ -1,0 +1,21 @@
+##############
+# Headphones #
+##############
+
+   headphones:
+    image: linuxserver/headphones
+    container_name: seedbox-headphones
+    hostname: headphones
+    volumes:
+      - ./files/headphones:/config
+      - ZICINC:/downloads
+      - ZIC:/comics
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    environment:
+      - PUID=1069
+      - PGID=1069
+      - TZ=Europe/Paris
+    ports:
+      - 5007:8181
+

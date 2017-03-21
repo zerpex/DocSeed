@@ -8,7 +8,9 @@ This script automatically install some services to any debian based distro using
 - [SabNZB](https://sabnzbd.org/) : Newsgroups downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-sabnzbd).
 
 **Download automation :**
-- [SickGear](https://github.com/SickGear/SickGear) : TV Shows download manager dockerized by [ressu](https://github.com/SickGear/SickGear.Docker).
+- [SickGear](https://github.com/SickGear/SickGear) : Automated TV Shows downloader dockerized by [ressu](https://github.com/SickGear/SickGear.Docker).
+- [Headphones](https://github.com/evilhero/mylar) : Automated music downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-headphones).
+- [Mylar](https://github.com/evilhero/mylar) : Automated Comic Book (cbr/cbz) downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-mylar).  
 
 **Streaming :**
 - [Emby](https://emby.media/) : Video streaming platform dockerized by [Emby.media](https://hub.docker.com/r/emby/embyserver/).
@@ -64,6 +66,10 @@ This script automatically install some services to any debian based distro using
  pass : admin
 
 **SickGear** : `<your-ip>:5005`
+
+**Headphones** : `<your-ip>:5006`
+
+**Mylar** : `<your-ip>:5007`
 
 ## To do :
 - Add a reverse proxy
