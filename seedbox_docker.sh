@@ -165,6 +165,7 @@ then
 fi
 
 cat files/samples/head.docker > docker-compose.yml
+cat files/samples/watchtower.docker > docker-compose.yml
 
 if [ "$rT" == "y" ]
 then

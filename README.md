@@ -7,13 +7,16 @@ This script automatically install some services to any debian based distro using
 - [rTorrent](https://github.com/rakshasa/rtorrent) : Torrents downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood).
 - [SabNZB](https://sabnzbd.org/) : Newsgroups downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-sabnzbd).
 
-**Download automation:**
+**Download automation :**
 - [SickGear](https://github.com/SickGear/SickGear) : TV Shows download manager dockerized by [ressu](https://github.com/SickGear/SickGear.Docker).
 
 **Streaming :**
 - [Emby](https://emby.media/) : Video streaming platform dockerized by [Emby.media](https://hub.docker.com/r/emby/embyserver/).
 - [Ubooquity](https://vaemendis.net/ubooquity/) : Comics streaming platform dockerized by [Cromigon](https://github.com/cromigon/ubooquity-docker).
 - [Libresonic](https://github.com/Libresonic/libresonic) : Music streaming platform dockerized by [linuxserver.io](https://github.com/linuxserver/docker-libresonic)
+
+**Tools :**
+- [Watchtower](https://github.com/v2tec/watchtower) : Check and update all other containers automaticaly.
 
 ## How to use this script :
 1- Clone this repository :  
