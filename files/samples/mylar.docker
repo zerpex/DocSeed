@@ -1,0 +1,21 @@
+#########
+# Mylar #
+#########
+
+   mylar:
+    image: linuxserver/mylar
+    container_name: seedbox-mylar
+    hostname: mylar
+    volumes:
+      - ./files/mylar:/config
+      - BDINC:/downloads
+      - BDS:/comics
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    environment:
+      - PUID=1069
+      - PGID=1069
+      - TZ=Europe/Paris
+    ports:
+      - 5006:8090
+

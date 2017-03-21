@@ -151,6 +151,27 @@ then
         fi
 fi
 
+echo "Mylar (y/n) ?"
+read My
+then
+        echo "Path to your Comics incoming folder ( default to /home/seebox/media/incoming ):"
+        read My_BDINC
+        if [ -z "$My_BDINC" ]
+        then
+                My_BDINC="/home/seebox/media/incoming"
+                mkdir -p $My_BDINC
+                chown -R seedbox:seedbox $My_BDINC
+        fi
+        echo "Path to your Comics ( default to /home/seebox/media/comics ):"
+        read My_BDS
+        if [ -z "$My_BDS" ]
+        then
+                My_BDS="/home/seebox/media/comics"
+                mkdir -p $My_BDS
+                chown -R seedbox:seedbox $My_BDS
+        fi
+fi
+
 if [ ! -s /usr/bin/docker ]
 then
         sudo apt-get -y update
@@ -204,7 +225,14 @@ if [ "$Sg" == "y" ]
 then
         cat files/samples/sickgear.docker >> docker-compose.yml
         sudo sed -i "s@TVINC@$Sg_TVINC@g" docker-compose.yml
-		sudo sed -i "s@TVSHOWS@$Sg_TVSHOWS@g" docker-compose.yml
+	sudo sed -i "s@TVSHOWS@$Sg_TVSHOWS@g" docker-compose.yml
+fi
+
+if [ "$My" == "y" ]
+then
+        cat files/samples/mylar.docker >> docker-compose.yml
+        sudo sed -i 's/BDINC/'"$My_BDINC"'/g' docker-compose.yml
+        sudo sed -i 's/BDS/'"$My_BDS"'/g' docker-compose.yml
 fi
 
 cat files/samples/foot.docker >> docker-compose.yml
