@@ -151,6 +151,8 @@ then
 	sudo chmod +x /usr/local/bin/docker-compose
 fi
 
+cat files/samples/head.docker > docker-compose.yml
+
 if [ "$rT" == "y" ]
 then
 	cat files/samples/utorrent.docker >> docker-compose.yml
