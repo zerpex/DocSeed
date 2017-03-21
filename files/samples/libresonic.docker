@@ -23,3 +23,4 @@
       - TERM=xterm
     ports:
       - "5004:4040"
+

@@ -19,3 +19,4 @@
       - TZ=Europe/Paris
     ports:
       - "5002:8080"
+
