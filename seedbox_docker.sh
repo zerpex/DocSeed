@@ -3,14 +3,15 @@
 #
 # This script automatically manage some services to any debian based distro.
 #      - uTorrent	   => Torrents downloader with a modern web UI ( Flood )
-#      - SabNZB        => Newsgroups downloader
+#      - SabNZB            => Newsgroups downloader
 #      - Emby		   => Video streaming platform
 #      - Ubooquity	   => Comics streaming platform
 #      - Libresonic	   => Music streaming platform
+#      - SickGear          => TV Shows download manager
 #
-# author       : zer ( cg.cpam@gmail.com )
-# Last updated : 2017 02 23
-# Version 1
+# author       : zerpex ( zerpex@gmail.com )
+# Last updated : 2017 03 21
+# Version 1.1
 
 if [ ! -f /etc/debian_version ];
 then
@@ -116,6 +117,27 @@ then
 	fi
 fi
 
+echo "SickGear (y/n) ?"
+read Sg
+then
+        echo "Path to your TV Shows incoming folder ( default to /home/seebox/media/incoming ):"
+        read Sg_TVINC
+        if [ -z "$Sg_TVINC" ]
+        then
+                Sg_TVINC="/home/seebox/media/incoming"
+                mkdir -p $Sg_TVINC
+                chown -R seedbox:seedbox $Sg_TVINC
+        fi
+        echo "Path to your TV Shows ( default to /home/seebox/media/TV ):"
+        read Sg_TVSHOWS
+        if [ -z "$Sg_TVSHOWS" ]
+        then
+                Sg_TVSHOWS="/home/seebox/media/TV"
+                mkdir -p $Sg_TVSHOWS
+                chown -R seedbox:seedbox $Sg_TVSHOWS
+        fi
+fi
+
 if [ ! -s /usr/bin/docker ]
 then
 	sudo apt-get -y update
@@ -160,6 +182,13 @@ then
 	sudo sed -i 's/PODCASTS/'"$Ls_PODCAST"'/g' docker-compose.yml
 	sudo sed -i 's/PLAYLISTS/'"$Ls_PLAYLISTS"'/g' docker-compose.yml
 	sudo sed -i 's/MEDIA/'"$Ls_OTHER"'/g' docker-compose.yml
+fi
+
+if [ "$Sg" == "y" ]
+then
+        cat files/samples/sickgear.docker >> docker-compose.yml
+        sudo sed -i 's/TVINC/'"$Sg_TVINC"'/g' docker-compose.yml
+        sudo sed -i 's/TVSHOWS/'"$Sg_TVSHOWS"'/g' docker-compose.yml
 fi
 
 cat files/samples/foot.docker >> docker-compose.yml

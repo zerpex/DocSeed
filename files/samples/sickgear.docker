@@ -1,0 +1,20 @@
+############
+# SickGear #
+############
+
+   sickgear:
+    image: ressu/sickgear
+    container_name: seedbox-sickgear
+    hostname: sickgear
+    volumes:
+      - ./files/sickgear:/data
+      - TVINC:/incoming
+      - TVSHOWS:/tv
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    environment:
+      - APP_UID=1069
+      - APP_GID=1069
+      - TZ=Europe/Paris
+    ports:
+      - 5005:8081
