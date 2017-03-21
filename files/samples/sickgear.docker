@@ -4,7 +4,7 @@
 
    sickgear:
     image: ressu/sickgear
-    container_name: seedbox-sickgear
+    container_name: autodl-TV_sickgear
     hostname: sickgear
     volumes:
       - ./files/sickgear:/data

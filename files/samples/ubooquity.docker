@@ -5,7 +5,7 @@
   ubooquity:
     restart: always
     image: cromigon/ubooquity
-    container_name: seedbox_ubooquity
+    container_name: stream-comics_ubooquity
     hostname: library
     volumes:
       - LIBRARY:/opt/data:ro

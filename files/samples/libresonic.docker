@@ -5,7 +5,7 @@
   libresonic:
     restart: always
     image: linuxserver/libresonic
-    container_name: seedbox_libresonic
+    container_name: stream-music_libresonic
     hostname: zik
     volumes:
       - MUSIC:/music:ro

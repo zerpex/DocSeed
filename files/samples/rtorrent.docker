@@ -4,7 +4,7 @@
 
   rtorrent:
     image: wonderfall/rtorrent-flood
-    container_name: seedbox_rutorrent
+    container_name: dl-torrent_rtorrent
     restart: always
     hostname: torrent
     volumes:

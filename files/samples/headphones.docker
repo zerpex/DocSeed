@@ -4,7 +4,7 @@
 
    headphones:
     image: linuxserver/headphones
-    container_name: seedbox-headphones
+    container_name: autodl-music_headphones
     hostname: headphones
     volumes:
       - ./files/headphones:/config

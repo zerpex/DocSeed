@@ -4,7 +4,7 @@
 
   emby:
     image: emby/embyserver
-    container_name: seedbox_emby
+    container_name: stream-video_emby
     restart: always
     hostname: video
     volumes:

@@ -4,7 +4,7 @@
 
   sabnzbd:
     image: linuxserver/sabnzbd
-    container_name: seedbox_sabnzdb
+    container_name: dl-newsgroups_sabnzdb
     restart: always
     hostname: newsgroups
     volumes:

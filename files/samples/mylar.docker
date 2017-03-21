@@ -4,7 +4,7 @@
 
    mylar:
     image: linuxserver/mylar
-    container_name: seedbox-mylar
+    container_name: autodl-comics_mylar
     hostname: mylar
     volumes:
       - ./files/mylar:/config
