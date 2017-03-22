@@ -10,8 +10,8 @@
 #      - SickGear          => TV Shows download manager
 #
 # author       : zerpex ( zerpex@gmail.com )
-# Last updated : 2017 03 21
-# Version 1.1
+# Last updated : 2017 03 22
+# Version 1.2
 
 #--- Define text colors
 CSI="\033["
@@ -27,171 +27,154 @@ then
         exit 0
 fi
 
-sudo addgroup -g 1069 seedbox && sudo adduser -h /home/seedbox --create-home -s /bin/sh -D -G seedbox -u 1069 seedbox
-
 echo " "
 echo -e "${CYELLOW}This script require docker and docker-compose, it will install it if not found on the system. please quit with CTRL+C if you do not agree.$CEND"
+echo " "
+
+sudo addgroup -g 1069 seedbox && sudo adduser -h /home/seedbox --create-home -s /bin/sh -D -G seedbox -u 1069 seedbox
+
+cat files/samples/head.docker > docker-compose.yml
+cat files/samples/watchtower.docker >> docker-compose.yml
+
+echo -e "${CYELLOW}Please set the root path of your installation ($CEND${CBLUE}default to /home/seebox$CEND{CYELLOW}) :$CEND"
+read DEFAULT_PATH
+if [ -z "$DEFAULT_PATH" ]
+then
+		DEFAULT_PATH=/home/seebox
+		sudo mkdir -p $DEFAULT_PATH
+		sudo chown -R seedbox:seedbox $DEFAULT_PATH
+fi
+echo " "
+echo -e "${CYELLOW}Please set the path of your incoming folder ($CEND${CBLUE}default to /home/seebox/incoming$CEND{CYELLOW}) :$CEND"
+read INC_PATH
+if [ -z "$INC_PATH" ]
+then
+		INC_PATH=$DEFAULT_PATH/incoming
+		sudo mkdir -p $INC_PATH
+		sudo chown -R seedbox:seedbox $INC_PATH
+fi
+echo " "
+echo -e "${CYELLOW}Please set the path of your media folder ($CEND${CBLUE}default to /home/seebox/media$CEND{CYELLOW}) :$CEND"
+read MEDIA_PATH
+if [ -z "$MEDIA_PATH" ]
+then
+		MEDIA_PATH=$DEFAULT_PATH/media
+		sudo mkdir -p $MEDIA_PATH
+		sudo chown -R seedbox:seedbox $MEDIA_PATH
+fi
 echo " "
 echo -e "${CYELLOW}Do you want to install :$CEND"
 echo " "
 
-echo -e "${CBLUE}uTorrent + Flood interface (y/n) ?$CEND"
+echo -e "${CBLUE}rTorrent is a lightweight ans stable torrent downloader. Here installed with a modern UI (Flood).$CEND"
+echo -e "${CBLUE}Install rTorrent + Flood interface (y/N) ?$CEND"
 read rT
 if [ "$rT" == "y" ]
 then
-        echo -e "${CGREEN}Path to your torrents incoming folder ( default to /home/seebox/media/incoming ):$CEND"
-        read rT_INC
-        if [ -z "$rT_INC" ]
-        then
-                rT_INC="/home/seebox/media/incoming"
-                mkdir -p $rT_INC
-                chown -R seedbox:seedbox $rT_INC
-        fi
+        sudo mkdir -p $INC_PATH
+		cat files/samples/rtorrent.docker >> docker-compose.yml
+        sudo sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
 fi
 
-echo -e "${CBLUE}SabNZB (y/n) ?$CEND"
+echo -e "${CBLUE}SabNZB is a newsgroup downloader.$CEND"
+echo -e "${CBLUE}Install SabNZB (y/N) ?$CEND"
 read Sb
 if [ "$Sb" == "y" ]
 then
-        echo -e "${CGREEN}Path to your newsgroups incoming folder ( default to /home/seebox/media/incoming ):$CEND"
-        read Sb_INC
-        if [ -z "$Sb_INC" ]
-        then
-                Sb_INC="/home/seebox/media/incoming"
-                mkdir -p $Sb_INC
-                chown -R seedbox:seedbox $Sb_INC
-        fi
+        sudo mkdir -p $INC_PATH
+		cat files/samples/sabnzb.docker >> docker-compose.yml
+        sudo sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
 fi
 
-echo -e "${CBLUE}Emby (y/n) ?$CEND"
+echo -e "${CBLUE}Emby is a media (video/photo/music) streaming plateform.$CEND"
+echo -e "${CBLUE}Install emby (y/N) ?$CEND"
 read Eb
 if [ "$Eb" == "y" ]
 then
-        echo -e "${CGREEN}Path to your movies ( default to /home/seebox/media/movies ):$CEND"
-        read Eb_MOVIES
-        if [ -z "$Eb_MOVIES" ]
-        then
-                Eb_MOVIES="/home/seebox/media/movies"
-                mkdir -p $Eb_MOVIES
-                chown -R seedbox:seedbox $Eb_MOVIES
-        fi
+        sudo mkdir -p $MEDIA_PATH/movies
+		cat files/samples/emby.docker >> docker-compose.yml
+        sudo sed -i "s@MOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
 fi
 
-echo -e "${CBLUE}Ubooquity (y/n) ?$CEND"
+echo -e "${CBLUE}Ubooquity is a library (comics/ebooks/magazines) streaming plateform.$CEND"
+echo -e "${CBLUE}Install ubooquity (y/n) ?$CEND"
 read Ub
 if [ "$Ub" == "y" ]
 then
-        echo -e "${CGREEN}Path to your library ( default to /home/seebox/media/library ):$CEND"
-        read Ub_LIBRARY
-        if [ -z "$Ub_LIBRARY" ]
-        then
-                Ub_LIBRARY="/home/seebox/media/library"
-                mkdir -p $Ub_LIBRARY
-                chown -R seedbox:seedbox $Ub_LIBRARY
-        fi
+        sudo mkdir -p $MEDIA_PATH/library
+		cat files/samples/ubooquity.docker >> docker-compose.yml
+        sudo sed -i "s@LIBRARY@$MEDIA_PATH/library@g" docker-compose.yml
 fi
 
-echo -e "${CBLUE}Libresonic (y/n) ?$CEND"
+echo -e "${CBLUE}Libresonic is a music streaming plateform.$CEND"
+echo -e "${CBLUE}Install libresonic (y/N) ?$CEND"
 read Ls
 if [ "$Ls" == "y" ]
 then
-        echo -e "${CGREEN}Path to your music ( default to /home/seebox/media/music ):$CEND"
-        read Ls_MUSIC
-        if [ -z "$Ls_MUSIC" ]
-        then
-                Ls_MUSIC="/home/seebox/media/music"
-                mkdir -p $Ls_MUSIC
-                chown -R seedbox:seedbox $Ls_MUSIC
-        fi
-        echo -e "${CGREEN}Path to your podcasts ( default to /home/seebox/media/podcast ):$CEND"
-        read Ls_PODCAST
-        if [ -z "$Ls_PODCAST" ]
-        then
-                Ls_PODCAST="/home/seebox/media/podcast"
-                mkdir -p $Ls_PODCAST
-                chown -R seedbox:seedbox $Ls_PODCAST
-        fi
-        echo -e "${CGREEN}Path to your playlists ( default to /home/seebox/media/playlist ):$CEND"
-        read Ls_PLAYLIST
-        if [ -z "$Ls_PLAYLIST" ]
-        then
-                Ls_PLAYLIST="/home/seebox/media/playlist"
-                mkdir -p $Ls_PLAYLIST
-                chown -R seedbox:seedbox $Ls_PLAYLIST
-        fi
-        echo -e "${CGREEN}Path to your other media ( default to /home/seebox/media/other ):$CEND"
-        read Ls_OTHER
-        if [ -z "$Ls_OTHER" ]
-        then
-                Ls_OTHER="/home/seebox/media/other"
-                mkdir -p $Ls_OTHER
-                chown -R seedbox:seedbox $Ls_OTHER
-        fi
+        sudo mkdir -p $MEDIA_PATH/sound/music
+		sudo mkdir -p $MEDIA_PATH/sound/podcast
+		sudo mkdir -p $MEDIA_PATH/sound/playlist
+		sudo mkdir -p $MEDIA_PATH/sound/other
+        cat files/samples/libresonic.docker >> docker-compose.yml
+        sudo sed -i "s@MUSIC@$MEDIA_PATH/sound/music@g" docker-compose.yml
+        sudo sed -i "s@PODCASTS@$MEDIA_PATH/sound/podcast@g" docker-compose.yml
+        sudo sed -i "s@PLAYLISTS@$MEDIA_PATH/sound/playlist@g" docker-compose.yml
+        sudo sed -i "s@MEDIA@$MEDIA_PATH/sound/other@g" docker-compose.yml
 fi
 
-echo -e "${CBLUE}SickGear (y/n) ?$CEND"
+echo -e "${CBLUE}SickGear is a TV shows download manager.$CEND"
+echo -e "${CBLUE}Install SickGear (y/N) ?$CEND"
 read Sg
 if [ "$Sg" == "y" ]
 then
-        echo -e "${CGREEN}Path to your TV Shows incoming folder ( default to /home/seebox/media/incoming ):$CEND"
-        read Sg_TVINC
-        if [ -z "$Sg_TVINC" ]
-        then
-                Sg_TVINC="/home/seebox/media/incoming"
-                mkdir -p $Sg_TVINC
-                chown -R seedbox:seedbox $Sg_TVINC
-        fi
-        echo -e "${CGREEN}Path to your TV Shows ( default to /home/seebox/media/TV ):$CEND"
-        read Sg_TVSHOWS
-        if [ -z "$Sg_TVSHOWS" ]
-        then
-                Sg_TVSHOWS="/home/seebox/media/TV"
-                mkdir -p $Sg_TVSHOWS
-                chown -R seedbox:seedbox $Sg_TVSHOWS
-        fi
+        sudo mkdir -p $INC_PATH/tv
+        sudo mkdir -p $MEDIA_PATH/tv
+        cat files/samples/sickgear.docker >> docker-compose.yml
+        sudo sed -i "s@TVINC@$INC_PATH/tv@g" docker-compose.yml
+        sudo sed -i "s@TVSHOWS@$MEDIA_PATH/tv@g" docker-compose.yml
 fi
 
-echo "Mylar (y/n) ?"
+echo -e "${CBLUE}Mylar is a comics download manager.$CEND"
+echo -e "${CBLUE}Install Mylar (y/N) ?$CEND"
 read My
+if [ "$My" == "y" ]
 then
-        echo "Path to your Comics incoming folder ( default to /home/seebox/media/incoming ):"
-        read My_BDINC
-        if [ -z "$My_BDINC" ]
-        then
-                My_BDINC="/home/seebox/media/incoming"
-                mkdir -p $My_BDINC
-                chown -R seedbox:seedbox $My_BDINC
-        fi
-        echo "Path to your Comics ( default to /home/seebox/media/comics ):"
-        read My_BDS
-        if [ -z "$My_BDS" ]
-        then
-                My_BDS="/home/seebox/media/comics"
-                mkdir -p $My_BDS
-                chown -R seedbox:seedbox $My_BDS
-        fi
+        sudo mkdir -p $INC_PATH/library
+        sudo mkdir -p $MEDIA_PATH/library
+        cat files/samples/mylar.docker >> docker-compose.yml
+        sudo sed -i "s@BDINC@$INC_PATH/library@g" docker-compose.yml
+        sudo sed -i "s@BDS@$MEDIA_PATH/library@g" docker-compose.yml
 fi
 
-echo "Headphones (y/n) ?"
+echo -e "${CBLUE}Headphones is a music download manager.$CEND"
+echo -e "${CBLUE}Install Headphones (y/N) ?$CEND"
 read Hp
+if [ "$Hp" == "y" ]
 then
-        echo "Path to your Comics incoming folder ( default to /home/seebox/media/incoming ):"
-        read Hp_ZICINC
-        if [ -z "$Hp_ZICINC" ]
-        then
-                Hp_ZICINC="/home/seebox/media/incoming"
-                mkdir -p $Hp_ZICINC
-                chown -R seedbox:seedbox $Hp_ZICINC
-        fi
-        echo "Path to your Comics ( default to /home/seebox/media/comics ):"
-        read Hp_ZIC
-        if [ -z "$Hp_ZIC" ]
-        then
-                Hp_ZIC="/home/seebox/media/comics"
-                mkdir -p $Hp_ZIC
-                chown -R seedbox:seedbox $Hp_ZIC
-        fi
+        sudo mkdir -p $INC_PATH/music
+        sudo mkdir -p $MEDIA_PATH/sound/music
+        cat files/samples/headphones.docker >> docker-compose.yml
+        sudo sed -i "s@ZICINC@$INC_PATH/music@g@ docker-compose.yml
+        sudo sed -i "s@ZIC@$MEDIA_PATH/sound/music"s@g" docker-compose.yml
 fi
+
+echo -e "${CBLUE}Radarr is a movie download manager.$CEND"
+echo -e "${CBLUE}Install Radarr (y/N) ?$CEND"
+read Rd
+if [ "$Sg" == "y" ]
+then
+        sudo mkdir -p $INC_PATH/movies
+        sudo mkdir -p $MEDIA_PATH/movies
+        cat files/samples/radarr.docker >> docker-compose.yml
+        sudo sed -i "s@MINC@$INC_PATH/movies@g" docker-compose.yml
+        sudo sed -i "s@RMOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
+fi
+
+cat files/samples/foot.docker >> docker-compose.yml
+
+#######################################################
+# Check if docker is installed. If not, install it :) #
+#######################################################
 
 if [ ! -s /usr/bin/docker ]
 then
@@ -205,64 +188,5 @@ then
         sudo curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
         sudo chmod +x /usr/local/bin/docker-compose
 fi
-
-cat files/samples/head.docker > docker-compose.yml
-cat files/samples/watchtower.docker > docker-compose.yml
-
-if [ "$rT" == "y" ]
-then
-        cat files/samples/rtorrent.docker >> docker-compose.yml
-		sudo sed -i "s@INCOMING@$rT_INC@g" docker-compose.yml
-fi
-
-if [ "$Sb" == "y" ]
-then
-        cat files/samples/sabnzb.docker >> docker-compose.yml
-		sudo sed -i "s@INCOMING@$Sb_INC@g" docker-compose.yml
-fi
-
-if [ "$Eb" == "y" ]
-then
-        cat files/samples/emby.docker >> docker-compose.yml
-		sudo sed -i "s@MOVIES@$Eb_MOVIES@g" docker-compose.yml
-fi
-
-if [ "$Ub" == "y" ]
-then
-        cat files/samples/ubooquity.docker >> docker-compose.yml
-		sudo sed -i "s@LIBRARY@$Ub_LIBRARY@g" docker-compose.yml
-fi
-
-if [ "$Ls" == "y" ]
-then
-        cat files/samples/libresonic.docker >> docker-compose.yml
-		sudo sed -i "s@MUSIC@$Ls_MUSIC@g" docker-compose.yml
-		sudo sed -i "s@PODCASTS@$Ls_PODCAST@g" docker-compose.yml
-		sudo sed -i "s@PLAYLISTS@$Ls_PLAYLISTS@g" docker-compose.yml
-		sudo sed -i "s@MEDIA@$Ls_OTHER@g" docker-compose.yml
-fi
-
-if [ "$Sg" == "y" ]
-then
-        cat files/samples/sickgear.docker >> docker-compose.yml
-        sudo sed -i "s@TVINC@$Sg_TVINC@g" docker-compose.yml
-	sudo sed -i "s@TVSHOWS@$Sg_TVSHOWS@g" docker-compose.yml
-fi
-
-if [ "$My" == "y" ]
-then
-        cat files/samples/mylar.docker >> docker-compose.yml
-        sudo sed -i 's/BDINC/'"$My_BDINC"'/g' docker-compose.yml
-        sudo sed -i 's/BDS/'"$My_BDS"'/g' docker-compose.yml
-fi
-
-if [ "$Hp" == "y" ]
-then
-        cat files/samples/headphones.docker >> docker-compose.yml
-        sudo sed -i 's/ZICINC/'"$Hp_ZICINC"'/g' docker-compose.yml
-        sudo sed -i 's/ZIC/'"$Hp_ZIC"'/g' docker-compose.yml
-fi
-
-cat files/samples/foot.docker >> docker-compose.yml
 
 docker-compose up -d
