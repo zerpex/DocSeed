@@ -170,6 +170,14 @@ then
         sudo sed -i "s@RMOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
 fi
 
+echo -e "${CBLUE}HTPC Manager is a front-end interface to manage many htpc related applications.$CEND"
+echo -e "${CBLUE}Install HTPC Manager (y/N) ?$CEND"
+read Hm
+if [ "$Hm" == "y" ]
+then
+        cat files/samples/htpcmanager.docker >> docker-compose.yml
+fi
+
 cat files/samples/foot.docker >> docker-compose.yml
 
 #######################################################

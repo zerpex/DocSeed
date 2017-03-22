@@ -19,6 +19,7 @@ This script automatically install some services to any debian based distro using
 - [Libresonic](https://github.com/Libresonic/libresonic) : Music streaming platform dockerized by [linuxserver.io](https://github.com/linuxserver/docker-libresonic)
 
 **Tools :**
+- [HTPC Manager](https://github.com/Hellowlol/HTPC-Manager) : Front-end interface to manage many htpc related applications dockerized by [linuxserver.io](https://github.com/linuxserver/docker-htpcmanager).
 - [Watchtower](https://github.com/v2tec/watchtower) : Check and update all other containers automaticaly.
 
 ## How to use this script :
@@ -73,6 +74,8 @@ This script automatically install some services to any debian based distro using
 **Mylar** : `<your-ip>:5007`
 
 **Radarr** : `<your-ip>:5008`
+
+**HTPC Manager** : `<your-ip>:5555`
 
 ## To do :
 - Add a reverse proxy

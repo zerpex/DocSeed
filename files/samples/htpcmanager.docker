@@ -1,0 +1,17 @@
+################
+# HTPC Manager #
+################
+
+   htpcmanager:
+    image: linuxserver/htpcmanager
+    container_name: tool-HTPCManager
+    volumes:
+     - ./files/htpcmanager:/config
+    restart: always
+    environment:
+     - PUID=1069
+     - PGID=1069
+     - TZ=Europe/Paris
+    ports:
+     - 5555:8085
+
