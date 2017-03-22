@@ -4,14 +4,14 @@
 This script automatically install some services to any debian based distro using docker and docker-compose.
 
 **Downloaders :**
-- [rTorrent](https://github.com/rakshasa/rtorrent) : Torrents downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood).
-- [SabNZB](https://sabnzbd.org/) : Newsgroups downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-sabnzbd).
+- [rTorrent](https://github.com/rakshasa/rtorrent) : **Torrents** downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood).
+- [SabNZB](https://sabnzbd.org/) : **Newsgroups** downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-sabnzbd).
 
 **Download automation :**
 - [Radarr](https://github.com/Radarr/Radarr) : Automated **movies** downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-headphones).
-- [SickGear](https://github.com/SickGear/SickGear) : Automated TV Shows downloader dockerized by [ressu](https://github.com/SickGear/SickGear.Docker).
-- [Headphones](https://github.com/rembo10/headphones) : Automated music downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-headphones).
-- [Mylar](https://github.com/evilhero/mylar) : Automated Comic Book (cbr/cbz) downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-mylar).  
+- [SickGear](https://github.com/SickGear/SickGear) : Automated **TV Shows** downloader dockerized by [ressu](https://github.com/SickGear/SickGear.Docker).
+- [Headphones](https://github.com/rembo10/headphones) : Automated **music** downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-headphones).
+- [Mylar](https://github.com/evilhero/mylar) : Automated **comic book** (cbr/cbz) downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-mylar).  
 
 **Streaming :**
 - [Emby](https://emby.media/) : Video streaming platform dockerized by [Emby.media](https://hub.docker.com/r/emby/embyserver/).
