@@ -53,7 +53,7 @@ fi
 cat files/samples/head.docker > docker-compose.yml
 cat files/samples/watchtower.docker >> docker-compose.yml
 
-echo -e "${CYELLOW}Please set the root path of your installation ($CEND${CBLUE}default to /home/seebox$CEND{CYELLOW}) :$CEND"
+echo -e "${CYELLOW}Please set the root path of your installation ($CEND${CBLUE}default to /home/seebox$CEND${CYELLOW}) :$CEND"
 read DEFAULT_PATH
 if [ -z "$DEFAULT_PATH" ]
 then
@@ -62,7 +62,7 @@ then
                 $SUDO chown -R seedbox:seedbox $DEFAULT_PATH
 fi
 echo " "
-echo -e "${CYELLOW}Please set the path of your incoming folder ($CEND${CBLUE}default to /home/seebox/incoming$CEND{CYELLOW}) :$CEND"
+echo -e "${CYELLOW}Please set the path of your incoming folder ($CEND${CBLUE}default to /home/seebox/incoming$CEND${CYELLOW}) :$CEND"
 read INC_PATH
 if [ -z "$INC_PATH" ]
 then
@@ -71,7 +71,7 @@ then
                 $SUDO chown -R seedbox:seedbox $INC_PATH
 fi
 echo " "
-echo -e "${CYELLOW}Please set the path of your media folder ($CEND${CBLUE}default to /home/seebox/media$CEND{CYELLOW}) :$CEND"
+echo -e "${CYELLOW}Please set the path of your media folder ($CEND${CBLUE}default to /home/seebox/media$CEND${CYELLOW}) :$CEND"
 read MEDIA_PATH
 if [ -z "$MEDIA_PATH" ]
 then
