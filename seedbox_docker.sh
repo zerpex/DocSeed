@@ -13,6 +13,10 @@
 # Last updated : 2017 03 23
 # Version 1.2
 
+#---User and group ID for all apps. Realy important in order to have all apps access the files.
+UID=1069
+GID=1069
+
 #--- Define text colors
 CSI="\033["
 CEND="${CSI}0m"
@@ -41,11 +45,10 @@ then
                 echo -e "${CRED}sudo is not installed on this system and you are not root.$CEND"
                 echo -e "${CRED}Please either install sudo or execute this script as root.$CEND"
                 exit 1
+		fi
 else
         SUDO=sudo
 fi
-
-$SUDO addgroup -g 1069 seedbox && $SUDO adduser -h /home/seedbox --create-home -s /bin/sh -D -G seedbox -u 1069 seedbox
 
 cat files/samples/head.docker > docker-compose.yml
 cat files/samples/watchtower.docker >> docker-compose.yml
@@ -194,6 +197,9 @@ fi
 
 cat files/samples/foot.docker >> docker-compose.yml
 
+$SUDO sed -i "s@1069@$UID@g" docker-compose.yml
+$SUDO sed -i "s@1069@$GID@g" docker-compose.yml
+
 #######################################################
 # Check if docker is installed. If not, install it :) #
 #######################################################
@@ -212,3 +218,7 @@ then
 fi
 
 docker-compose up -d
+
+$SUDO chown -R $UID:$GID $DEFAULT_PATH
+$SUDO chown -R $UID:$GID $INC_PATH
+$SUDO chown -R $UID:$GID $MEDIA_PATH
