@@ -2,7 +2,7 @@
 # Emby #
 ########
 
-  emby:
+   emby:
     image: emby/embyserver
     container_name: stream-video_emby
     restart: always

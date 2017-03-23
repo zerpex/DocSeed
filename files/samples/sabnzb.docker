@@ -2,7 +2,7 @@
 # SabNZB #
 ##########
 
-  sabnzbd:
+   sabnzbd:
     image: linuxserver/sabnzbd
     container_name: dl-newsgroups_sabnzdb
     restart: always

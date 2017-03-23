@@ -2,7 +2,7 @@
 # rTorrent #
 #############
 
-  rtorrent:
+   rtorrent:
     image: wonderfall/rtorrent-flood
     container_name: dl-torrent_rtorrent
     restart: always

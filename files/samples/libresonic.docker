@@ -2,7 +2,7 @@
 # Libresonic #
 ##############
 
-  libresonic:
+   libresonic:
     restart: always
     image: linuxserver/libresonic
     container_name: stream-music_libresonic

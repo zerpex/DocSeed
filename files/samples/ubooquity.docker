@@ -2,7 +2,7 @@
 # Ubooquity #
 #############
 
-  ubooquity:
+   ubooquity:
     restart: always
     image: cromigon/ubooquity
     container_name: stream-comics_ubooquity
