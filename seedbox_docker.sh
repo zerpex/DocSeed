@@ -50,7 +50,6 @@ if [ -z "$DEFAULT_PATH" ]
 then
     DEFAULT_PATH=/home/seebox
     $SUDO mkdir -p $DEFAULT_PATH
-    $SUDO chown -R $UID:$GID $DEFAULT_PATH
 fi
 echo " "
 echo -e "${CYELLOW}Please set the path of your incoming folder ($CEND ${CBLUE}default to /home/seebox/incoming$CEND ${CYELLOW}) :$CEND"
@@ -59,7 +58,6 @@ if [ -z "$INC_PATH" ]
 then
     INC_PATH=$DEFAULT_PATH/incoming
     $SUDO mkdir -p $INC_PATH
-    $SUDO chown -R $UID:$GID $INC_PATH
 fi
 echo " "
 echo -e "${CYELLOW}Please set the path of your media folder ($CEND ${CBLUE}default to /home/seebox/media$CEND ${CYELLOW}) :$CEND"
@@ -68,7 +66,6 @@ if [ -z "$MEDIA_PATH" ]
 then
     MEDIA_PATH=$DEFAULT_PATH/media
     $SUDO mkdir -p $MEDIA_PATH
-    $SUDO chown -R $UID:$GID $MEDIA_PATH
 fi
 echo " "
 echo -e "${CYELLOW}Do you want to install :$CEND"
@@ -217,8 +214,8 @@ fi
 
 cat files/samples/foot.docker >> docker-compose.yml
 
-$SUDO sed -i "s@1069@$UID@g" docker-compose.yml
-$SUDO sed -i "s@1069@$GID@g" docker-compose.yml
+$SUDO sed -i "s@1069@$SUID@g" docker-compose.yml
+$SUDO sed -i "s@1069@$SGID@g" docker-compose.yml
 
 #######################################################
 # Check if docker is installed. If not, install it :) #
@@ -239,8 +236,8 @@ fi
 
 docker-compose up -d
 
-$SUDO chown -R $UID:$GID $DEFAULT_PATH
-$SUDO chown -R $UID:$GID $INC_PATH
-$SUDO chown -R $UID:$GID $MEDIA_PATH
+$SUDO chown -R $SUID:$SGID $DEFAULT_PATH
+$SUDO chown -R $SUID:$SGID $INC_PATH
+$SUDO chown -R $SUID:$SGID $MEDIA_PATH
 
 source files/start_menu/gen_links.sh

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #--- Define user and group ID for all apps. Realy important in order to have all apps access the files.
-UID=1069
-GID=1069
+SUID=1069
+SGID=1069
 
 #--- Docker options
 #- Container names
