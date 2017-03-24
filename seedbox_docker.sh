@@ -10,20 +10,10 @@
 #      - SickGear          => TV Shows download manager
 #
 # author       : zerpex ( zerpex@gmail.com )
-# Last updated : 2017 03 23
-# Version 1.2
+# Last updated : 2017 03 24
+# Version 1.3
 
-#---User and group ID for all apps. Realy important in order to have all apps access the files.
-UID=1069
-GID=1069
-
-#--- Define text colors
-CSI="\033["
-CEND="${CSI}0m"
-CRED="${CSI}1;31m"
-CGREEN="${CSI}1;32m"
-CYELLOW="${CSI}1;33m"
-CBLUE="${CSI}1;34m"
+source vars.sh
 
 if [ ! -f /etc/debian_version ];
 then
@@ -52,6 +42,7 @@ fi
 
 cat files/samples/head.docker > docker-compose.yml
 cat files/samples/watchtower.docker >> docker-compose.yml
+cat files/samples/startpage.docker >> docker-compose.yml
 
 echo -e "${CYELLOW}Please set the root path of your installation ($CEND ${CBLUE}default to /home/seebox$CEND ${CYELLOW}) :$CEND"
 read DEFAULT_PATH
@@ -91,6 +82,9 @@ then
     $SUDO mkdir -p $INC_PATH
     cat files/samples/rtorrent.docker >> docker-compose.yml
     $SUDO sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
+	$SUDO sed -i "s@dl-torrent_rtorrent@$Rt_CNAME@g" docker-compose.yml
+	$SUDO sed -i "s@5001@$Rt_CPORT@g" docker-compose.yml
+	INSTALLED+=('Rt')
 fi
 
 echo -e "${CBLUE}SabNZB is a newsgroup downloader.$CEND"
@@ -101,6 +95,9 @@ then
     $SUDO mkdir -p $INC_PATH
     cat files/samples/sabnzb.docker >> docker-compose.yml
     $SUDO sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
+	$SUDO sed -i "s@dl-newsgroups_sabnzdb@$Sb_CNAME@g" docker-compose.yml
+	$SUDO sed -i "s@5002@$Sb_CPORT@g" docker-compose.yml
+	INSTALLED+=('Sb')
 fi
 
 echo -e "${CBLUE}Emby is a media (video/photo/music) streaming plateform.$CEND"
@@ -111,6 +108,8 @@ then
     $SUDO mkdir -p $MEDIA_PATH/movies
     cat files/samples/emby.docker >> docker-compose.yml
     $SUDO sed -i "s@MOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
+	$SUDO sed -i "s@stream-video_emby@$Eb_CNAME@g" docker-compose.yml
+	INSTALLED+=('Eb')
 fi
 
 echo -e "${CBLUE}Ubooquity is a library (comics/ebooks/magazines) streaming plateform.$CEND"
@@ -121,6 +120,9 @@ then
     $SUDO mkdir -p $MEDIA_PATH/library
     cat files/samples/ubooquity.docker >> docker-compose.yml
     $SUDO sed -i "s@LIBRARY@$MEDIA_PATH/library@g" docker-compose.yml
+	$SUDO sed -i "s@stream-comics_ubooquity@$Ub_CNAME@g" docker-compose.yml
+	$SUDO sed -i "s@5003@$Ub_CPORT@g" docker-compose.yml
+	INSTALLED+=('Ub')
 fi
 
 echo -e "${CBLUE}Libresonic is a music streaming plateform.$CEND"
@@ -137,6 +139,9 @@ then
     $SUDO sed -i "s@PODCASTS@$MEDIA_PATH/sound/podcast@g" docker-compose.yml
     $SUDO sed -i "s@PLAYLISTS@$MEDIA_PATH/sound/playlist@g" docker-compose.yml
     $SUDO sed -i "s@MEDIA@$MEDIA_PATH/sound/other@g" docker-compose.yml
+	$SUDO sed -i "s@stream-music_libresonic@$Ls_CNAME@g" docker-compose.yml
+	$SUDO sed -i "s@5004@$Ls_CPORT@g" docker-compose.yml
+	INSTALLED+=('Ls')
 fi
 
 echo -e "${CBLUE}SickGear is a TV shows download manager.$CEND"
@@ -149,6 +154,9 @@ then
     cat files/samples/sickgear.docker >> docker-compose.yml
     $SUDO sed -i "s@TVINC@$INC_PATH/tv@g" docker-compose.yml
     $SUDO sed -i "s@TVSHOWS@$MEDIA_PATH/tv@g" docker-compose.yml
+	$SUDO sed -i "s@autodl-movies_sickgear@$Sg_CNAME@g" docker-compose.yml
+	$SUDO sed -i "s@5005@$Sg_CPORT@g" docker-compose.yml
+	INSTALLED+=('Sg')
 fi
 
 echo -e "${CBLUE}Mylar is a comics download manager.$CEND"
@@ -161,6 +169,9 @@ then
     cat files/samples/mylar.docker >> docker-compose.yml
     $SUDO sed -i "s@BDINC@$INC_PATH/library@g" docker-compose.yml
     $SUDO sed -i "s@BDS@$MEDIA_PATH/library@g" docker-compose.yml
+	$SUDO sed -i "s@autodl-comics_mylar@$My_CNAME@g" docker-compose.yml
+	$SUDO sed -i "s@5006@$My_CPORT@g" docker-compose.yml
+	INSTALLED+=('My')
 fi
 
 echo -e "${CBLUE}Headphones is a music download manager.$CEND"
@@ -173,6 +184,9 @@ then
     cat files/samples/headphones.docker >> docker-compose.yml
     $SUDO sed -i "s@ZICINC@$INC_PATH/music@g" docker-compose.yml
     $SUDO sed -i "s@ZIC@$MEDIA_PATH/sound/music@g" docker-compose.yml
+	$SUDO sed -i "s@autodl-music_headphones@$Hp_CNAME@g" docker-compose.yml
+	$SUDO sed -i "s@5007@$Hp_CPORT@g" docker-compose.yml
+	INSTALLED+=('Hp')
 fi
 
 echo -e "${CBLUE}Radarr is a movie download manager.$CEND"
@@ -185,6 +199,9 @@ then
     cat files/samples/radarr.docker >> docker-compose.yml
     $SUDO sed -i "s@MINC@$INC_PATH/movies@g" docker-compose.yml
     $SUDO sed -i "s@RMOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
+	$SUDO sed -i "s@autodl-movies_radarr@$Rd_CNAME@g" docker-compose.yml
+	$SUDO sed -i "s@5008@$Rd_CPORT@g" docker-compose.yml
+	INSTALLED+=('Rd')
 fi
 
 echo -e "${CBLUE}HTPC Manager is a front-end interface to manage many htpc related applications.$CEND"
@@ -193,6 +210,9 @@ read Hm
 if [ "$Hm" == "y" ]
 then
     cat files/samples/htpcmanager.docker >> docker-compose.yml
+	$SUDO sed -i "s@tool-HTPCManager@$Hm_CNAME@g" docker-compose.yml
+	$SUDO sed -i "s@5555@$Hm_CPORT@g" docker-compose.yml
+	INSTALLED+=('Hm')
 fi
 
 cat files/samples/foot.docker >> docker-compose.yml
@@ -222,3 +242,5 @@ docker-compose up -d
 $SUDO chown -R $UID:$GID $DEFAULT_PATH
 $SUDO chown -R $UID:$GID $INC_PATH
 $SUDO chown -R $UID:$GID $MEDIA_PATH
+
+source files/start_menu/gen_links.sh
