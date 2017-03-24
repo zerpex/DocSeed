@@ -11,9 +11,6 @@
       - INCOMING:/data:rw
       - ./files/rtorrent/conf/.rtorrent.rc:/home/torrent/.rtorrent.rc:ro
       - ./files/rtorrent/db:/flood-db:rw
-      - ./files/filebot/conf/postdl:/usr/bin/postdl:ro
-      - ./files/filebot/conf/postrm:/usr/bin/postrm:ro
-      - ./files/filebot/logs/amc.log:/filebot/data/logs/amc.log:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
       - CONTEXT_PATH=/
