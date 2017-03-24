@@ -29,8 +29,9 @@ This script automatically install some services to any debian based distro using
 2- Place yourself on the folder :  
 `cd seedbox`
 
-2b- OPTIONNAL (_and only if you know what you are doing !_)  
-- You can change docker options in `./files/samples/*.docker` where "*" is the app you want to change.
+2b- OPTIONNAL  
+- Container's names and exposed ports are set in var.sh fell free to change them as you like/need :) (just remember that these elements are uniq).
+- (_only if you know what you are doing !_) : You can change all docker options in `./files/samples/*.docker` where "*" is the app you want to change.
 
 3- Execute :  
 `./seedbox_docker.sh`
@@ -38,7 +39,7 @@ This script automatically install some services to any debian based distro using
 4- Answer questions :)
 
 ## Notes :
-- If not found, it will automatically install docker and docker-compose
+- **/!\** If not found, it will **automatically** install docker and docker-compose
 - Default dirs set to /home/seedbox
 - Access apps through :
 
@@ -69,9 +70,9 @@ This script automatically install some services to any debian based distro using
 
 **SickGear** : `<your-ip>:5005`
 
-**Headphones** : `<your-ip>:5006`
+**Mylar** : `<your-ip>:5006`
 
-**Mylar** : `<your-ip>:5007`
+**Headphones** : `<your-ip>:5007`
 
 **Radarr** : `<your-ip>:5008`
 
