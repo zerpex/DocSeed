@@ -29,8 +29,8 @@
 		  <th>Automation</th>
 		</tr>
 		<tr>
-		  <td class="column"><?php include("dl.html"); ?></td>
-		  <td class="column"><?php include("autodl.html"); ?></td>
+		  <td><div class="column"><?php include("dl.html"); ?></div></td>
+		  <td><div class="column"><?php include("autodl.html"); ?></div></td>
 		</tr>
 		</tbody>
 	  </table>
@@ -43,8 +43,8 @@
 		  <th>Tools</th>
 		</tr>
 		<tr>
-		  <td class="column"><?php include("stream.html"); ?></td>
-		  <td class="column"><?php include("tools.html"); ?></td>
+		  <td><div class="column"><?php include("stream.html"); ?></div></td>
+		  <td><div class="column"><?php include("tools.html"); ?></div></td>
 		</tr>
 		</tbody>
 	  </table>

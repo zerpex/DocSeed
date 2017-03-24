@@ -7,7 +7,7 @@ for APP in "${INSTALLED[@]}"
 do
         CNAME=_CNAME
         CPORT=_CPORT
-        CICON=_CICON
+        ICON=_ICON
         FNAME=$(eval "echo \$$APP$CNAME")
         FPORT=$(eval "echo \$$APP$CPORT")
         FICON=$(eval "echo \$$APP$CICON")
