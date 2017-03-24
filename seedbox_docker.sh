@@ -240,4 +240,4 @@ $SUDO chown -R $SUID:$SGID $DEFAULT_PATH
 $SUDO chown -R $SUID:$SGID $INC_PATH
 $SUDO chown -R $SUID:$SGID $MEDIA_PATH
 
-source files/start_menu/gen_links.sh
+source files/start_menu/www/gen_links.sh
