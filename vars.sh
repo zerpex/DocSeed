@@ -71,7 +71,7 @@ CYELLOW="${CSI}1;33m"
 CBLUE="${CSI}1;34m"
 
 #--- Define local system variables
-LAN=$(hostname -I)
+LAN=$(hostname -I | awk '{print $1}')
 WAN=$(dig +short myip.opendns.com @resolver1.opendns.com)
 FQDN=$(hostname -f)
 HNAME=$(hostname)
