@@ -8,15 +8,16 @@ do
         CNAME=_CNAME
         CPORT=_CPORT
         ICON=_ICON
-        FNAME=$(eval "echo \$$APP$CNAME")
+        CONTNAME=$(eval "echo \$$APP$CNAME")
         FPORT=$(eval "echo \$$APP$CPORT")
         FICON=$(eval "echo \$$APP$CICON")
+        FNAME=`echo $CONTNAME | awk -F_ '{print $2}``
 
         for KEY in "${dl[@]}"
         do
                 if [ "$KEY" == "$APP" ]
                 then
-                        echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\" class=\"$FNAME\">" >> files/start_menu/www/dl.html
+                        echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/dl.html
                         echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/dl.html
                         echo "        </a>" >> files/start_menu/www/dl.html
                 fi
@@ -26,7 +27,7 @@ do
         do
                 if [ "$KEY" == "$APP" ]
                 then
-                        echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\" class=\"$FNAME\">" >> files/start_menu/www/autodl.html
+                        echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/autodl.html
                         echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/autodl.html
                         echo "        </a>" >> files/start_menu/www/autodl.html
                 fi
@@ -38,11 +39,11 @@ do
                 then
                         if [ "$APP" == "Eb" ]
                         then
-                                echo "        <a href=\"http://$LAN/emby\" target=\"_blank\" title=\"$FNAME\" class=\"$FNAME\">" >> files/start_menu/www/stream.html
+                                echo "        <a href=\"http://$LAN/emby\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/stream.html
                                 echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/stream.html
                                 echo "        </a>" >> files/start_menu/www/stream.html
                         else
-                                echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\" class=\"$FNAME\">" >> files/start_menu/www/stream.html
+                                echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/stream.html
                                 echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/stream.html
                                 echo "        </a>" >> files/start_menu/www/stream.html
                         fi
@@ -53,7 +54,7 @@ do
         do
                 if [ "$KEY" == "$APP" ]
                 then
-                        echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\" class=\"$FNAME\">" >> files/start_menu/www/tools.html
+                        echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/tools.html
                         echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/tools.html
                         echo "        </a>" >> files/start_menu/www/tools.html
                 fi
