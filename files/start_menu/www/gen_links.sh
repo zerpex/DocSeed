@@ -10,8 +10,8 @@ do
         ICON=_ICON
         CONTNAME=$(eval "echo \$$APP$CNAME")
         FPORT=$(eval "echo \$$APP$CPORT")
-        FICON=$(eval "echo \$$APP$CICON")
-        FNAME=`echo $CONTNAME | awk -F_ '{print $2}``
+        FICON=$(eval "echo \$$APP$ICON")
+        FNAME=`echo $CONTNAME | awk -F_ '{print $2}'`
 
         for KEY in "${dl[@]}"
         do
