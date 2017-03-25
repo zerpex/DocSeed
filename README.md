@@ -2,6 +2,7 @@
 
 ## Description :
 This script automatically install some services to any debian based distro using docker and docker-compose.
+I made a start page to get an easy access to all apps at `<your-ip>:55000`
 
 **Downloaders :**
 - [rTorrent](https://github.com/rakshasa/rtorrent) : **Torrents** downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood).
@@ -19,6 +20,7 @@ This script automatically install some services to any debian based distro using
 - [Libresonic](https://github.com/Libresonic/libresonic) : Music streaming platform dockerized by [linuxserver.io](https://github.com/linuxserver/docker-libresonic)
 
 **Tools :**
+- Start Menu : Self-made srart page to centralize links to each app on the same interface. Access it through `<your-ip>:55000` 
 - [HTPC Manager](https://github.com/Hellowlol/HTPC-Manager) : Front-end interface to manage many htpc related applications dockerized by [linuxserver.io](https://github.com/linuxserver/docker-htpcmanager).
 - [Watchtower](https://github.com/v2tec/watchtower) : Check and update all other containers automaticaly.
 
@@ -30,7 +32,7 @@ This script automatically install some services to any debian based distro using
 `cd seedbox`
 
 2b- OPTIONNAL  
-- Container's names and exposed ports are set in var.sh fell free to change them as you like/need :) (just remember that these elements are uniq).
+- Container's names and exposed ports are set in var.sh fell free to change them as you like/need :) (just remember that these elements are needeed to be uniq).
 - (_only if you know what you are doing !_) : You can change all docker options in `./files/samples/*.docker` where "*" is the app you want to change.
 
 3- Execute :  
@@ -39,16 +41,16 @@ This script automatically install some services to any debian based distro using
 4- Answer questions :)
 
 ## Notes :
-- **/!\** If not found, it will **automatically** install docker and docker-compose
+- If not found, it will **automatically** install docker and docker-compose
 - Default dirs set to /home/seedbox
-- Access apps through :
+- All apps are centralized in one page : `<your-ip>:55000`
+You can still access apps through :
 
 **rTorrent** : `<your-ip>:5001`  
  user and pass will be asked at first start
 
 **SabNZB** : `<your-ip>:5002`  
- user :  
- pass :
+ user and pass will be asked at first start
 
 **Emby** : `<your-ip>/emby`  
  user and pass will be asked at first start
