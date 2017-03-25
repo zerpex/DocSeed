@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rm dl.html autodl.html stream.html tools.html
-touch dl.html autodl.html stream.html tools.html
+rm files/start_menu/www/dl.html files/start_menu/www/autodl.html files/start_menu/www/stream.html files/start_menu/www/tools.html
+touch files/start_menu/www/dl.html files/start_menu/www/autodl.html files/start_menu/www/stream.html files/start_menu/www/tools.html
 
 for APP in "${INSTALLED[@]}"
 do
