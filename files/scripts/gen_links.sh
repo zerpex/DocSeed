@@ -3,6 +3,12 @@
 rm files/start_menu/www/dl.html files/start_menu/www/autodl.html files/start_menu/www/stream.html files/start_menu/www/tools.html
 touch files/start_menu/www/dl.html files/start_menu/www/autodl.html files/start_menu/www/stream.html files/start_menu/www/tools.html
 
+echo " "
+echo "#######################"
+echo "# Installation Status #"
+echo "#######################"
+echo " "
+
 for APP in "${INSTALLED[@]}"
 do
         CNAME=_CNAME
@@ -88,5 +94,5 @@ do
 done 
 
 echo " "
-echo -e "If you installed the start page, you can access all your apps through : ${CYELOOW}http://$LAN:55000$CEND"
+echo -e "If you installed the start page, you can access all your apps through : ${CYELLOW}http://$LAN:55000$CEND"
 echo " "
