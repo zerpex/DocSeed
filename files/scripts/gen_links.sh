@@ -24,7 +24,7 @@ do
 			if [ "$STATE" == "true" ]
 			then
 				echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
-                                echo -e "    Access it directly through : ${CYELLOW}http://$LAN:$FPORT\$CEND"
+                                echo -e "    Access it directly through : ${CYELLOW}http://$LAN:$FPORT$CEND"
                                 echo " "
 			else
 				echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
@@ -42,7 +42,7 @@ do
                         if [ "$STATE" == "true" ]
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
-                                echo -e "    Access it directly through : ${CYELLOW}http://$LAN:$FPORT\$CEND"
+                                echo -e "    Access it directly through : ${CYELLOW}http://$LAN:$FPORT$CEND"
                                 echo " "
                         else
                                 echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
@@ -60,7 +60,7 @@ do
                         if [ "$STATE" == "true" ]
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
-                                echo -e "    Access it directly through : ${CYELLOW}http://$LAN:$FPORT\$CEND"
+                                echo -e "    Access it directly through : ${CYELLOW}http://$LAN:$FPORT$CEND"
                                 echo " "
                         else
                                 echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
@@ -78,7 +78,7 @@ do
                         if [ "$STATE" == "true" ]
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running. Please configure it trough it's own interface."
-                                echo -e "    Access it directly through : ${CYELLOW}http://$LAN:$FPORT\$CEND"
+                                echo -e "    Access it directly through : ${CYELLOW}http://$LAN:$FPORT$CEND"
                                 echo " "
                         else
                                 echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
@@ -88,5 +88,5 @@ do
 done 
 
 echo " "
-echo -e "If you installed the start page, you can access all your apps through : ${CYELOOW}http://$LAN:55000\$CEND"
+echo -e "If you installed the start page, you can access all your apps through : ${CYELOOW}http://$LAN:55000$CEND"
 echo " "
