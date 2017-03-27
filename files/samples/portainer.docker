@@ -1,0 +1,15 @@
+#############
+# Portainer #
+#############
+
+   portainer:
+    image: portainer/portainer
+    container_name: tool-docker_portainer
+    restart: always
+    ports:
+    - "9000:9000"
+    volumes:
+    - ./files/portainer/data:/data
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /etc/localtime:/etc/localtime:ro
+

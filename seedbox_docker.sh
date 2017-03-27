@@ -131,7 +131,8 @@ options=(01 "rTorrent : Torrents downloads" off
          10 "Libresonic : Music streaming" off
          11 "HTPCManager : Automation centrilized interface" off
          12 "Watchtower : Auto-update apps tool (Heavily recommanded)" on
-         13 "Start menu : Web-page that centrilize all links to your apps (heavily recomanded)" on)
+         13 "Start menu : Web-page that centrilize all links to your apps (heavily recomanded)" on
+         14 "Portainer : Containers management tools through browser (recomanded)" on)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
 for choice in $choices
@@ -235,6 +236,9 @@ do
             ;;
         13)# Start menu
             cat files/samples/startpage.docker >> docker-compose.yml
+            ;;
+        14)# Portainer
+            cat files/samples/portainer.docker >> docker-compose.yml
             ;;
     esac
 done

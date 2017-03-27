@@ -4,7 +4,7 @@
 
    htpcmanager:
     image: linuxserver/htpcmanager
-    container_name: tool-HTPCManager
+    container_name: tool-manage_HTPCManager
     volumes:
      - ./files/htpcmanager:/config
     restart: always

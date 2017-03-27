@@ -16,8 +16,9 @@ My_CNAME=autodl-comics_mylar		# Mylar
 Eb_CNAME=stream-video_emby		# Emby
 Ub_CNAME=stream-comics_ubooquity	# Ubooquity
 Ls_CNAME=stream-music_libresonic	# Libresonic
-Hm_CNAME=tool-HTPCManager		# HTPCManager
-Wt_CNAME=tool-watchtower		# Watchtower
+Hm_CNAME=tool-manage_HTPCManager	# HTPCManager
+Wt_CNAME=tool-docker_watchtower		# Watchtower
+Pt_CNAME=tool-docker_portainer		# Portainer
 
 #- Exposed ports
 Rt_CPORT=5001			# rTorrent
@@ -31,6 +32,7 @@ Eb_CPORT=5200			# Emby
 Ub_CPORT=5201			# Ubooquity
 Ls_CPORT=5202			# Libresonic
 Hm_CPORT=5555			# HTPCManager
+Pt_CPORT=9000			# Portainer
 
 #--- Icons for start menu
 # (icons from fonts awesome : http://fontawesome.io/icons/ )
@@ -60,7 +62,7 @@ declare -a stream=(
 )
 
 declare -a tool=( 
- Hm
+ Hm Pt
 )
 
 #--- Define text colors

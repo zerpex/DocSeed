@@ -4,7 +4,7 @@
 
    watchtower:
     image: v2tec/watchtower
-    container_name: tool-watchtower
+    container_name: tool-docker_watchtower
     hostname: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
