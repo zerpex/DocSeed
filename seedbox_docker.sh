@@ -56,7 +56,7 @@ fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 trap "rm -f $fichtemp" 0 1 2 5 15
 $DIALOG --title "Root path" --clear \
         --inputbox "Please set the root path of your installation\n
-( default to /home/seebox ) :" 16 51 2> $fichtemp
+( default to /home/seebox ) :\n" 16 51 2> $fichtemp
 
 DEFAULT_PATH=`cat $fichtemp`
 
@@ -70,7 +70,7 @@ fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 trap "rm -f $fichtemp" 0 1 2 5 15
 $DIALOG --title "Incoming path" --clear \
         --inputbox "Please set the path of your incoming folder\n
-( default to $DEFAULT_PATH/incoming ) :" 16 51 2> $fichtemp
+( default to $DEFAULT_PATH/incoming ) :\n" 16 51 2> $fichtemp
 
 INC_PATH=`cat $fichtemp`
 
@@ -84,7 +84,7 @@ fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 trap "rm -f $fichtemp" 0 1 2 5 15
 $DIALOG --title "Media path" --clear \
         --inputbox "Please set the path of your media folder\n
-( default to $DEFAULT_PATH/media ) :" 16 51 2> $fichtemp
+( default to $DEFAULT_PATH/media ) :\n" 16 51 2> $fichtemp
 
 MEDIA_PATH=`cat $fichtemp`
 
@@ -148,7 +148,7 @@ do
 			cat files/samples/sickgear.docker >> docker-compose.yml
 			$SUDO sed -i "s@TVINC@$INC_PATH/tv@g" docker-compose.yml
 			$SUDO sed -i "s@TVSHOWS@$MEDIA_PATH/tv@g" docker-compose.yml
-			$SUDO sed -i "s@autodl-movies_sickgear@$Sg_CNAME@g" docker-compose.yml
+			$SUDO sed -i "s@autodl-tv_sickgear@$Sg_CNAME@g" docker-compose.yml
 			$SUDO sed -i "s@5005@$Sg_CPORT@g" docker-compose.yml
 			INSTALLED+=('Sg')
             ;;

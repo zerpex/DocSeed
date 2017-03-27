@@ -25,7 +25,7 @@ do
 			echo "        </a>" >> files/start_menu/www/dl.html
 			if [ "$STATE" == "true" ]
 			then
-				echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running. Please configure it trough it's own interface."
+				echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
 			else
 				echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
 			fi
@@ -43,7 +43,7 @@ do
                         echo "        </a>" >> files/start_menu/www/autodl.html
                         if [ "$STATE" == "true" ]
                         then
-                                echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running. Please configure it trough it's own interface."
+                                echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
                         else
                                 echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
                         fi
@@ -61,7 +61,7 @@ do
                         echo "        </a>" >> files/start_menu/www/stream.html
                         if [ "$STATE" == "true" ]
                         then
-                                echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running. Please configure it trough it's own interface."
+                                echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
                         else
                                 echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
                         fi
