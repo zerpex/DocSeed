@@ -6,19 +6,19 @@ SGID=1069
 
 #--- Docker options
 #- Container names
-Rt_CNAME=dl-torrent_rtorrent		# rTorrent
-Sb_CNAME=dl-newsgroups_sabnzdb		# SabNZB
-Py_CNAME=dl-directdl_pyload		# Pyload
-Rd_CNAME=autodl-movies_radarr		# Radarr
-Sg_CNAME=autodl-tv_sickgear		# SickGear
-Hp_CNAME=autodl-music_headphones	# HeadPhones
-My_CNAME=autodl-comics_mylar		# Mylar
-Eb_CNAME=stream-video_emby		# Emby
-Ub_CNAME=stream-comics_ubooquity	# Ubooquity
-Ls_CNAME=stream-music_libresonic	# Libresonic
+Rt_CNAME=dl-torrent_rTorrent		# rTorrent
+Sb_CNAME=dl-newsgroups_SabnNZB		# SabNZB
+Py_CNAME=dl-directdl_Pyload		# Pyload
+Rd_CNAME=autodl-movies_Radarr		# Radarr
+Sg_CNAME=autodl-tv_SickGear		# SickGear
+Hp_CNAME=autodl-music_Headphones	# HeadPhones
+My_CNAME=autodl-comics_Mylar		# Mylar
+Eb_CNAME=stream-video_Emby		# Emby
+Ub_CNAME=stream-comics_Ubooquity	# Ubooquity
+Ls_CNAME=stream-music_Libresonic	# Libresonic
 Hm_CNAME=tool-manage_HTPCManager	# HTPCManager
-Wt_CNAME=tool-docker_watchtower		# Watchtower
-Pt_CNAME=tool-docker_portainer		# Portainer
+Wt_CNAME=tool-docker_Watchtower		# Watchtower
+Pt_CNAME=tool-docker_Portainer		# Portainer
 
 #- Exposed ports
 Rt_CPORT=5001			# rTorrent
@@ -47,6 +47,7 @@ Eb_ICON=fa-film                 # Emby
 Ub_ICON=fa-book                 # Ubooquity
 Ls_ICON=fa-music                # Libresonic
 Hm_ICON=fa-sign-in              # HTPCManager
+Pt_ICON=fa-cubes                # Portainer
 
 #--- Regroup apps by category
 declare -a dl=( 

@@ -239,6 +239,7 @@ do
             ;;
         14)# Portainer
             cat files/samples/portainer.docker >> docker-compose.yml
+            INSTALLED+=('Pt')
             ;;
     esac
 done
