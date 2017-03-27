@@ -14,10 +14,10 @@ do
         FNAME=`echo $CONTNAME | awk -F_ '{print $2}'`
 	STATE=`docker inspect -f {{.State.Running}} $CONTNAME`
 
+        echo -e "${CYELLOW} Download apps : $CEND"
+        echo " "
         for KEY in "${dl[@]}"
         do
-		echo -e "${CYELLOW} Download apps : $CEND"
-		echo " "
                 if [ "$KEY" == "$APP" ]
                 then
 			echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/dl.html
@@ -27,15 +27,15 @@ do
 			then
 				echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running. Please configure it trough it's own interface."
 			else
-				echo -e "!! [ ${CRED}KO$CEND ] $FNAME is now installed, but not running. Please check logs with "docker logs $CONTNAME" !"
+				echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
 			fi
                 fi
         done
 
+	echo -e "${CYELLOW} Download automation apps : $CEND"
+        echo " "
         for KEY in "${autodl[@]}"
         do
-		echo -e "${CYELLOW} Download automation apps : $CEND"
-		echo " "
                 if [ "$KEY" == "$APP" ]
                 then
                         echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/autodl.html
@@ -45,15 +45,15 @@ do
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running. Please configure it trough it's own interface."
                         else
-                                echo -e "!! [ ${CRED}KO$CEND ] $FNAME is now installed, but not running. Please check logs with "docker logs $CONTNAME" !"
+                                echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
                         fi
                 fi
         done
 
+        echo -e "${CYELLOW} Streaming apps : $CEND"
+        echo " "
         for KEY in "${stream[@]}"
         do
-		echo -e "${CYELLOW} Streaming apps : $CEND"
-		echo " "
                 if [ "$KEY" == "$APP" ]
                 then
                         echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/stream.html
@@ -63,15 +63,15 @@ do
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running. Please configure it trough it's own interface."
                         else
-                                echo -e "!! [ ${CRED}KO$CEND ] $FNAME is now installed, but not running. Please check logs with "docker logs $CONTNAME" !"
+                                echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
                         fi
                 fi
         done
 
+        echo -e "${CYELLOW} Tools : $CEND"
+        echo " "
         for KEY in "${tool[@]}"
         do
-		echo -e "${CYELLOW} Tools : $CEND"
-		echo " "
                 if [ "$KEY" == "$APP" ]
                 then
                         echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/tools.html
@@ -81,7 +81,7 @@ do
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running. Please configure it trough it's own interface."
                         else
-                                echo -e "!! [ ${CRED}KO$CEND ] $FNAME is now installed, but not running. Please check logs with "docker logs $CONTNAME" !"
+                                echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
                         fi
                 fi
         done

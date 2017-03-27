@@ -50,30 +50,49 @@ then
 	apt-get -y install dialog
 fi
 
-echo -e "${CYELLOW}Please set the root path of your installation ($CEND ${CBLUE}default to /home/seebox$CEND ${CYELLOW}) :$CEND"
-read DEFAULT_PATH
+DIALOG=${DIALOG=dialog}
+
+fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
+trap "rm -f $fichtemp" 0 1 2 5 15
+$DIALOG --title "Root path" --clear \
+        --inputbox "Please set the root path of your installation\n
+( default to /home/seebox ) :" 16 51 2> $fichtemp
+
+DEFAULT_PATH=`cat $fichtemp`
+
 if [ -z "$DEFAULT_PATH" ]
 then
     DEFAULT_PATH=/home/seebox
     $SUDO mkdir -p $DEFAULT_PATH
 fi
-echo " "
-echo -e "${CYELLOW}Please set the path of your incoming folder ($CEND ${CBLUE}default to /home/seebox/incoming$CEND ${CYELLOW}) :$CEND"
-read INC_PATH
+
+fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
+trap "rm -f $fichtemp" 0 1 2 5 15
+$DIALOG --title "Incoming path" --clear \
+        --inputbox "Please set the path of your incoming folder\n
+( default to $DEFAULT_PATH/incoming ) :" 16 51 2> $fichtemp
+
+INC_PATH=`cat $fichtemp`
+
 if [ -z "$INC_PATH" ]
 then
     INC_PATH=$DEFAULT_PATH/incoming
     $SUDO mkdir -p $INC_PATH
 fi
-echo " "
-echo -e "${CYELLOW}Please set the path of your media folder ($CEND ${CBLUE}default to /home/seebox/media$CEND ${CYELLOW}) :$CEND"
-read MEDIA_PATH
+
+fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
+trap "rm -f $fichtemp" 0 1 2 5 15
+$DIALOG --title "Media path" --clear \
+        --inputbox "Please set the path of your media folder\n
+( default to $DEFAULT_PATH/media ) :" 16 51 2> $fichtemp
+
+MEDIA_PATH=`cat $fichtemp`
+
 if [ -z "$MEDIA_PATH" ]
 then
     MEDIA_PATH=$DEFAULT_PATH/media
     $SUDO mkdir -p $MEDIA_PATH
 fi
-echo " "
 
 cat files/samples/head.docker > docker-compose.yml
 	
@@ -222,8 +241,8 @@ $SUDO chown -R $SUID:$SGID $DEFAULT_PATH
 $SUDO chown -R $SUID:$SGID $INC_PATH
 $SUDO chown -R $SUID:$SGID $MEDIA_PATH
 
-# Generate start page links to all installed apps
-source $SCRPATH/gen_links.sh
-
 # Generate and start all needeed containers
 docker-compose up -d
+
+# Generate start page links to all installed apps
+source $SCRPATH/gen_links.sh
