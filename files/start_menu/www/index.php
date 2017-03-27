@@ -12,13 +12,13 @@
         MySeedbox
     </div>
     <div>
-      <form method="get" action="https://www.google.fr/#q=" target="_blank">
-        <input class="search" name="g" type="text" placeholder="Google">
+      <form method="get" action="https://www.google.fr/custom" target="_blank">
+        <input class="search" name="g" type="text" placeholder=" Google">
       </form>
     </div>
     <div>
       <form method="get" action="https://www.qwant.com/?q=">
-        <input class="search" name="q" type="text" placeholder="Qwant">
+        <input class="search" name="q" type="text" placeholder=" Qwant">
       </form>
     </div>
 	<div class="row">
