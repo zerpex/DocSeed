@@ -199,6 +199,7 @@ do
             cat files/samples/emby.docker >> docker-compose.yml
             $SUDO sed -i "s@MOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
             $SUDO sed -i "s@stream-video_emby@$Eb_CNAME@g" docker-compose.yml
+            $SUDO sed -i "s@5009@$Eb_CPORT@g" docker-compose.yml
             INSTALLED+=('Eb')
             ;;
         09)# Ubooquity
