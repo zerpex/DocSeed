@@ -14,8 +14,6 @@ do
         FNAME=`echo $CONTNAME | awk -F_ '{print $2}'`
 	STATE=`docker inspect -f {{.State.Running}} $CONTNAME`
 
-        echo -e "${CYELLOW} Download apps : $CEND"
-        echo " "
         for KEY in "${dl[@]}"
         do
                 if [ "$KEY" == "$APP" ]
@@ -26,14 +24,13 @@ do
 			if [ "$STATE" == "true" ]
 			then
 				echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
+                                echo -e "    Access it directly through : ${CYELOOW}http://$LAN:$FPORT\$CEND"
 			else
 				echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
 			fi
                 fi
         done
 
-	echo -e "${CYELLOW} Download automation apps : $CEND"
-        echo " "
         for KEY in "${autodl[@]}"
         do
                 if [ "$KEY" == "$APP" ]
@@ -44,14 +41,13 @@ do
                         if [ "$STATE" == "true" ]
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
+                                echo -e "    Access it directly through : ${CYELOOW}http://$LAN:$FPORT\$CEND"
                         else
                                 echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
                         fi
                 fi
         done
 
-        echo -e "${CYELLOW} Streaming apps : $CEND"
-        echo " "
         for KEY in "${stream[@]}"
         do
                 if [ "$KEY" == "$APP" ]
@@ -62,14 +58,13 @@ do
                         if [ "$STATE" == "true" ]
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
+                                echo -e "    Access it directly through : ${CYELOOW}http://$LAN:$FPORT\$CEND"
                         else
                                 echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
                         fi
                 fi
         done
 
-        echo -e "${CYELLOW} Tools : $CEND"
-        echo " "
         for KEY in "${tool[@]}"
         do
                 if [ "$KEY" == "$APP" ]
@@ -86,3 +81,7 @@ do
                 fi
         done
 done 
+
+echo " "
+echo -e "If you installed the start page, you can access all your apps through : ${CYELOOW}http://$LAN:55000\$CEND"
+echo " "
