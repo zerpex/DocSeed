@@ -23,10 +23,6 @@ then
     exit 0
 fi
 
-echo " "
-echo -e "${CYELLOW}This script require docker and docker-compose, it will install it if not found on the system. please quit with CTRL+C if you do not agree.$CEND"
-echo " "
-
 if [ -f /usr/bin/sudo ]
 then
     ROOT=`whoami`
@@ -37,24 +33,50 @@ then
         echo -e "${CRED}sudo is not installed on this system and you are not root.$CEND"
         echo -e "${CRED}Please either install sudo or execute this script as root.$CEND"
         exit 1
-        fi
+    fi
 else
         SUDO=sudo
 fi
 
 if [ ! -s /usr/bin/dialog ]
 then
-	echo " "
-	echo -e "${CGREEN}Installing menu pre-requiresites$CEND"
-	echo " "
-	apt-get -y install dialog
+    echo " "
+    echo -e "${CGREEN}Installing menu pre-requiresites$CEND"
+    echo " "
+    apt-get -y install dialog
 fi
 
 DIALOG=${DIALOG=dialog}
 
+$DIALOG --title " IMPORTANT " --clear \
+        --yesno "This script require docker and docker-compose, it will install it automatically if not found on the system.\n
+  Do you agree ?" 15 50
+
+case $? in
+  0)
+    # If docker is not installed
+        if [ ! -s /usr/bin/docker ]
+        then
+                # Install docker
+                source $SCRPATH/ins_docker.sh
+        fi
+
+        # If docker-compose is not installed
+        if [ ! -s /usr/local/bin/docker-compose ]
+        then
+                # Install docker-compose
+                source $SCRPATH/ins_docker-compose.sh
+        fi
+    ;;
+  1)
+    echo "KTHXBYE."
+    exit 0
+    ;;
+esac
+
 fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 trap "rm -f $fichtemp" 0 1 2 5 15
-$DIALOG --title "Root path" --clear \
+$DIALOG --title " Root path " --clear \
         --inputbox "Please set the root path of your installation\n
 ( default to /home/seebox ) :\n" 16 51 2> $fichtemp
 
@@ -68,7 +90,7 @@ fi
 
 fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 trap "rm -f $fichtemp" 0 1 2 5 15
-$DIALOG --title "Incoming path" --clear \
+$DIALOG --title " Incoming path " --clear \
         --inputbox "Please set the path of your incoming folder\n
 ( default to $DEFAULT_PATH/incoming ) :\n" 16 51 2> $fichtemp
 
@@ -82,7 +104,7 @@ fi
 
 fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 trap "rm -f $fichtemp" 0 1 2 5 15
-$DIALOG --title "Media path" --clear \
+$DIALOG --title " Media path " --clear \
         --inputbox "Please set the path of your media folder\n
 ( default to $DEFAULT_PATH/media ) :\n" 16 51 2> $fichtemp
 
@@ -95,122 +117,122 @@ then
 fi
 
 cat files/samples/head.docker > docker-compose.yml
-	
+
 cmd=(dialog --separate-output --checklist "Select options:" 22 76 16)
 options=(01 "rTorrent : Torrents downloads" off
          02 "SabNZB : Newsgroups downloads" off
          03 "Pyload : Direct downloads" off
-		 04 "Radarr : Movies automation" off
-		 05 "SickGear : TV shows automation" off
-		 06 "Headphones : Music automation" off
-		 07 "Mylar : Comics automation" off
-		 08 "Emby : Video streaming" off
-		 09 "Ubooquity : Comics streaming" off
-		 10 "Libresonic : Music streaming" off
-		 11 "HTPCManager : Automation centrilized interface" off
+         04 "Radarr : Movies automation" off
+         05 "SickGear : TV shows automation" off
+         06 "Headphones : Music automation" off
+         07 "Mylar : Comics automation" off
+         08 "Emby : Video streaming" off
+         09 "Ubooquity : Comics streaming" off
+         10 "Libresonic : Music streaming" off
+         11 "HTPCManager : Automation centrilized interface" off
          12 "Watchtower : Auto-update apps tool (Heavily recommanded)" on
-		 13 "Start menu : Web-page that centrilize all links to your apps (heavily recomanded)" on)
+         13 "Start menu : Web-page that centrilize all links to your apps (heavily recomanded)" on)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
 for choice in $choices
 do
     case $choice in
         01)# rTorrent
-			cat files/samples/rtorrent.docker >> docker-compose.yml
-			$SUDO sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
-			$SUDO sed -i "s@dl-torrent_rtorrent@$Rt_CNAME@g" docker-compose.yml
-			$SUDO sed -i "s@5001@$Rt_CPORT@g" docker-compose.yml
-			INSTALLED+=('Rt')
+            cat files/samples/rtorrent.docker >> docker-compose.yml
+            $SUDO sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
+            $SUDO sed -i "s@dl-torrent_rtorrent@$Rt_CNAME@g" docker-compose.yml
+            $SUDO sed -i "s@5001@$Rt_CPORT@g" docker-compose.yml
+            INSTALLED+=('Rt')
             ;;
         02)# SabNZB
-			cat files/samples/sabnzb.docker >> docker-compose.yml
-			$SUDO sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
-			$SUDO sed -i "s@dl-newsgroups_sabnzdb@$Sb_CNAME@g" docker-compose.yml
-			$SUDO sed -i "s@5002@$Sb_CPORT@g" docker-compose.yml
-			INSTALLED+=('Sb')
+            cat files/samples/sabnzb.docker >> docker-compose.yml
+            $SUDO sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
+            $SUDO sed -i "s@dl-newsgroups_sabnzdb@$Sb_CNAME@g" docker-compose.yml
+            $SUDO sed -i "s@5002@$Sb_CPORT@g" docker-compose.yml
+            INSTALLED+=('Sb')
             ;;
         03)# Pyload
             echo "Third Option"
             ;;
         04)#Radarr
             $SUDO mkdir -p $INC_PATH/movies
-			$SUDO mkdir -p $MEDIA_PATH/movies
-			cat files/samples/radarr.docker >> docker-compose.yml
-			$SUDO sed -i "s@MINC@$INC_PATH/movies@g" docker-compose.yml
-			$SUDO sed -i "s@RMOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
-			$SUDO sed -i "s@autodl-movies_radarr@$Rd_CNAME@g" docker-compose.yml
-			$SUDO sed -i "s@5008@$Rd_CPORT@g" docker-compose.yml
-			INSTALLED+=('Rd')
+            $SUDO mkdir -p $MEDIA_PATH/movies
+            cat files/samples/radarr.docker >> docker-compose.yml
+            $SUDO sed -i "s@MINC@$INC_PATH/movies@g" docker-compose.yml
+            $SUDO sed -i "s@RMOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
+            $SUDO sed -i "s@autodl-movies_radarr@$Rd_CNAME@g" docker-compose.yml
+            $SUDO sed -i "s@5008@$Rd_CPORT@g" docker-compose.yml
+            INSTALLED+=('Rd')
             ;;
         05)#SickGear
             $SUDO mkdir -p $INC_PATH/tv
-			$SUDO mkdir -p $MEDIA_PATH/tv
-			cat files/samples/sickgear.docker >> docker-compose.yml
-			$SUDO sed -i "s@TVINC@$INC_PATH/tv@g" docker-compose.yml
-			$SUDO sed -i "s@TVSHOWS@$MEDIA_PATH/tv@g" docker-compose.yml
-			$SUDO sed -i "s@autodl-tv_sickgear@$Sg_CNAME@g" docker-compose.yml
-			$SUDO sed -i "s@5005@$Sg_CPORT@g" docker-compose.yml
-			INSTALLED+=('Sg')
+            $SUDO mkdir -p $MEDIA_PATH/tv
+            cat files/samples/sickgear.docker >> docker-compose.yml
+            $SUDO sed -i "s@TVINC@$INC_PATH/tv@g" docker-compose.yml
+            $SUDO sed -i "s@TVSHOWS@$MEDIA_PATH/tv@g" docker-compose.yml
+            $SUDO sed -i "s@autodl-tv_sickgear@$Sg_CNAME@g" docker-compose.yml
+            $SUDO sed -i "s@5005@$Sg_CPORT@g" docker-compose.yml
+            INSTALLED+=('Sg')
             ;;
         06)# Headphones
             $SUDO mkdir -p $INC_PATH/music
-			$SUDO mkdir -p $MEDIA_PATH/sound/music
-			cat files/samples/headphones.docker >> docker-compose.yml
-			$SUDO sed -i "s@ZICINC@$INC_PATH/music@g" docker-compose.yml
-			$SUDO sed -i "s@ZIC@$MEDIA_PATH/sound/music@g" docker-compose.yml
-			$SUDO sed -i "s@autodl-music_headphones@$Hp_CNAME@g" docker-compose.yml
-			$SUDO sed -i "s@5007@$Hp_CPORT@g" docker-compose.yml
-			INSTALLED+=('Hp')
+            $SUDO mkdir -p $MEDIA_PATH/sound/music
+            cat files/samples/headphones.docker >> docker-compose.yml
+            $SUDO sed -i "s@ZICINC@$INC_PATH/music@g" docker-compose.yml
+            $SUDO sed -i "s@ZIC@$MEDIA_PATH/sound/music@g" docker-compose.yml
+            $SUDO sed -i "s@autodl-music_headphones@$Hp_CNAME@g" docker-compose.yml
+            $SUDO sed -i "s@5007@$Hp_CPORT@g" docker-compose.yml
+            INSTALLED+=('Hp')
             ;;
         07)# Mylar
             $SUDO mkdir -p $INC_PATH/library
-			$SUDO mkdir -p $MEDIA_PATH/library
-			cat files/samples/mylar.docker >> docker-compose.yml
-			$SUDO sed -i "s@BDINC@$INC_PATH/library@g" docker-compose.yml
-			$SUDO sed -i "s@BDS@$MEDIA_PATH/library@g" docker-compose.yml
-			$SUDO sed -i "s@autodl-comics_mylar@$My_CNAME@g" docker-compose.yml
-			$SUDO sed -i "s@5006@$My_CPORT@g" docker-compose.yml
-			INSTALLED+=('My')
+            $SUDO mkdir -p $MEDIA_PATH/library
+            cat files/samples/mylar.docker >> docker-compose.yml
+            $SUDO sed -i "s@BDINC@$INC_PATH/library@g" docker-compose.yml
+            $SUDO sed -i "s@BDS@$MEDIA_PATH/library@g" docker-compose.yml
+            $SUDO sed -i "s@autodl-comics_mylar@$My_CNAME@g" docker-compose.yml
+            $SUDO sed -i "s@5006@$My_CPORT@g" docker-compose.yml
+            INSTALLED+=('My')
             ;;
         08)# Emby
             $SUDO mkdir -p $MEDIA_PATH/movies
-			cat files/samples/emby.docker >> docker-compose.yml
-			$SUDO sed -i "s@MOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
-			$SUDO sed -i "s@stream-video_emby@$Eb_CNAME@g" docker-compose.yml
-			INSTALLED+=('Eb')
+            cat files/samples/emby.docker >> docker-compose.yml
+            $SUDO sed -i "s@MOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
+            $SUDO sed -i "s@stream-video_emby@$Eb_CNAME@g" docker-compose.yml
+            INSTALLED+=('Eb')
             ;;
         09)# Ubooquity
             $SUDO mkdir -p $MEDIA_PATH/library
-			cat files/samples/ubooquity.docker >> docker-compose.yml
-			$SUDO sed -i "s@LIBRARY@$MEDIA_PATH/library@g" docker-compose.yml
-			$SUDO sed -i "s@stream-comics_ubooquity@$Ub_CNAME@g" docker-compose.yml
-			$SUDO sed -i "s@5003@$Ub_CPORT@g" docker-compose.yml
-			INSTALLED+=('Ub')
+            cat files/samples/ubooquity.docker >> docker-compose.yml
+            $SUDO sed -i "s@LIBRARY@$MEDIA_PATH/library@g" docker-compose.yml
+            $SUDO sed -i "s@stream-comics_ubooquity@$Ub_CNAME@g" docker-compose.yml
+            $SUDO sed -i "s@5003@$Ub_CPORT@g" docker-compose.yml
+            INSTALLED+=('Ub')
             ;;
         10)# Libresonic
             $SUDO mkdir -p $MEDIA_PATH/sound/music
-			$SUDO mkdir -p $MEDIA_PATH/sound/podcast
-			$SUDO mkdir -p $MEDIA_PATH/sound/playlist
-			$SUDO mkdir -p $MEDIA_PATH/sound/other
-			cat files/samples/libresonic.docker >> docker-compose.yml
-			$SUDO sed -i "s@MUSIC@$MEDIA_PATH/sound/music@g" docker-compose.yml
-			$SUDO sed -i "s@PODCASTS@$MEDIA_PATH/sound/podcast@g" docker-compose.yml
-			$SUDO sed -i "s@PLAYLISTS@$MEDIA_PATH/sound/playlist@g" docker-compose.yml
-			$SUDO sed -i "s@MEDIA@$MEDIA_PATH/sound/other@g" docker-compose.yml
-			$SUDO sed -i "s@stream-music_libresonic@$Ls_CNAME@g" docker-compose.yml
-			$SUDO sed -i "s@5004@$Ls_CPORT@g" docker-compose.yml
-			INSTALLED+=('Ls')
+            $SUDO mkdir -p $MEDIA_PATH/sound/podcast
+            $SUDO mkdir -p $MEDIA_PATH/sound/playlist
+            $SUDO mkdir -p $MEDIA_PATH/sound/other
+            cat files/samples/libresonic.docker >> docker-compose.yml
+            $SUDO sed -i "s@MUSIC@$MEDIA_PATH/sound/music@g" docker-compose.yml
+            $SUDO sed -i "s@PODCASTS@$MEDIA_PATH/sound/podcast@g" docker-compose.yml
+            $SUDO sed -i "s@PLAYLISTS@$MEDIA_PATH/sound/playlist@g" docker-compose.yml
+            $SUDO sed -i "s@MEDIA@$MEDIA_PATH/sound/other@g" docker-compose.yml
+            $SUDO sed -i "s@stream-music_libresonic@$Ls_CNAME@g" docker-compose.yml
+            $SUDO sed -i "s@5004@$Ls_CPORT@g" docker-compose.yml
+            INSTALLED+=('Ls')
             ;;
         11)# HTPCManager
             cat files/samples/htpcmanager.docker >> docker-compose.yml
-			$SUDO sed -i "s@tool-HTPCManager@$Hm_CNAME@g" docker-compose.yml
-			$SUDO sed -i "s@5555@$Hm_CPORT@g" docker-compose.yml
-			INSTALLED+=('Hm')
+            $SUDO sed -i "s@tool-HTPCManager@$Hm_CNAME@g" docker-compose.yml
+            $SUDO sed -i "s@5555@$Hm_CPORT@g" docker-compose.yml
+            INSTALLED+=('Hm')
             ;;
         12)# Watchtower
             cat files/samples/watchtower.docker >> docker-compose.yml
             ;;
-		13)# Start menu
+        13)# Start menu
             cat files/samples/startpage.docker >> docker-compose.yml
             ;;
     esac
@@ -221,20 +243,6 @@ cat files/samples/foot.docker >> docker-compose.yml
 
 $SUDO sed -i "s@1069@$SUID@g" docker-compose.yml
 $SUDO sed -i "s@1069@$SGID@g" docker-compose.yml
-
-# If docker is not installed
-if [ ! -s /usr/bin/docker ]
-then
-        # Install docker
-        source $SCRPATH/ins_docker.sh
-fi
-
-# If docker-compose is not installed
-if [ ! -s /usr/local/bin/docker-compose ]
-then
-        # Install docker-compose
-        source $SCRPATH/ins_docker-compose.sh
-fi
 
 # Set permissions
 $SUDO chown -R $SUID:$SGID $DEFAULT_PATH
