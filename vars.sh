@@ -27,6 +27,7 @@ Rd_CPORT=5101			# Radarr
 Sg_CPORT=5102			# SickGear
 Hp_CPORT=5103			# HeadPhones
 My_CPORT=5104			# Mylar
+Eb_CPORT=5200			# Emby
 Ub_CPORT=5201			# Ubooquity
 Ls_CPORT=5202			# Libresonic
 Hm_CPORT=5555			# HTPCManager

@@ -37,16 +37,9 @@ do
         do
                 if [ "$KEY" == "$APP" ]
                 then
-                        if [ "$APP" == "Eb" ]
-                        then
-                                echo "        <a href=\"http://$LAN/emby\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/stream.html
-                                echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/stream.html
-                                echo "        </a>" >> files/start_menu/www/stream.html
-                        else
-                                echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/stream.html
-                                echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/stream.html
-                                echo "        </a>" >> files/start_menu/www/stream.html
-                        fi
+                        echo "        <a href=\"http://$LAN:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/stream.html
+                        echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/stream.html
+                        echo "        </a>" >> files/start_menu/www/stream.html
                 fi
         done
 
