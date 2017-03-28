@@ -46,7 +46,7 @@ I made a start page to get an easy access to all installed apps at `http://<your
 - If not found, it will **automatically** install docker and docker-compose
 - Default dirs set to /home/seedbox
 - All apps are centralized in one page : `htpp://<your-ip>`
-You can still access apps through :
+  If you don't want to use it, you can still access apps through :
 
 **rTorrent** : `htpp://<your-ip>:5001`  
  user and pass will be asked at first start
@@ -58,15 +58,8 @@ You can still access apps through :
  user and pass will be asked at first start
 
 **Ubooquity** : `htpp://<your-ip>:5201`  
- Admin interface is disabled by default for security reasons. In order to set up the application, you have to activate it :
-  - Stop Ubooquity container :
-`docker stop seedbox_ubooquity`
-  - Run the container with admin interface enabled :
-`docker run --rm -ti -v ./files/ubooquity/conf:/opt/ubooquity-data -v /home/seebox/media/library:/opt/data -p 5003:2202 cromigon/ubooquity:latest -webadmin`
-  - Let it run and open your browser to : `http://<your-ip>:5003/admin`
-  - Configure Ubooquity as you wish and close docker (CTRL-Z) in the terminal
-  - Restart ubooquity container :
-`docker start seedbox_ubooquity`
+ Admin interface is availlable at `htpp://<your-ip>:5201/admin`
+ user and pass will be set on the admin interface on first start.
 
 **Libresonic** : `htpp://<your-ip>:5202`  
  user : admin  
@@ -86,3 +79,4 @@ You can still access apps through :
 
 ## To do :
 - Add a reverse proxy
+- Adds Pyload
