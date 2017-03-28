@@ -45,37 +45,36 @@ I made a start page to get an easy access to all installed apps at `http://<your
 ## Notes :
 - If not found, it will **automatically** install docker and docker-compose
 - Default dirs set to /home/seedbox
-- All apps are centralized in one page : `htpp://<your-ip>`
+- All apps are centralized in one page : `http://<your-ip>`
   If you don't want to use it, you can still access apps through :
 
-**rTorrent** : `htpp://<your-ip>:5001`  
+**rTorrent** : `http://<your-ip>:5001`  
  user and pass will be asked at first start
 
-**SabNZB** : `htpp://<your-ip>:5002`  
+**SabNZB** : `http://<your-ip>:5002`  
  user and pass will be asked at first start
 
-**Emby** : `htpp://<your-ip>:5200`  
+**Emby** : `http://<your-ip>:5200`  
  user and pass will be asked at first start
 
-**Ubooquity** : `htpp://<your-ip>:5201`  
- Admin interface is availlable at `htpp://<your-ip>:5201/admin`
+**Ubooquity** : `http://<your-ip>:5201`  
+ Admin interface is availlable at `htpp://<your-ip>:5201/admin`  
  user and pass will be set on the admin interface on first start.
 
-**Libresonic** : `htpp://<your-ip>:5202`  
- user : admin  
- pass : admin
+**Libresonic** : `http://<your-ip>:5202`  
+ user : admin / pass : admin
 
-**Radarr** : `htpp://<your-ip>:5101`
+**Radarr** : `http://<your-ip>:5101`
 
-**SickGear** : `htpp://<your-ip>:5102`
+**SickGear** : `http://<your-ip>:5102`
 
-**Headphones** : `htpp://<your-ip>:5103`
+**Headphones** : `http://<your-ip>:5103`
 
-**Mylar** : `htpp://<your-ip>:5104`
+**Mylar** : `http://<your-ip>:5104`
 
-**HTPC Manager** : `htpp://<your-ip>:5555`
+**HTPC Manager** : `http://<your-ip>:5555`
 
-**Portainer** : `htpp://<your-ip>:9000``
+**Portainer** : `http://<your-ip>:9000`
 
 ## To do :
 - Add a reverse proxy
