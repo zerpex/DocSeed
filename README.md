@@ -2,11 +2,12 @@
 
 ## Description :
 This script automatically install some services to any debian based distro using docker and docker-compose.
-I made a start page to get an easy access to all apps at `<your-ip>:55000`
+I made a start page to get an easy access to all installed apps at `http://<your-ip>`
 
 **Downloaders :**
 - [rTorrent](https://github.com/rakshasa/rtorrent) : **Torrents** downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood).
 - [SabNZB](https://sabnzbd.org/) : **Newsgroups** downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-sabnzbd).
+- Pyload : **direct download** not yet implemented. Still looking for a good maintainer.
 
 **Download automation :**
 - [Radarr](https://github.com/Radarr/Radarr) : Automated **movies** downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-headphones).
@@ -20,9 +21,10 @@ I made a start page to get an easy access to all apps at `<your-ip>:55000`
 - [Libresonic](https://github.com/Libresonic/libresonic) : Music streaming platform dockerized by [linuxserver.io](https://github.com/linuxserver/docker-libresonic)
 
 **Tools :**
-- Start Menu : Self-made srart page to centralize links to each app on the same interface. Access it through `<your-ip>:55000` 
+- Start Menu : Self-made srart page to centralize links to each app on the same interface. Access it through `http://<your-ip>` 
 - [HTPC Manager](https://github.com/Hellowlol/HTPC-Manager) : Front-end interface to manage many htpc related applications dockerized by [linuxserver.io](https://github.com/linuxserver/docker-htpcmanager).
-- [Watchtower](https://github.com/v2tec/watchtower) : Check and update all other containers automaticaly.
+- [Watchtower](https://github.com/v2tec/watchtower) : **docker tool** that check and update all other containers automaticaly.
+- [Portainer](https://github.com/portainer/portainer) : **docker tool** that adds a graphical web interface to manage all containers.
 
 ## How to use this script :
 1- Clone this repository :  
@@ -43,7 +45,7 @@ I made a start page to get an easy access to all apps at `<your-ip>:55000`
 ## Notes :
 - If not found, it will **automatically** install docker and docker-compose
 - Default dirs set to /home/seedbox
-- All apps are centralized in one page : `<your-ip>:55000`
+- All apps are centralized in one page : `htpp://<your-ip>`
 You can still access apps through :
 
 **rTorrent** : `<your-ip>:5001`  
@@ -79,6 +81,8 @@ You can still access apps through :
 **Mylar** : `<your-ip>:5104`
 
 **HTPC Manager** : `<your-ip>:5555`
+
+**Portainer** : `<your-ip>:9000``
 
 ## To do :
 - Add a reverse proxy

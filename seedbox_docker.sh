@@ -1,17 +1,11 @@
 #!/bin/bash
 # Seedbox manager
 #
-# This script automatically manage some services to any debian based distro.
-#      - uTorrent          => Torrents downloader with a modern web UI ( Flood )
-#      - SabNZB            => Newsgroups downloader
-#      - Emby              => Video streaming platform
-#      - Ubooquity         => Comics streaming platform
-#      - Libresonic        => Music streaming platform
-#      - SickGear          => TV Shows download manager
-#
 # author       : zerpex ( zerpex@gmail.com )
 # Last updated : 2017 03 27
 # Version 1.4
+#
+# Github : https://github.com/zerpex/seedbox_docker
 
 SCRPATH=files/scripts
 
@@ -236,9 +230,11 @@ do
             ;;
         13)# Start menu
             cat files/samples/startpage.docker >> docker-compose.yml
+            $SUDO sed -i "s@55000@$St_CPORT@g" docker-compose.yml
             ;;
         14)# Portainer
             cat files/samples/portainer.docker >> docker-compose.yml
+            $SUDO sed -i "s@tool-docker_portainer@$Pt_CNAME@g" docker-compose.yml
             INSTALLED+=('Pt')
             ;;
     esac

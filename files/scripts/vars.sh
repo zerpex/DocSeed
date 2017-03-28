@@ -33,6 +33,7 @@ Ub_CPORT=5201			# Ubooquity
 Ls_CPORT=5202			# Libresonic
 Hm_CPORT=5555			# HTPCManager
 Pt_CPORT=9000			# Portainer
+St_CPORT=80                     # Start page
 
 #--- Icons for start menu
 # (icons from fonts awesome : http://fontawesome.io/icons/ )
