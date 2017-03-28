@@ -48,16 +48,16 @@ I made a start page to get an easy access to all installed apps at `http://<your
 - All apps are centralized in one page : `htpp://<your-ip>`
 You can still access apps through :
 
-**rTorrent** : `<your-ip>:5001`  
+**rTorrent** : `htpp://<your-ip>:5001`  
  user and pass will be asked at first start
 
-**SabNZB** : `<your-ip>:5002`  
+**SabNZB** : `htpp://<your-ip>:5002`  
  user and pass will be asked at first start
 
-**Emby** : `<your-ip>:5200`  
+**Emby** : `htpp://<your-ip>:5200`  
  user and pass will be asked at first start
 
-**Ubooquity** : `<your-ip>:5201`  
+**Ubooquity** : `htpp://<your-ip>:5201`  
  Admin interface is disabled by default for security reasons. In order to set up the application, you have to activate it :
   - Stop Ubooquity container :
 `docker stop seedbox_ubooquity`
@@ -68,21 +68,21 @@ You can still access apps through :
   - Restart ubooquity container :
 `docker start seedbox_ubooquity`
 
-**Libresonic** : `<your-ip>:5202`  
+**Libresonic** : `htpp://<your-ip>:5202`  
  user : admin  
  pass : admin
 
-**Radarr** : `<your-ip>:5101`
+**Radarr** : `htpp://<your-ip>:5101`
 
-**SickGear** : `<your-ip>:5102`
+**SickGear** : `htpp://<your-ip>:5102`
 
-**Headphones** : `<your-ip>:5103`
+**Headphones** : `htpp://<your-ip>:5103`
 
-**Mylar** : `<your-ip>:5104`
+**Mylar** : `htpp://<your-ip>:5104`
 
-**HTPC Manager** : `<your-ip>:5555`
+**HTPC Manager** : `htpp://<your-ip>:5555`
 
-**Portainer** : `<your-ip>:9000``
+**Portainer** : `htpp://<your-ip>:9000``
 
 ## To do :
 - Add a reverse proxy
