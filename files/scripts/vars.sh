@@ -19,6 +19,7 @@ Ls_CNAME=stream-music_Libresonic	# Libresonic
 Hm_CNAME=tool-manage_HTPCManager	# HTPCManager
 Wt_CNAME=tool-docker_Watchtower		# Watchtower
 Pt_CNAME=tool-docker_Portainer		# Portainer
+Sy_CNAME=tool-syncro_Syncthing          # Syncthing
 
 #- Exposed ports
 Rt_CPORT=5001			# rTorrent
@@ -34,6 +35,7 @@ Ls_CPORT=5202			# Libresonic
 Hm_CPORT=5555			# HTPCManager
 Pt_CPORT=9000			# Portainer
 St_CPORT=80                     # Start page
+Sy_CPORT=5550                   # Syncthing
 
 #--- Icons for start menu
 # (icons from fonts awesome : http://fontawesome.io/icons/ )
@@ -49,6 +51,7 @@ Ub_ICON=fa-book                 # Ubooquity
 Ls_ICON=fa-music                # Libresonic
 Hm_ICON=fa-sign-in              # HTPCManager
 Pt_ICON=fa-cubes                # Portainer
+Sy_ICON=fa-refresh              # Syncthing
 
 #--- Regroup apps by category
 declare -a dl=( 
@@ -64,7 +67,7 @@ declare -a stream=(
 )
 
 declare -a tool=( 
- Hm Pt
+ Sy Hm Pt
 )
 
 #--- Define text colors

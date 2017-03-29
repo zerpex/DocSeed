@@ -25,6 +25,7 @@ I made a start page to get an easy access to all installed apps at `http://<your
 - [HTPC Manager](https://github.com/Hellowlol/HTPC-Manager) : Front-end interface to manage many htpc related applications dockerized by [linuxserver.io](https://github.com/linuxserver/docker-htpcmanager).
 - [Watchtower](https://github.com/v2tec/watchtower) : **docker tool** that check and update all other containers automaticaly.
 - [Portainer](https://github.com/portainer/portainer) : **docker tool** that adds a graphical web interface to manage all containers.
+- [Syncthing](https://syncthing.net/) : Multiple devices syncronisation tool (servers/smartphone/...) dockerized by [linuxserver.io](https://github.com/linuxserver/docker-syncthing).
 
 ## How to use this script :
 1- Clone this repository :  
@@ -45,7 +46,7 @@ I made a start page to get an easy access to all installed apps at `http://<your
 ## Notes :
 - If not found, it will **automatically** install docker and docker-compose
 - Default dirs set to /home/seedbox
-- All apps are centralized in one page : `http://<your-ip>`
+- All apps are centralized in one page : `http://<your-ip>`  
   If you don't want to use it, you can still access apps through :
 
 **rTorrent** : `http://<your-ip>:5001`  
@@ -75,6 +76,8 @@ I made a start page to get an easy access to all installed apps at `http://<your
 **HTPC Manager** : `http://<your-ip>:5555`
 
 **Portainer** : `http://<your-ip>:9000`
+
+**Syncthing** : `<your-ip>:5550`
 
 ## To do :
 - Add a reverse proxy
