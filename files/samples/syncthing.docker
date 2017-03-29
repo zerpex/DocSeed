@@ -4,13 +4,13 @@
 
    syncthing:
     image: linuxserver/syncthing
-    container_name: syncthing
+    container_name: tool-syncro_Syncthing
     environment:
       - WEBROOT=/rutorrent
       - PUID=1000
       - PGID=1000
     ports:
-      - "8384:8384"
+      - "5550:8384"
       - "22000:22000"
       - "21027:21027/udp"
     volumes:
