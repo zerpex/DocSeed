@@ -96,7 +96,7 @@ do
 done 
 
 echo " "
-echo -e "If you installed the start page, you can access all your apps through : ${CYELLOW}http://$IFACE:55000$CEND"
+echo -e "If you installed the start page, you can access all your apps through : ${CYELLOW}http://$IFACE$CEND"
 echo " "
 
 cd $PWD
