@@ -68,47 +68,22 @@ case $? in
     ;;
 esac
 
-fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
-trap "rm -f $fichtemp" 0 1 2 5 15
-$DIALOG --title " Root path " --clear \
-        --inputbox "Please set the root path of your installation\n
-( default to /home/seebox ) :\n" 16 51 2> $fichtemp
+D_PATH=($DIALOG --title " Root path " --clear \
+             --inputbox "Please set the root path of your installation\n ( default to /home/seebox ) :\n" 16 51 "/home/seebox")
 
-DEFAULT_PATH=`cat $fichtemp`
-
-if [ -z "$DEFAULT_PATH" ]
-then
-    DEFAULT_PATH=/home/seebox
-    $SUDO mkdir -p $DEFAULT_PATH
-fi
-
-fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
-trap "rm -f $fichtemp" 0 1 2 5 15
-$DIALOG --title " Incoming path " --clear \
+I_PATH=($DIALOG --title " Incoming path " --clear \
         --inputbox "Please set the path of your incoming folder\n
-( default to $DEFAULT_PATH/incoming ) :\n" 16 51 2> $fichtemp
+( default to $DEFAULT_PATH/incoming ) :\n" 16 51 "$DEFAULT_PATH/incoming")
 
-INC_PATH=`cat $fichtemp`
-
-if [ -z "$INC_PATH" ]
-then
-    INC_PATH=$DEFAULT_PATH/incoming
-    $SUDO mkdir -p $INC_PATH
-fi
-
-fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
-trap "rm -f $fichtemp" 0 1 2 5 15
-$DIALOG --title " Media path " --clear \
+M_PATH=($DIALOG --title " Media path " --clear \
         --inputbox "Please set the path of your media folder\n
-( default to $DEFAULT_PATH/media ) :\n" 16 51 2> $fichtemp
+( default to $DEFAULT_PATH/media ) :\n" 16 51 "$DEFAULT_PATH/media")
 
-MEDIA_PATH=`cat $fichtemp`
+DEFAULT_PATH=$("${D_PATH[@]}" 2>&1 >/dev/tty)
+INC_PATH=$("${I_PATH[@]}" 2>&1 >/dev/tty)
+MEDIA_PATH=$("${M_PATH[@]}" 2>&1 >/dev/tty)
 
-if [ -z "$MEDIA_PATH" ]
-then
-    MEDIA_PATH=$DEFAULT_PATH/media
-    $SUDO mkdir -p $MEDIA_PATH
-fi
+$SUDO mkdir -p $DEFAULT_PATH $INC_PATH $MEDIA_PATH
 
 cat files/samples/head.docker > docker-compose.yml
 
