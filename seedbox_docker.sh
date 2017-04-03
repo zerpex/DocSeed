@@ -40,7 +40,12 @@ then
     apt-get -y install dialog
 fi
 
-DIALOG=${DIALOG=dialog}
+if [ -z $DISPLAY ]
+   then
+      DIALOG=dialog
+   else
+      DIALOG=Xdialog
+fi
 
 $DIALOG --title " IMPORTANT " --clear \
         --yesno "This script require docker and docker-compose, it will install it automatically if not found on the system.\n
@@ -209,16 +214,14 @@ do
             $SUDO sed -i "s@55000@$St_CPORT@g" docker-compose.yml
 	cmd=($DIALOG --title " Select interface " --clear --radiolist "Please select the network interface to use on the start menu: " 20 75 5)
 	options=("LAN" ": $LAN" on
-		 "WAN" ": $WAN
-WARN : start page is not secure.
-If WAN is enabled, don\'t forget to protect it !" off)
+		 "WAN" ": $WAN\n WARN : start page is not secure.\n If WAN is enabled, don\'t forget to protect it !" off)
 	choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	clear
-	if [ "$choice" == "LAN" ]
+	if [ "$choice" == "WAN" ]
 	then
-		IFACE=$LAN
-	else
 		IFACE=$WAN
+	else
+		IFACE=$LAN
 	fi
             ;;
         14)# Portainer
@@ -233,6 +236,9 @@ If WAN is enabled, don\'t forget to protect it !" off)
             $SUDO sed -i "s@tool-syncro_Syncthing@$Sy_CNAME@g" docker-compose.yml
             $SUDO sed -i "s@5550@$Sy_CPORT@g" docker-compose.yml
             INSTALLED+=('Sy')
+            ;;
+        255)echo "KTHXBYE"
+            exit 0
             ;;
     esac
 done
