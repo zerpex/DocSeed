@@ -8,7 +8,7 @@
     container_name: tool-startpage_php
     restart: always
     volumes:
-     - ./files/start_menu/www:/usr/share/nginx/html
+     - CONF/start_menu/www:/usr/share/nginx/html
      - /etc/localtime:/etc/localtime:ro
 
 # Webstack WEB
@@ -19,8 +19,8 @@
     links:
      - startphp
     volumes:
-     - ./files/start_menu/conf/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-     - ./files/start_menu/logs/nginx:/var/log/nginx
+     - CONF/start_menu/conf/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+     - CONF/start_menu/logs/nginx:/var/log/nginx
     volumes_from:
       - startphp
     ports:

@@ -7,8 +7,8 @@
     container_name: autodl-tv_sickgear
     hostname: sickgear
     volumes:
-      - ./files/sickgear:/data
-      - TVINC:/incoming
+      - CONF/sickgear:/data
+      - INCOMING:/incoming
       - TVSHOWS:/tv
       - /etc/localtime:/etc/localtime:ro
     restart: always

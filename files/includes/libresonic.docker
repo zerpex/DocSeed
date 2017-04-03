@@ -12,7 +12,7 @@
       - PODCASTS:/podcasts:ro
       - PLAYLISTS:/playlists:ro
       - MEDIA:/media:ro
-      - ./files/libresonic/conf:/config:rw
+      - CONF/libresonic/conf:/config:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
       - PGID=1069

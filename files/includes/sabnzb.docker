@@ -9,8 +9,8 @@
     hostname: newsgroups
     volumes:
       - INCOMING:/downloads:rw
-      - ./files/sabnzdb/temp_dls:/incomplete-downloads:rw
-      - ./files/sabnzdb/conf:/config:rw
+      - CONF/sabnzdb/temp_dls:/incomplete-downloads:rw
+      - CONF/sabnzdb/conf:/config:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
       - WEBROOT=/

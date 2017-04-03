@@ -6,7 +6,7 @@
     image: linuxserver/htpcmanager
     container_name: tool-manage_HTPCManager
     volumes:
-     - ./files/htpcmanager:/config
+     - CONF/htpcmanager:/config
     restart: always
     environment:
      - PUID=1069

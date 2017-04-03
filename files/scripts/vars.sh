@@ -83,3 +83,4 @@ LAN=$(hostname -I | awk '{print $1}')
 WAN=$(dig +short myip.opendns.com @resolver1.opendns.com)
 FQDN=$(hostname -f)
 HNAME=$(hostname)
+IFACE=$LAN # default interface

@@ -7,8 +7,8 @@
     container_name: autodl-comics_mylar
     hostname: mylar
     volumes:
-      - ./files/mylar:/config
-      - BDINC:/downloads
+      - CONF/mylar:/config
+      - INCOMING:/downloads
       - BDS:/comics
       - /etc/localtime:/etc/localtime:ro
     restart: always

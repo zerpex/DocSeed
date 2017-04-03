@@ -6,8 +6,8 @@
     image: linuxserver/radarr
     container_name: autodl-movies_radarr
     volumes:
-     - ./files/radarr:/config
-     - MINC:/downloads
+     - CONF/radarr:/config
+     - INCOMING:/downloads
      - RMOVIES:/movies
     restart: always
     environment:

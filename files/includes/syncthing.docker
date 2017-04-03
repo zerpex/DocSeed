@@ -16,4 +16,4 @@
     volumes:
       - INCOMING:/data/incoming
       - MEDIA:/data/media
-      - ./files/syncthings/conf:/config
+      - CONF/syncthings/conf:/config

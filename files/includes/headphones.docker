@@ -7,9 +7,9 @@
     container_name: autodl-music_headphones
     hostname: headphones
     volumes:
-      - ./files/headphones:/config
-      - ZICINC:/downloads
-      - ZIC:/comics
+      - CONF/headphones:/config
+      - INCOMING:/downloads
+      - ZIC:/music
       - /etc/localtime:/etc/localtime:ro
     restart: always
     environment:

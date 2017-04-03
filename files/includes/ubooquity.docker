@@ -9,7 +9,7 @@
     hostname: library
     volumes:
       - LIBRARY:/opt/data:ro
-      - ./files/ubooquity/conf:/opt/ubooquity-data:rw
+      - CONF/ubooquity/conf:/opt/ubooquity-data:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
       - UID=1069

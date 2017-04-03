@@ -9,7 +9,7 @@
     hostname: video
     volumes:
       - MOVIES:/data:ro
-      - ./files/emby/conf:/config:rw
+      - CONF/emby/conf:/config:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
       - APP_UID=1069
