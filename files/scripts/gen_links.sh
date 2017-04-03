@@ -1,7 +1,9 @@
 #!/bin/bash
 
-rm files/start_menu/www/dl.html files/start_menu/www/autodl.html files/start_menu/www/stream.html files/start_menu/www/tools.html
-touch files/start_menu/www/dl.html files/start_menu/www/autodl.html files/start_menu/www/stream.html files/start_menu/www/tools.html
+cd $CONF_PATH/start_menu/www
+
+rm dl.html autodl.html stream.html tools.html
+touch dl.html autodl.html stream.html tools.html
 
 echo " "
 echo "#######################"
@@ -24,9 +26,9 @@ do
         do
                 if [ "$KEY" == "$APP" ]
                 then
-			echo "        <a href=\"http://$IFACE:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/dl.html
-			echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/dl.html
-			echo "        </a>" >> files/start_menu/www/dl.html
+			echo "        <a href=\"http://$IFACE:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> dl.html
+			echo "          <i class=\"fa $FICON\"></i>" >> dl.html
+			echo "        </a>" >> dl.html
 			if [ "$STATE" == "true" ]
 			then
 				echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
@@ -42,9 +44,9 @@ do
         do
                 if [ "$KEY" == "$APP" ]
                 then
-                        echo "        <a href=\"http://$IFACE:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/autodl.html
-                        echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/autodl.html
-                        echo "        </a>" >> files/start_menu/www/autodl.html
+                        echo "        <a href=\"http://$IFACE:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> autodl.html
+                        echo "          <i class=\"fa $FICON\"></i>" >> autodl.html
+                        echo "        </a>" >> autodl.html
                         if [ "$STATE" == "true" ]
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
@@ -60,9 +62,9 @@ do
         do
                 if [ "$KEY" == "$APP" ]
                 then
-                        echo "        <a href=\"http://$IFACE:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/stream.html
-                        echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/stream.html
-                        echo "        </a>" >> files/start_menu/www/stream.html
+                        echo "        <a href=\"http://$IFACE:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> stream.html
+                        echo "          <i class=\"fa $FICON\"></i>" >> stream.html
+                        echo "        </a>" >> stream.html
                         if [ "$STATE" == "true" ]
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
@@ -78,9 +80,9 @@ do
         do
                 if [ "$KEY" == "$APP" ]
                 then
-                        echo "        <a href=\"http://$IFACE:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> files/start_menu/www/tools.html
-                        echo "          <i class=\"fa $FICON\"></i>" >> files/start_menu/www/tools.html
-                        echo "        </a>" >> files/start_menu/www/tools.html
+                        echo "        <a href=\"http://$IFACE:$FPORT\" target=\"_blank\" title=\"$FNAME\">" >> tools.html
+                        echo "          <i class=\"fa $FICON\"></i>" >> tools.html
+                        echo "        </a>" >> tools.html
                         if [ "$STATE" == "true" ]
                         then
                                 echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running. Please configure it trough it's own interface."
@@ -96,3 +98,5 @@ done
 echo " "
 echo -e "If you installed the start page, you can access all your apps through : ${CYELLOW}http://$IFACE:55000$CEND"
 echo " "
+
+cd $PWD
