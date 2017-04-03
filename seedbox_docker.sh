@@ -232,6 +232,10 @@ do
         13)# Start menu
             cat files/samples/startpage.docker >> docker-compose.yml
             $SUDO sed -i "s@55000@$St_CPORT@g" docker-compose.yml
+	cmd=($DIALOG --backtitle " Select interface " --title " Select interface " --clear --radiolist "Please select the network interface to use : " 20 61 5)
+	options=("LAN" ": $LAN" on
+		 "WAN" ": $WAN. WARN : start page is not secure. Don't forget to protect it !" off 2> $fichtemp
+	IFACE=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
             ;;
         14)# Portainer
             cat files/samples/portainer.docker >> docker-compose.yml
