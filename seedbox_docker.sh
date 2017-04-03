@@ -235,15 +235,14 @@ do
 	cmd=($DIALOG " --title " Select interface " --clear --radiolist "Please select the network interface to use on the start menu:\n\n " 20 75 5)
 	options=("LAN" ": $LAN" on
 		 "WAN" ": $WAN\n\nWARN : start page is not secure.\n If WAN is enabled, don't forget to protect it !" off)
-	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	clear
-	for choice in $choices
-	do
-		case $choice in
-			LAN)IFACE=$LAN;;
-			WAN)IFACE=$WAN;;
-		esac
-	done
+	if [ "$choice" == "LAN" ]
+	then
+		IFACE=$LAN
+	else
+		IFACE=$WAN
+	fi
             ;;
         14)# Portainer
             cat files/samples/portainer.docker >> docker-compose.yml
