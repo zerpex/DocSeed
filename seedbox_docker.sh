@@ -43,8 +43,8 @@ fi
 DIALOG=${DIALOG=dialog}
 
 $DIALOG --title " IMPORTANT " --clear \
-        --yesno "This script require docker and docker-compose, it will install it automatically if not found on the system.\n
-  Do you agree ?" 15 50
+        --yesno "This script require docker and docker-compose, it will install it automatically if not found on the system.\n\
+  Do you agree ?" 15 75 
 
 case $? in
   0)
@@ -69,24 +69,24 @@ case $? in
 esac
 
 D_PATH=($DIALOG --title " Root path " --clear \
-             --inputbox "Please set the root path of your installation\n ( default to /home/seebox ) :\n" 16 51 "/home/seebox")
+             --inputbox "Please set the root path of your installation\n ( default to /home/seebox ) :\n\" 16 75 "/home/seebox")
 DEFAULT_PATH=$("${D_PATH[@]}" 2>&1 >/dev/tty)
 
 I_PATH=($DIALOG --title " Incoming path " --clear \
-        --inputbox "Please set the path of your incoming folder\n
-( default to $DEFAULT_PATH/incoming ) :\n" 16 51 "$DEFAULT_PATH/incoming")
+        --inputbox "Please set the path of your incoming folder\n\
+( default to $DEFAULT_PATH/incoming ) :\n" 16 75 "$DEFAULT_PATH/incoming")
 INC_PATH=$("${I_PATH[@]}" 2>&1 >/dev/tty)
 
 M_PATH=($DIALOG --title " Media path " --clear \
-        --inputbox "Please set the path of your media folder\n
-( default to $DEFAULT_PATH/media ) :\n" 16 51 "$DEFAULT_PATH/media")
+        --inputbox "Please set the path of your media folder\n\
+( default to $DEFAULT_PATH/media ) :\n" 16 75 "$DEFAULT_PATH/media")
 MEDIA_PATH=$("${M_PATH[@]}" 2>&1 >/dev/tty)
 
 $SUDO mkdir -p $DEFAULT_PATH $INC_PATH $MEDIA_PATH
 
 cat files/samples/head.docker > docker-compose.yml
 
-cmd=(dialog --separate-output --checklist "Select options:" 22 76 16)
+cmd=(dialog --separate-output --checklist "Select options:" 22 85 16)
 options=(01 "rTorrent : Torrents downloads" off
          02 "SabNZB : Newsgroups downloads" off
          03 "Pyload : Direct downloads" off
@@ -208,7 +208,7 @@ do
             $SUDO sed -i "s@55000@$St_CPORT@g" docker-compose.yml
 	cmd=($DIALOG --title " Select interface " --clear --radiolist "Please select the network interface to use on the start menu: " 20 75 5)
 	options=("LAN" ": $LAN" on
-		 "WAN" ": $WAN \n \n WARN : start page is not secure. \n If WAN is enabled, don\'t forget to protect it !" off)
+		 "WAN" ": $WAN \n\ \n\ WARN : start page is not secure. \n\ If WAN is enabled, don\'t forget to protect it !" off)
 	choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	clear
 	if [ "$choice" == "LAN" ]
