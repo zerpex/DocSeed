@@ -124,9 +124,8 @@ options=("rTorrent" "Torrents downloads" off
          "Emby" "Video streaming" off
          "Ubooquity" "Comics streaming" off
          "Libresonic" "Music streaming" off
-         "HTPCManager" "Automation centrilized interface" off
+         "Muximux" "Application management console (Heavily recommanded)" on
          "Watchtower" "Auto-update apps tool (Heavily recommanded)" on
-         "Start_page" "Web-page that centrilize all links to your apps (heavily recomanded)" on
          "Portainer" "Containers management tools through browser (recomanded)" on
          "Syncthing" "Synchronisation tool" on)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)

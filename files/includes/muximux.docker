@@ -1,0 +1,19 @@
+###########
+# Muximux #
+###########
+
+   muximux:
+    restart: always
+    image: linuxserver/muximux
+    container_name: tool-manage_Muximux
+    volumes:
+      - CONF/muximux/conf:/config:rw
+      - ./files/apps/muximux/conf/www/muximux/settings.ini.php:/config/www/muximux/settings.ini.php:rw
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - PUID=1069
+      - PGID=1069
+      - TZ=Europe/Paris
+    ports:
+      - "80:80"
+
