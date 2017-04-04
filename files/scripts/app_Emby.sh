@@ -10,4 +10,18 @@ $SUDO sed -i "s@MOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
 $SUDO sed -i "s@stream-video_emby@$Eb_CNAME@g" docker-compose.yml
 $SUDO sed -i "s@5009@$Eb_CPORT@g" docker-compose.yml
 
+cat <<EOF >> files/includes/muximux.conf
+
+[Emby]
+name = "Emby"
+url = "http://192.168.42.52:5009"
+scale = 1
+icon = "muximux-plex"
+color = "#f9be03"
+enabled = "true"
+EOF
+
+$SUDO sed -i "s@192.168.42.52@$IFACE@g" files/includes/muximux.conf
+$SUDO sed -i "s@5009@$Eb_CPORT@g" files/includes/muximux.conf
+
 INSTALLED+=('Eb')

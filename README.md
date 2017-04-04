@@ -2,7 +2,6 @@
 
 ## Description :
 This script automatically install some services to any debian based distro using docker and docker-compose.
-I made a start page to get an easy access to all installed apps at `http://<your-ip>`
 
 **Downloaders :**
 - [rTorrent](https://github.com/rakshasa/rtorrent) : **Torrents** downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood).
@@ -21,8 +20,7 @@ I made a start page to get an easy access to all installed apps at `http://<your
 - [Libresonic](https://github.com/Libresonic/libresonic) : Music streaming platform dockerized by [linuxserver.io](https://github.com/linuxserver/docker-libresonic)
 
 **Tools :**
-- Start Menu : Self-made srart page to centralize links to each app on the same interface. Access it through `http://<your-ip>` 
-- [HTPC Manager](https://github.com/Hellowlol/HTPC-Manager) : Front-end interface to manage many htpc related applications dockerized by [linuxserver.io](https://github.com/linuxserver/docker-htpcmanager).
+- [Muximux](https://github.com/mescon/Muximux) : Front-end interface to manage applications dockerized by [linuxserver.io](https://hub.docker.com/r/linuxserver/muximux/).
 - [Watchtower](https://github.com/v2tec/watchtower) : **docker tool** that check and update all other containers automaticaly.
 - [Portainer](https://github.com/portainer/portainer) : **docker tool** that adds a graphical web interface to manage all containers.
 - [Syncthing](https://syncthing.net/) : Multiple devices syncronisation tool (servers/smartphone/...) dockerized by [linuxserver.io](https://github.com/linuxserver/docker-syncthing).
@@ -46,8 +44,6 @@ I made a start page to get an easy access to all installed apps at `http://<your
 ## Notes :
 - If not found, it will **automatically** install docker and docker-compose
 - Default dirs set to /home/seedbox
-- All apps are centralized in one page : `http://<your-ip>`  
-  If you don't want to use it, you can still access apps through :
 
 **rTorrent** : `http://<your-ip>:5001`  
  user and pass will be asked at first start
@@ -73,7 +69,8 @@ I made a start page to get an easy access to all installed apps at `http://<your
 
 **Mylar** : `http://<your-ip>:5104`
 
-**HTPC Manager** : `http://<your-ip>:5555`
+**Muximux** : `http://<your-ip>`  
+ user : admin / pass : admin
 
 **Portainer** : `http://<your-ip>:9000`
 
@@ -81,4 +78,6 @@ I made a start page to get an easy access to all installed apps at `http://<your
 
 ## To do :
 - Add a reverse proxy
-- Adds Pyload
+- Add Pyload
+- Add Glances
+- Add Pydio

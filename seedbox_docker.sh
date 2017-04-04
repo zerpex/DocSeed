@@ -109,26 +109,39 @@ CONF_PATH=$("${C_PATH[@]}" 2>&1 >/dev/tty)
 # Create all this directories
 $SUDO mkdir -p $DEFAULT_PATH $INC_PATH $MEDIA_PATH $CONF_PATH
 
+# Select the network interface to use
+cmd=($DIALOG --title " Select interface " --clear --radiolist "Please select the network interface to use on the start menu: " 20 75 5)
+options=("LAN" ": $LAN" on
+		 "WAN" ": $WAN" off)
+choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+
+if [ "$choice" == "WAN" ]
+then
+		IFACE=$WAN
+else
+		IFACE=$LAN
+fi
+
 # Begin generating docker receipe
 cat files/includes/head.docker > docker-compose.yml
 
 # Select apps to install
 cmd=(dialog --separate-output --checklist "Select options:" 22 85 16)
-options=("rTorrent" "Torrents downloads" off
-         "SabNZB" "Newsgroups downloads" off
-         "Pyload" "Direct downloads" off
-         "Radarr" "Movies automation" off
-         "SickGear" "TV shows automation" off
-         "Headphones" "Music automation" off
-         "Mylar" "Comics automation" off
-         "Emby" "Video streaming" off
-         "Ubooquity" "Comics streaming" off
-         "Libresonic" "Music streaming" off
-         "HTPCManager" "Automation centrilized interface" off
-         "Watchtower" "Auto-update apps tool (Heavily recommanded)" on
-         "Start_page" "Web-page that centrilize all links to your apps (heavily recomanded)" on
-         "Portainer" "Containers management tools through browser (recomanded)" on
-         "Syncthing" "Synchronisation tool" on)
+options=("Muximux" "Application management console (Heavily recommanded)" on
+         "rTorrent" "Download : Torrents" off
+         "SABnzdb" "Download : Newsgroups" off
+         "Pyload" "Download : Direct" off
+         "Emby" "Streaming : Video" off
+         "Libresonic" "Streaming : Music" off
+         "Ubooquity" "Streaming : Comics" off
+         "Radarr" "Automation : Movies" off
+         "SickGear" "Automation : TV shows" off
+         "Headphones" "Automation : Music" off
+         "Mylar" "Automation : Comics" off
+         "Watchtower" "Tool : Auto-update apps (Heavily recommanded)" on
+         "Portainer" "Tool : Containers management through browser (recomanded)" on
+         "Syncthing" "Tool : Devices synchronisation" on)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
 
@@ -152,6 +165,34 @@ $SUDO chown -R $SUID:$SGID $MEDIA_PATH
 
 # Generate and start all needeed containers
 docker-compose up -d
+sleep 5
 
-# Generate start page links to all installed apps
-source $SCRPATH/gen_links.sh
+# Update Muximux conf
+docker stop $Mx_CNAME
+$SUDO rm $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+$SUDO cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+$SUDO chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+docker start $Mx_CNAME
+
+for APP in "${INSTALLED[@]}"
+do
+	CNAME=_CNAME
+	CPORT=_CPORT
+	ICON=_ICON
+	CONTNAME=$(eval "echo \$$APP$CNAME")
+	FPORT=$(eval "echo \$$APP$CPORT")
+	FICON=$(eval "echo \$$APP$ICON")
+	FNAME=`echo $CONTNAME | awk -F_ '{print $2}'`
+	STATE=`docker inspect -f {{.State.Running}} $CONTNAME`
+
+	if [ "$STATE" == "true" ]
+	then
+		echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running at ${CYELLOW}http://$IFACE:$FPORT$CEND"
+	else
+		echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
+	fi
+done
+
+echo " "
+echo -e "If you installed Muximux, you can access all your apps directly through : ${CYELLOW}http://$IFACE$CEND"
+echo " "
