@@ -109,6 +109,20 @@ CONF_PATH=$("${C_PATH[@]}" 2>&1 >/dev/tty)
 # Create all this directories
 $SUDO mkdir -p $DEFAULT_PATH $INC_PATH $MEDIA_PATH $CONF_PATH
 
+# Select the network interface to use
+cmd=($DIALOG --title " Select interface " --clear --radiolist "Please select the network interface to use on the start menu: " 20 75 5)
+options=("LAN" ": $LAN" on
+		 "WAN" ": $WAN" off)
+choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+
+if [ "$choice" == "WAN" ]
+then
+		IFACE=$WAN
+else
+		IFACE=$LAN
+fi
+
 # Begin generating docker receipe
 cat files/includes/head.docker > docker-compose.yml
 
@@ -151,11 +165,34 @@ $SUDO chown -R $SUID:$SGID $MEDIA_PATH
 
 # Generate and start all needeed containers
 docker-compose up -d
+sleep 5
 
 # Update Muximux conf
 $SUDO rm $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
 $SUDO cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
 $SUDO chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
 
-# Generate start page links to all installed apps
-#source $SCRPATH/gen_links.sh
+for APP in "${INSTALLED[@]}"
+do
+	CNAME=_CNAME
+	CPORT=_CPORT
+	ICON=_ICON
+	CONTNAME=$(eval "echo \$$APP$CNAME")
+	FPORT=$(eval "echo \$$APP$CPORT")
+	FICON=$(eval "echo \$$APP$ICON")
+	FNAME=`echo $CONTNAME | awk -F_ '{print $2}'`
+	STATE=`docker inspect -f {{.State.Running}} $CONTNAME`
+
+	if [ "$STATE" == "true" ]
+	then
+		echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
+						echo -e "    Access it directly through : ${CYELLOW}http://$IFACE:$FPORT$CEND"
+						echo " "
+	else
+		echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
+	fi
+done
+
+echo " "
+echo -e "If you installed Muximux, you can access all your apps directly through : ${CYELLOW}http://$IFACE$CEND"
+echo " "
