@@ -165,8 +165,8 @@ $SUDO chown -R $SUID:$SGID $MEDIA_PATH
 
 # Generate and start all needeed containers
 docker-compose up -d
+sleep 5
 
-docker stop $Mx_CNAME
 # Update Muximux conf
 docker stop $Mx_CNAME
 $SUDO rm $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
