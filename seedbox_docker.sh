@@ -152,5 +152,10 @@ $SUDO chown -R $SUID:$SGID $MEDIA_PATH
 # Generate and start all needeed containers
 docker-compose up -d
 
+# Update Muximux conf
+$SUDO rm $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+$SUDO cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+$SUDO chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+
 # Generate start page links to all installed apps
-source $SCRPATH/gen_links.sh
+#source $SCRPATH/gen_links.sh

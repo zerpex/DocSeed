@@ -1,23 +1,4 @@
 #!/bin/bash
-# Muximux installation
-
-
-cat files/includes/muximux.docker >> docker-compose.yml
-
-$SUDO sed -i "s@tool-manage_Muximux@$Mx_CNAME@g" docker-compose.yml
-$SUDO sed -i "s@5554@$Mx_CPORT@g" docker-compose.yml
-
-INSTALLED+=('Mx')
-root@Ungoliant:~/seedbox#
-root@Ungoliant:~/seedbox#
-root@Ungoliant:~/seedbox#
-root@Ungoliant:~/seedbox#
-root@Ungoliant:~/seedbox#
-root@Ungoliant:~/seedbox#
-root@Ungoliant:~/seedbox#
-root@Ungoliant:~/seedbox#
-root@Ungoliant:~/seedbox# cat files/scripts/vars.sh
-#!/bin/bash
 
 #--- Define user and group ID for all apps. Realy important in order to have all apps access the files.
 SUID=1069
