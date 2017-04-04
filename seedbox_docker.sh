@@ -117,13 +117,13 @@ cmd=(dialog --separate-output --checklist "Select options:" 22 85 16)
 options=("rTorrent" "Torrents downloads" off
          "SabNZB" "Newsgroups downloads" off
          "Pyload" "Direct downloads" off
+         "Emby" "Video streaming" off
+         "Libresonic" "Music streaming" off
+         "Ubooquity" "Comics streaming" off
          "Radarr" "Movies automation" off
          "SickGear" "TV shows automation" off
          "Headphones" "Music automation" off
          "Mylar" "Comics automation" off
-         "Emby" "Video streaming" off
-         "Ubooquity" "Comics streaming" off
-         "Libresonic" "Music streaming" off
          "Muximux" "Application management console (Heavily recommanded)" on
          "Watchtower" "Auto-update apps tool (Heavily recommanded)" on
          "Portainer" "Containers management tools through browser (recomanded)" on
