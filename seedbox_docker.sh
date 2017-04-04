@@ -116,7 +116,7 @@ cat files/includes/head.docker > docker-compose.yml
 cmd=(dialog --separate-output --checklist "Select options:" 22 85 16)
 options=("Muximux" "Application management console (Heavily recommanded)" on
          "rTorrent" "Download : Torrents" off
-         "SabNZB" "Download : Newsgroups" off
+         "SABnzdb" "Download : Newsgroups" off
          "Pyload" "Download : Direct" off
          "Emby" "Streaming : Video" off
          "Libresonic" "Streaming : Music" off

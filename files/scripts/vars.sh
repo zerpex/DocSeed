@@ -7,7 +7,7 @@ SGID=1069
 #--- Docker options
 #- Container names
 Rt_CNAME=dl-torrent_rTorrent            # rTorrent
-Sb_CNAME=dl-newsgroups_SabnNZB          # SabNZB
+Sb_CNAME=dl-newsgroups_SABnzdb          # SABnzdb
 Py_CNAME=dl-directdl_Pyload             # Pyload
 Rd_CNAME=autodl-movies_Radarr           # Radarr
 Sg_CNAME=autodl-tv_SickGear             # SickGear
@@ -24,7 +24,7 @@ Mx_CNAME=tool-manage_Muximux            # Muximux
 
 #- Exposed ports
 Rt_CPORT=5001                   # rTorrent
-Sb_CPORT=5002                   # SabNZB
+Sb_CPORT=5002                   # SABnzdb
 Py_CPORT=5003                   # Pyload
 Rd_CPORT=5101                   # Radarr
 Sg_CPORT=5102                   # SickGear
@@ -42,7 +42,7 @@ Mx_CPORT=5554                   # Muximux
 #--- Icons for start menu
 # (icons from fonts awesome : http://fontawesome.io/icons/ )
 Rt_ICON=fa-download             # rTorrent
-Sb_ICON=fa-file-archive-o       # SabNZB
+Sb_ICON=fa-file-archive-o       # SABnzdb
 Py_ICON=fa-cloud-download       # Pyload
 Rd_ICON=fa-file-video-o         # Radarr
 Sg_ICON=fa-television           # SickGear
