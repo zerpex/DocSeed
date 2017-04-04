@@ -19,7 +19,6 @@ scale = 1
 icon = "muximux-plex"
 color = "#f9be03"
 enabled = "true"
-default = "true"
 EOF
 
 $SUDO sed -i "s@192.168.42.52@$IFACE@g" files/includes/muximux.conf

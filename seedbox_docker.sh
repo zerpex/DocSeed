@@ -165,12 +165,14 @@ $SUDO chown -R $SUID:$SGID $MEDIA_PATH
 
 # Generate and start all needeed containers
 docker-compose up -d
-sleep 5
 
+docker stop $Mx_CNAME
 # Update Muximux conf
+docker stop $Mx_CNAME
 $SUDO rm $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
 $SUDO cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
 $SUDO chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+docker start $Mx_CNAME
 
 for APP in "${INSTALLED[@]}"
 do
@@ -185,9 +187,7 @@ do
 
 	if [ "$STATE" == "true" ]
 	then
-		echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running."
-						echo -e "    Access it directly through : ${CYELLOW}http://$IFACE:$FPORT$CEND"
-						echo " "
+		echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running at ${CYELLOW}http://$IFACE:$FPORT$CEND"
 	else
 		echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
 	fi
