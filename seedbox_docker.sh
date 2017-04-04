@@ -114,20 +114,20 @@ cat files/includes/head.docker > docker-compose.yml
 
 # Select apps to install
 cmd=(dialog --separate-output --checklist "Select options:" 22 85 16)
-options=("rTorrent" "Torrents downloads" off
-         "SabNZB" "Newsgroups downloads" off
-         "Pyload" "Direct downloads" off
-         "Emby" "Video streaming" off
-         "Libresonic" "Music streaming" off
-         "Ubooquity" "Comics streaming" off
-         "Radarr" "Movies automation" off
-         "SickGear" "TV shows automation" off
-         "Headphones" "Music automation" off
-         "Mylar" "Comics automation" off
-         "Muximux" "Application management console (Heavily recommanded)" on
-         "Watchtower" "Auto-update apps tool (Heavily recommanded)" on
-         "Portainer" "Containers management tools through browser (recomanded)" on
-         "Syncthing" "Synchronisation tool" on)
+options=("Muximux" "Application management console (Heavily recommanded)" on
+         "rTorrent" "Download : Torrents" off
+         "SabNZB" "Download : Newsgroups" off
+         "Pyload" "Download : Direct" off
+         "Emby" "Streaming : Video" off
+         "Libresonic" "Streaming : Music" off
+         "Ubooquity" "Streaming : Comics" off
+         "Radarr" "Automation : Movies" off
+         "SickGear" "Automation : TV shows" off
+         "Headphones" "Automation : Music" off
+         "Mylar" "Automation : Comics" off
+         "Watchtower" "Tool : Auto-update apps (Heavily recommanded)" on
+         "Portainer" "Tool : Containers management through browser (recomanded)" on
+         "Syncthing" "Tool : Devices synchronisation" on)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
 
