@@ -37,14 +37,14 @@ else
         SUDO=sudo
 fi
 
-# Installation menu pre-requiresites
-if [ ! -s /usr/bin/dialog ]
-then
-    echo " "
-    echo -e "${CGREEN}Installing menu pre-requiresites$CEND"
-    echo " "
-    apt-get -y install dialog
-fi
+# Installation pre-requiresites
+
+echo " "
+echo -e "${CGREEN}Installing pre-requiresites$CEND"
+echo " "
+$SUDO apt-get update
+$SUDO apt-get -y upgrade
+$SUDO apt-get -y install dialog sudo apt-transport-https ca-certificates curl
 
 # Installation menu begin
 if [ -z $DISPLAY ]
@@ -131,7 +131,6 @@ cmd=(dialog --separate-output --checklist "Select options:" 22 85 16)
 options=("Muximux" "Application management console (Heavily recommanded)" on
          "rTorrent" "Download : Torrents" off
          "SABnzdb" "Download : Newsgroups" off
-         "Pyload" "Download : Direct" off
          "Emby" "Streaming : Video" off
          "Libresonic" "Streaming : Music" off
          "Ubooquity" "Streaming : Comics" off
