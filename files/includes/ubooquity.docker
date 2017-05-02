@@ -8,8 +8,8 @@
     container_name: stream-comics_ubooquity
     hostname: library
     volumes:
-      - LIBRARY:/opt/data:ro
-      - CONF/ubooquity/conf:/opt/ubooquity-data:rw
+      - LIBRARY:/media:ro
+      - CONF/ubooquity/conf:/config:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
       - UID=1069
