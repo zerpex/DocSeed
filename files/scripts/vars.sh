@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#--- Define user and group ID for all apps. Realy important in order to have all apps access the files.
+#--- Define user and group ID for all apps. Really important in order for all apps to access files.
 SUID=1069
 SGID=1069
 
@@ -16,7 +16,6 @@ My_CNAME=autodl-comics_Mylar            # Mylar
 Eb_CNAME=stream-video_Emby              # Emby
 Ub_CNAME=stream-comics_Ubooquity        # Ubooquity
 Ls_CNAME=stream-music_Libresonic        # Libresonic
-Hm_CNAME=tool-manage_HTPCManager        # HTPCManager
 Wt_CNAME=tool-docker_Watchtower         # Watchtower
 Pt_CNAME=tool-docker_Portainer          # Portainer
 Sy_CNAME=tool-syncro_Syncthing          # Syncthing
@@ -33,7 +32,6 @@ My_CPORT=5104                   # Mylar
 Eb_CPORT=5200                   # Emby
 Ub_CPORT=5201                   # Ubooquity
 Ls_CPORT=5202                   # Libresonic
-Hm_CPORT=5555                   # HTPCManager
 Pt_CPORT=9000                   # Portainer
 St_CPORT=80                     # Start page
 Sy_CPORT=5550                   # Syncthing
@@ -51,7 +49,6 @@ My_ICON=fa-comments-o           # Mylar
 Eb_ICON=fa-film                 # Emby
 Ub_ICON=fa-book                 # Ubooquity
 Ls_ICON=fa-music                # Libresonic
-Hm_ICON=fa-sign-in              # HTPCManager
 Pt_ICON=fa-cubes                # Portainer
 Sy_ICON=fa-refresh              # Syncthing
 Mx_ICON=fa-sign-in              # Muximux
@@ -87,3 +84,14 @@ WAN=$(dig +short myip.opendns.com @resolver1.opendns.com)
 FQDN=$(hostname -f)
 HNAME=$(hostname)
 IFACE=$LAN # default interface 
+
+#--- Define other used variables
+CNAME=_CNAME
+CPORT=_CPORT
+ICON=_ICON
+CONTNAME=$(eval "echo \$$APP$CNAME")
+FPORT=$(eval "echo \$$APP$CPORT")
+FICON=$(eval "echo \$$APP$ICON")
+FNAME=`echo $CONTNAME | awk -F_ '{print $2}'`
+DNAME=`echo $FNAME | tr '[:upper:]' '[:lower:]'`
+STATE=`docker inspect -f {{.State.Running}} $CONTNAME`
