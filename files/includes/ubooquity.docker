@@ -4,7 +4,7 @@
 
    ubooquity:
     restart: always
-    image: cromigon/ubooquity
+    image: zerpex/ubooquity-docker
     container_name: stream-comics_ubooquity
     hostname: library
     volumes:
@@ -17,5 +17,4 @@
       - TZ=Europe/Paris
     ports:
       - "5003:2202"
-    command: "-webadmin"
-
+      - "2502":"2502"
