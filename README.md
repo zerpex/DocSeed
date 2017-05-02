@@ -16,7 +16,7 @@ This script automatically install some services to any debian based distro using
 
 **Streaming :**
 - [Emby](https://emby.media/) : Video streaming platform dockerized by [Emby.media](https://hub.docker.com/r/emby/embyserver/).
-- [Ubooquity](https://vaemendis.net/ubooquity/) : Comics streaming platform dockerized by [Cromigon](https://github.com/cromigon/ubooquity-docker).
+- [Ubooquity](https://vaemendis.net/ubooquity/) : Comics streaming platform dockerized by [myself:)](https://github.com/zerpex/ubooquity-docker).
 - [Libresonic](https://github.com/Libresonic/libresonic) : Music streaming platform dockerized by [linuxserver.io](https://github.com/linuxserver/docker-libresonic)
 
 **Tools :**
@@ -55,7 +55,7 @@ This script automatically install some services to any debian based distro using
  user and pass will be asked at first start
 
 **Ubooquity** : `http://<your-ip>:5201`  
- Admin interface is availlable at `htpp://<your-ip>:5201/admin`  
+ Admin interface is availlable at `htpp://<your-ip>:2502/admin`  
  user and pass will be set on the admin interface on first start.
 
 **Libresonic** : `http://<your-ip>:5202`  
