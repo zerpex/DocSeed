@@ -7,9 +7,9 @@
     container_name: tool-docker_portainer
     restart: always
     ports:
-    - "9000:9000"
+      - "9000:9000"
     volumes:
-    - CONF/portainer/data:/data
-    - /var/run/docker.sock:/var/run/docker.sock
-    - /etc/localtime:/etc/localtime:ro
+      - CONF/portainer/data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/localtime:/etc/localtime:ro
 
