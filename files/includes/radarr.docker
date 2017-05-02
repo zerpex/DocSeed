@@ -6,14 +6,14 @@
     image: linuxserver/radarr
     container_name: autodl-movies_radarr
     volumes:
-     - CONF/radarr:/config
-     - INCOMING:/downloads
-     - RMOVIES:/movies
+      - CONF/radarr:/config
+      - INCOMING:/downloads
+      - RMOVIES:/movies
     restart: always
     environment:
-     - PUID=1069
-     - PGID=1069
-     - TZ=Europe/Paris
+      - PUID=1069
+      - PGID=1069
+      - TZ=Europe/Paris
     ports:
-     - 5008:7878
+      - 5008:7878
 
