@@ -124,7 +124,8 @@ cat files/includes/head.docker > docker-compose.yml
 
 # Select apps to install
 cmd=(dialog --separate-output --checklist "Select options:" 22 85 16)
-options=("Muximux" "Application management console (Heavily recommanded)" on
+options=("Traefik" "Proxy and certificates manager (Mandatory)" on
+         "Muximux" "Application management console (Heavily recommanded)" on
          "rTorrent" "Download : Torrents" off
          "SABnzdb" "Download : Newsgroups" off
          "Emby" "Streaming : Video" off
