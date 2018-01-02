@@ -1,8 +1,30 @@
 #!/bin/bash
 
-#--- Define user and group ID for all apps. Really important in order for all apps to access files.
+#--- Define user and group ID for all apps. Realy important in order to have all apps access the files.
 SUID=1069
 SGID=1069
+
+#--- Generic vars
+TIME_ZONE=Europe/Paris
+
+#--- Domain
+DOMAIN=myDomain.tld
+
+#--- subdomains per app
+Rt_SDOM=rtorrent                 # rTorrent
+Sb_SDOM=sabnzb                   # SabNZB
+Py_SDOM=pyload                   # Pyload
+Rd_SDOM=radarr                   # Radarr
+Sg_SDOM=sickgear                 # SickGear
+Hp_SDOM=headphones               # HeadPhones
+My_SDOM=mylar                    # Mylar
+Eb_SDOM=emby                     # Emby
+Ub_SDOM=ubooquity                # Ubooquity
+Ua_SDOM=ubooquity-adm            # Ubooquity
+Ls_SDOM=libresonic               # Libresonic
+Pt_SDOM=portainer                # Portainer
+Sy_SDOM=syncthing                # Syncthing
+Mx_SDOM=muximux                  # Muximux
 
 #--- Docker options
 #- Container names
@@ -21,55 +43,6 @@ Pt_CNAME=tool-docker_Portainer          # Portainer
 Sy_CNAME=tool-syncro_Syncthing          # Syncthing
 Mx_CNAME=tool-manage_Muximux            # Muximux
 
-#- Exposed ports
-Rt_CPORT=5001                   # rTorrent
-Sb_CPORT=5002                   # SABnzdb
-Py_CPORT=5003                   # Pyload
-Rd_CPORT=5101                   # Radarr
-Sg_CPORT=5102                   # SickGear
-Hp_CPORT=5103                   # HeadPhones
-My_CPORT=5104                   # Mylar
-Eb_CPORT=5200                   # Emby
-Ub_CPORT=5201                   # Ubooquity
-Ls_CPORT=5202                   # Libresonic
-Pt_CPORT=9000                   # Portainer
-St_CPORT=80                     # Start page
-Sy_CPORT=5550                   # Syncthing
-Mx_CPORT=5554                   # Muximux
-
-#--- Icons for start menu
-# (icons from fonts awesome : http://fontawesome.io/icons/ )
-Rt_ICON=fa-download             # rTorrent
-Sb_ICON=fa-file-archive-o       # SABnzdb
-Py_ICON=fa-cloud-download       # Pyload
-Rd_ICON=fa-file-video-o         # Radarr
-Sg_ICON=fa-television           # SickGear
-Hp_ICON=fa-file-audio-o         # HeadPhones
-My_ICON=fa-comments-o           # Mylar
-Eb_ICON=fa-film                 # Emby
-Ub_ICON=fa-book                 # Ubooquity
-Ls_ICON=fa-music                # Libresonic
-Pt_ICON=fa-cubes                # Portainer
-Sy_ICON=fa-refresh              # Syncthing
-Mx_ICON=fa-sign-in              # Muximux
-
-#--- Regroup apps by category
-declare -a dl=(
- Rt Sb Py
-)
-
-declare -a autodl=(
- Rd Sg Hp My
-)
-
-declare -a stream=(
- Eb Ub Ls
-)
-
-declare -a tool=(
- Sy Hm Pt Mx
-)
-
 #--- Define text colors
 CSI="\033["
 CEND="${CSI}0m"
@@ -84,14 +57,11 @@ WAN=$(dig +short myip.opendns.com @resolver1.opendns.com)
 FQDN=$(hostname -f)
 HNAME=$(hostname)
 IFACE=$LAN # default interface 
+RDNS=$(dig +short -x $WAN)
+RDNS=${RDNS::-1}
+DOMAIN="${DOMAIN:-$RDNS}"
 
 #--- Define other used variables
 CNAME=_CNAME
 CPORT=_CPORT
-ICON=_ICON
-CONTNAME=$(eval "echo \$$APP$CNAME")
-FPORT=$(eval "echo \$$APP$CPORT")
-FICON=$(eval "echo \$$APP$ICON")
-FNAME=`echo $CONTNAME | awk -F_ '{print $2}'`
-DNAME=`echo $FNAME | tr '[:upper:]' '[:lower:]'`
-STATE=`docker inspect -f {{.State.Running}} $CONTNAME`
+CSDOM=_SDOM
