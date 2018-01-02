@@ -63,32 +63,25 @@ if [ -z $DISPLAY ]
       DIALOG=Xdialog
 fi
 
-# OK to check and install docker ?
-$DIALOG --title " IMPORTANT " --clear \
-        --yesno "This script require docker and docker-compose, it will install it automatically if not found on the system.\n
-  Do you agree ?" 15 75
+if is_package_installed docker; then
+  # OK to check and install docker ?
+  $DIALOG --title " IMPORTANT " --clear \
+          --yesno "This script require docker and docker-compose, it will install it automatically.\n
+                   Do you agree ?" 15 75
 
-case $? in
-  0)
-    # If docker is not installed
-	if is_package_installed docker; then
-	  # Install docker
-	  source $SCRPATH/ins_docker.sh
-	fi
-
-	# If docker-compose is not installed
-	if [ ! -s /usr/local/bin/docker-compose ]
-	then
-	  # Install docker-compose
-	  source $SCRPATH/ins_docker-compose.sh
-	fi
-    ;;
-  1)
-    # Can't do anything without docker
-    echo "KTHXBYE."
-    exit 0
-    ;;
-esac
+  case $? in
+       0)# Install docker
+	 source $SCRPATH/ins_docker.sh
+	
+	 # Install docker-compose
+	 source $SCRPATH/ins_docker-compose.sh
+         ;;
+       1)# Can't do anything without docker
+         echo "KTHXBYE."
+         exit 0
+         ;;
+  esac
+fi
 
 # Define the root path 
 D_PATH=($DIALOG --title " Root path " --clear \
