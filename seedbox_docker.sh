@@ -116,8 +116,10 @@ CONF_PATH=$("${C_PATH[@]}" 2>&1 >/dev/tty)
 
 # Create all this directories
 $SUDO mkdir -p $DEFAULT_PATH $INC_PATH $MEDIA_PATH $CONF_PATH
-
 IFACE=$WAN
+
+# Down previously created containers before changing configuration
+docker-compose down
 
 # Begin generating docker receipe
 cat files/includes/head.docker > docker-compose.yml
