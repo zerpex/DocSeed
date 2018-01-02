@@ -27,7 +27,7 @@ source config.local
 # 0 = No
 # 1 = Yes
 is_package_installed() {
-    if [[ -z $1  ]]; then
+    if [[ ! -z $1  ]]; then
         echo $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c ' installed')
     fi
 }
@@ -71,7 +71,7 @@ $DIALOG --title " IMPORTANT " --clear \
 case $? in
   0)
     # If docker is not installed
-	if ! is_package_installed docker; then
+	if is_package_installed docker; then
 	  # Install docker
 	  source $SCRPATH/ins_docker.sh
 	fi
