@@ -7,6 +7,7 @@ $SUDO mkdir -p $MEDIA_PATH/library
 
 cat files/includes/mylar.docker >> docker-compose.yml
 
+$SUDO sed -i "s@FQDN@$My_SDOM.$DOMAIN@g" docker-compose.yml
 $SUDO sed -i "s@INCOMING@$INC_PATH/library@g" docker-compose.yml
 $SUDO sed -i "s@BDS@$MEDIA_PATH/library@g" docker-compose.yml
 $SUDO sed -i "s@autodl-comics_mylar@$My_CNAME@g" docker-compose.yml
@@ -16,13 +17,13 @@ cat <<EOF >> files/includes/muximux.conf
 
 [Mylar]
 name = "Mylar"
-url = "http://192.168.42.52:5006"
+url = "https://192.168.42.52"
 scale = 1
 icon = "muximux-book"
 color = ""
 enabled = "true"
 EOF
 
-$SUDO sed -i "s@192.168.42.52@$IFACE@g" files/includes/muximux.conf
+$SUDO sed -i "s@192.168.42.52@$My_SDOM.$DOMAIN@g" files/includes/muximux.conf
 
 INSTALLED+=('My')
