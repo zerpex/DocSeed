@@ -2,8 +2,8 @@
 # Seedbox manager
 #
 # author       : zerpex ( zerpex@gmail.com )
-# Last updated : 2017 04 03
-# Version 1.5
+# Last updated : 2018 01 02
+# Version 1.6
 #
 # Github : https://github.com/zerpex/seedbox_docker
 
