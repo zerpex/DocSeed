@@ -7,7 +7,6 @@ cat files/includes/syncthing.docker >> docker-compose.yml
 $SUDO sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
 $SUDO sed -i "s@MEDIA@$MEDIA_PATH@g" docker-compose.yml
 $SUDO sed -i "s@tool-syncro_Syncthing@$Sy_CNAME@g" docker-compose.yml
-$SUDO sed -i "s@5550@$Sy_CPORT@g" docker-compose.yml
 
 # Set Muximux configuration
 cat <<EOF >> files/includes/muximux.conf
@@ -23,6 +22,5 @@ dd = "true"
 EOF
 
 $SUDO sed -i "s@192.168.42.52@$IFACE@g" files/includes/muximux.conf
-$SUDO sed -i "s@5550@$Sy_CPORT@g" files/includes/muximux.conf
 
 INSTALLED+=('Sy')

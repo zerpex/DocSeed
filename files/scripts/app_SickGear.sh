@@ -10,7 +10,6 @@ cat files/includes/sickgear.docker >> docker-compose.yml
 $SUDO sed -i "s@INCOMING@$INC_PATH/tv@g" docker-compose.yml
 $SUDO sed -i "s@TVSHOWS@$MEDIA_PATH/tv@g" docker-compose.yml
 $SUDO sed -i "s@autodl-tv_sickgear@$Sg_CNAME@g" docker-compose.yml
-$SUDO sed -i "s@5005@$Sg_CPORT@g" docker-compose.yml
 
 # Set Muximux configuration
 cat <<EOF >> files/includes/muximux.conf
@@ -25,6 +24,5 @@ enabled = "true"
 EOF
 
 $SUDO sed -i "s@192.168.42.52@$IFACE@g" files/includes/muximux.conf
-$SUDO sed -i "s@5005@$Sg_CPORT@g" files/includes/muximux.conf
 
 INSTALLED+=('Sg')

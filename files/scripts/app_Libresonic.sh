@@ -14,7 +14,6 @@ $SUDO sed -i "s@PODCASTS@$MEDIA_PATH/sound/podcast@g" docker-compose.yml
 $SUDO sed -i "s@PLAYLISTS@$MEDIA_PATH/sound/playlist@g" docker-compose.yml
 $SUDO sed -i "s@MEDIA@$MEDIA_PATH/sound/other@g" docker-compose.yml
 $SUDO sed -i "s@stream-music_libresonic@$Ls_CNAME@g" docker-compose.yml
-$SUDO sed -i "s@5004@$Ls_CPORT@g" docker-compose.yml
 
 # Set Muximum configuration
 cat <<EOF >> files/includes/muximux.conf
@@ -29,6 +28,5 @@ enabled = "true"
 EOF
 
 $SUDO sed -i "s@192.168.42.52@$IFACE@g" files/includes/muximux.conf
-$SUDO sed -i "s@5004@$Ls_CPORT@g" files/includes/muximux.conf
 
 INSTALLED+=('Ls')

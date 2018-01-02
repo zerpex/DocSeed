@@ -10,7 +10,6 @@ cat files/includes/radarr.docker >> docker-compose.yml
 $SUDO sed -i "s@INCOMING@$INC_PATH/movies@g" docker-compose.yml
 $SUDO sed -i "s@RMOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
 $SUDO sed -i "s@autodl-movies_radarr@$Rd_CNAME@g" docker-compose.yml
-$SUDO sed -i "s@5008@$Rd_CPORT@g" docker-compose.yml
 
 # Set Muximux configuration
 cat <<EOF >> files/includes/muximux.conf
@@ -25,6 +24,5 @@ enabled = "true"
 EOF
 
 $SUDO sed -i "s@192.168.42.52@$IFACE@g" files/includes/muximux.conf
-$SUDO sed -i "s@5008@$Rd_CPORT@g" files/includes/muximux.conf
 
 INSTALLED+=('Rd')

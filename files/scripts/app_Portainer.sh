@@ -5,7 +5,6 @@
 cat files/includes/portainer.docker >> docker-compose.yml
 
 $SUDO sed -i "s@tool-docker_portainer@$Pt_CNAME@g" docker-compose.yml
-$SUDO sed -i "s@9001@$Pt_CPORT@g" docker-compose.yml
 
 # Set Muximum configuration
 cat <<EOF >> files/includes/muximux.conf
@@ -21,6 +20,5 @@ dd = "true"
 EOF
 
 $SUDO sed -i "s@192.168.42.52@$IFACE@g" files/includes/muximux.conf
-$SUDO sed -i "s@9001@$Pt_CPORT@g" files/includes/muximux.conf
 
 INSTALLED+=('Pt')
