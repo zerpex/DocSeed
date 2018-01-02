@@ -6,13 +6,13 @@
     image: traefik
     container_name: proxy_traefik
     hostname: traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - CONF/traefik/traefik.toml:/traefik.toml
+      - CONF/traefik/acme:/etc/traefik/acme
     ports:
       - "80:80"
       - "443:443"
       - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./files/traefik.toml:/traefik.toml
-      - ./files/acme:/etc/traefik/acme
     networks:
        - traefik_proxy
