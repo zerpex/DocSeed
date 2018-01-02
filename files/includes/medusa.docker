@@ -1,0 +1,27 @@
+##########
+# Medusa #
+##########
+   medusa:
+    image: xataz/medusa
+    container_name: autodl-tv_sickgear
+    hostname: medusa
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.backend.port=8080
+      - traefik.docker.network=traefik_proxy
+    volumes:
+      - CONF/medusa:/data
+      - INCOMING:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    environment:
+      - MEDUSA_WEBROOT=
+      - MEDUSA_ENCRYPTION_VERSION=2
+      - MEDUSA_TVDIRS=/downloads
+      - APP_UID=1069
+      - APP_GID=1069
+      - TZ=Europe/Paris
+    networks:
+      - traefik_proxy
+
