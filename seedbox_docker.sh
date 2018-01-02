@@ -14,6 +14,16 @@ SCRPATH=$PWD/files/scripts
 # Variables includes 
 source $SCRPATH/vars.sh
 
+# Check if a package is installed
+# $1 = Package to check
+# 0 = No
+# 1 = Yes
+is_package_installed() {
+    if [[ ! -z $1  ]]; then
+        echo $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c ' installed')
+    fi
+}
+
 # Check if system is debian based
 if [ ! -f /etc/debian_version ];
 then
@@ -54,7 +64,7 @@ if [ -z $DISPLAY ]
       DIALOG=Xdialog
 fi
 
-# OK to checka nd install docker ?
+# OK to check and install docker ?
 $DIALOG --title " IMPORTANT " --clear \
         --yesno "This script require docker and docker-compose, it will install it automatically if not found on the system.\n
   Do you agree ?" 15 75
@@ -62,17 +72,16 @@ $DIALOG --title " IMPORTANT " --clear \
 case $? in
   0)
     # If docker is not installed
-	if [ ! -s /usr/bin/docker ]
-	then
-			# Install docker
-			source $SCRPATH/ins_docker.sh
+	if ! is_package_installed docker; then
+	  # Install docker
+	  source $SCRPATH/ins_docker.sh
 	fi
 
 	# If docker-compose is not installed
 	if [ ! -s /usr/local/bin/docker-compose ]
 	then
-			# Install docker-compose
-			source $SCRPATH/ins_docker-compose.sh
+	  # Install docker-compose
+	  source $SCRPATH/ins_docker-compose.sh
 	fi
     ;;
   1)
@@ -109,19 +118,7 @@ CONF_PATH=$("${C_PATH[@]}" 2>&1 >/dev/tty)
 # Create all this directories
 $SUDO mkdir -p $DEFAULT_PATH $INC_PATH $MEDIA_PATH $CONF_PATH
 
-# Select the network interface to use
-cmd=($DIALOG --title " Select interface " --clear --radiolist "Please select the network interface to use on the start menu: " 20 75 5)
-options=("LAN" ": $LAN" on
-		 "WAN" ": $WAN" off)
-choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-clear
-
-if [ "$choice" == "WAN" ]
-then
-		IFACE=$WAN
-else
-		IFACE=$LAN
-fi
+IFACE=$WAN
 
 # Begin generating docker receipe
 cat files/includes/head.docker > docker-compose.yml
@@ -135,7 +132,7 @@ options=("Muximux" "Application management console (Heavily recommanded)" on
          "Libresonic" "Streaming : Music" off
          "Ubooquity" "Streaming : Comics" off
          "Radarr" "Automation : Movies" off
-         "SickGear" "Automation : TV shows" off
+         "Medusa" "Automation : TV shows" off
          "Headphones" "Automation : Music" off
          "Mylar" "Automation : Comics" off
          "Watchtower" "Tool : Auto-update apps (Heavily recommanded)" on
@@ -163,6 +160,7 @@ $SUDO chown -R $SUID:$SGID $INC_PATH
 $SUDO chown -R $SUID:$SGID $MEDIA_PATH
 
 # Generate and start all needeed containers
+docker network create traefik_proxy
 docker-compose up -d
 sleep 5
 
@@ -171,27 +169,28 @@ docker stop $Mx_CNAME
 $SUDO rm $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
 $SUDO cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
 $SUDO chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+sleep 5
 docker start $Mx_CNAME
 
+# Writing a beautifull resume
 for APP in "${INSTALLED[@]}"
 do
 	CNAME=_CNAME
-	CPORT=_CPORT
-	ICON=_ICON
+	SDOM=_SDOM
 	CONTNAME=$(eval "echo \$$APP$CNAME")
-	FPORT=$(eval "echo \$$APP$CPORT")
-	FICON=$(eval "echo \$$APP$ICON")
+	FDOM=$(eval "echo \$$APP$SDOM")
 	FNAME=`echo $CONTNAME | awk -F_ '{print $2}'`
 	STATE=`docker inspect -f {{.State.Running}} $CONTNAME`
 
 	if [ "$STATE" == "true" ]
 	then
-		echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running at ${CYELLOW}http://$IFACE:$FPORT$CEND"
+		echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running at ${CYELLOW}http://$FDOM$CEND"
 	else
 		echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
 	fi
 done
 
 echo " "
-echo -e "If you installed Muximux, you can access all your apps directly through : ${CYELLOW}http://$IFACE$CEND"
+echo -e "If you installed Muximux, you can access all your apps directly through : ${CYELLOW}http://$Mx_SDOM.$DOMAIN$CEND"
 echo " "
+
