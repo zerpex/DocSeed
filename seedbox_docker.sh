@@ -17,7 +17,7 @@ echo -e "${CGREEN}Installing pre-requiresites$CEND"
 echo " "
 $SUDO apt-get update
 $SUDO apt-get -y upgrade
-$SUDO apt-get -y install dialog sudo apt-transport-https ca-certificates curl dnsutils
+$SUDO apt-get -y install dialog sudo apt-transport-https ca-certificates curl dnsutils software-properties-common python-software-properties
 
 # Variables includes 
 source config.local
@@ -27,7 +27,7 @@ source config.local
 # 0 = No
 # 1 = Yes
 is_package_installed() {
-    if [[ ! -z $1  ]]; then
+    if [[ -z $1  ]]; then
         echo $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c ' installed')
     fi
 }
