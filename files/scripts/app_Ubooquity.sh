@@ -6,7 +6,7 @@ $SUDO mkdir -p $MEDIA_PATH/library
 
 cat files/includes/ubooquity.docker >> docker-compose.yml
 
-$SUDO sed -i "s@FQDN2@$Ua_SDOM.$DOMAIN@g" docker-compose.yml
+$SUDO sed -i "s@FQDN_ADM@$Ua_SDOM.$DOMAIN@g" docker-compose.yml
 $SUDO sed -i "s@FQDN@$Ub_SDOM.$DOMAIN@g" docker-compose.yml
 $SUDO sed -i "s@LIBRARY@$MEDIA_PATH/library@g" docker-compose.yml
 $SUDO sed -i "s@stream-comics_ubooquity@$Ub_CNAME@g" docker-compose.yml
