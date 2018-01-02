@@ -12,7 +12,7 @@ PWD=$(pwd)
 SCRPATH=$PWD/files/scripts
 
 # Variables includes 
-source $SCRPATH/vars.sh
+source config.local
 
 # Check if a package is installed
 # $1 = Package to check
