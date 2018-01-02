@@ -24,6 +24,3 @@
       - GID=1069
     networks:
       - traefik_proxy
-      - "49184:49184"
-      - "49184:49184/udp"
-
