@@ -177,7 +177,7 @@ do
 	CNAME=_CNAME
 	SDOM=_SDOM
 	CONTNAME=$(eval "echo \$$APP$CNAME")
-	FDOM=$(eval "echo \$$APP$SDOM")
+	FDOM=$(eval "echo \$$APP$SDOM").$DOMAIN
 	FNAME=`echo $CONTNAME | awk -F_ '{print $2}'`
 	STATE=`docker inspect -f {{.State.Running}} $CONTNAME`
 
