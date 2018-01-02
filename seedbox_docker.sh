@@ -17,7 +17,7 @@ echo -e "${CGREEN}Installing pre-requiresites$CEND"
 echo " "
 $SUDO apt-get update
 $SUDO apt-get -y upgrade
-$SUDO apt-get -y install dialog sudo apt-transport-https ca-certificates curl dnsutils software-properties-common python-software-properties
+$SUDO apt-get -y install dialog sudo apt-transport-https ca-certificates curl dnsutils software-properties-common
 
 # Variables includes 
 source config.local
