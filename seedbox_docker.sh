@@ -11,6 +11,14 @@
 PWD=$(pwd)
 SCRPATH=$PWD/files/scripts
 
+# Installation pre-requiresites
+echo " "
+echo -e "${CGREEN}Installing pre-requiresites$CEND"
+echo " "
+$SUDO apt-get update
+$SUDO apt-get -y upgrade
+$SUDO apt-get -y install dialog sudo apt-transport-https ca-certificates curl dnsutils
+
 # Variables includes 
 source config.local
 
@@ -46,15 +54,6 @@ then
 else
         SUDO=sudo
 fi
-
-# Installation pre-requiresites
-
-echo " "
-echo -e "${CGREEN}Installing pre-requiresites$CEND"
-echo " "
-$SUDO apt-get update
-$SUDO apt-get -y upgrade
-$SUDO apt-get -y install dialog sudo apt-transport-https ca-certificates curl
 
 # Installation menu begin
 if [ -z $DISPLAY ]
