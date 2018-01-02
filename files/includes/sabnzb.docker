@@ -1,12 +1,16 @@
 ##########
 # SabNZB #
 ##########
-
    sabnzbd:
     image: linuxserver/sabnzbd
     container_name: dl-newsgroups_sabnzdb
     restart: always
     hostname: newsgroups
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.backend.port=8080
+      - traefik.docker.network=traefik_proxy
     volumes:
       - INCOMING:/downloads:rw
       - CONF/sabnzdb/temp_dls:/incomplete-downloads:rw
@@ -17,6 +21,6 @@
       - PUID=1069
       - PGID=1069
       - TZ=Europe/Paris
-    ports:
-      - "5002:8080"
+    networks:
+      - traefik_proxy
 

@@ -1,11 +1,15 @@
 ##############
 # Headphones #
 ##############
-
    headphones:
     image: linuxserver/headphones
     container_name: autodl-music_headphones
     hostname: headphones
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.backend.port=8181
+      - traefik.docker.network=traefik_proxy
     volumes:
       - CONF/headphones:/config
       - INCOMING:/downloads
@@ -16,6 +20,6 @@
       - PUID=1069
       - PGID=1069
       - TZ=Europe/Paris
-    ports:
-      - 5007:8181
+    networks:
+      - traefik_proxy
 

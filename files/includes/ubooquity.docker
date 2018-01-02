@@ -1,12 +1,18 @@
 #############
 # Ubooquity #
 #############
-
    ubooquity:
     restart: always
     image: zerpex/ubooquity-docker
     container_name: stream-comics_ubooquity
     hostname: library
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.backend.port=2202
+      - traefik.adm.frontend.rule=Host:FQDN_ADM
+      - traefik.adm.backend.port=2502
+      - traefik.docker.network=traefik_proxy
     volumes:
       - LIBRARY:/media:ro
       - CONF/ubooquity/conf:/config:rw
@@ -15,7 +21,6 @@
       - UID=1069
       - GID=1069
       - TZ=Europe/Paris
-    ports:
-      - "5003:2202"
-      - "2502:2502"
+    networks:
+      - traefik_proxy
       

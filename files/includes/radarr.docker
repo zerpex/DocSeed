@@ -1,10 +1,14 @@
 ##########
 # Radarr #
 ##########
-
    radarr:
     image: linuxserver/radarr
     container_name: autodl-movies_radarr
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.backend.port=7878
+      - traefik.docker.network=traefik_proxy
     volumes:
       - CONF/radarr:/config
       - INCOMING:/downloads
@@ -14,6 +18,6 @@
       - PUID=1069
       - PGID=1069
       - TZ=Europe/Paris
-    ports:
-      - 5008:7878
+    networks:
+      - traefik_proxy
 

@@ -1,11 +1,15 @@
 #########
 # Mylar #
 #########
-
    mylar:
     image: linuxserver/mylar
     container_name: autodl-comics_mylar
     hostname: mylar
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.backend.port=8090
+      - traefik.docker.network=traefik_proxy
     volumes:
       - CONF/mylar:/config
       - INCOMING:/downloads
@@ -16,6 +20,6 @@
       - PUID=1069
       - PGID=1069
       - TZ=Europe/Paris
-    ports:
-      - 5006:8090
+    networks:
+      - traefik_proxy
 

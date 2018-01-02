@@ -1,12 +1,16 @@
 ##############
 # Libresonic #
 ##############
-
    libresonic:
     restart: always
     image: linuxserver/libresonic
     container_name: stream-music_libresonic
     hostname: zik
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.backend.port=4040
+      - traefik.docker.network=traefik_proxy
     volumes:
       - MUSIC:/music:ro
       - PODCASTS:/podcasts:ro
@@ -20,6 +24,6 @@
       - CONTEXT_PATH=/
       - SSL=no
       - TERM=xterm
-    ports:
-      - "5004:4040"
+    networks:
+      - traefik_proxy
 

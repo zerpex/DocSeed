@@ -1,15 +1,19 @@
 #############
 # Portainer #
 #############
-
    portainer:
     image: portainer/portainer
     container_name: tool-docker_portainer
     restart: always
-    ports:
-      - "9000:9000"
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.backend.port=9000
+      - traefik.docker.network=traefik_proxy
     volumes:
       - CONF/portainer/data:/data
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime:ro
+    networks:
+      - traefik_proxy
 

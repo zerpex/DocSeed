@@ -1,12 +1,16 @@
 ########
 # Emby #
 ########
-
    emby:
     image: emby/embyserver
     container_name: stream-video_emby
     restart: always
     hostname: video
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.backend.port=8096
+      - traefik.docker.network=traefik_proxy
     volumes:
       - MOVIES:/data:ro
       - CONF/emby/conf:/config:rw
@@ -14,9 +18,6 @@
     environment:
       - APP_UID=1069
       - APP_GID=1069
-    ports:
-      - "5009:8096"
-      - "8920:8920"
-      - "7359:7359/udp"
-      - "1900:1900/udp"
+    networks:
+      - traefik_proxy
 
