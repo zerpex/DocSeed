@@ -17,7 +17,7 @@ cat <<EOF >> files/includes/muximux.conf
 
 [Mylar]
 name = "Mylar"
-url = "https://192.168.42.52"
+url = "https://192.168.42.52/home"
 scale = 1
 icon = "muximux-book"
 color = ""
