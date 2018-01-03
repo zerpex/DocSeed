@@ -179,13 +179,13 @@ do
 
 	if [ "$STATE" == "true" ]
 	then
-		echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running at ${CYELLOW}http://$FDOM$CEND"
+		echo -e "=> [ ${CGREEN}OK$CEND ] $FNAME is now installed and running at ${CYELLOW}https://$FDOM$CEND"
 	else
 		echo -e "!! [ ${CRED}KO$CEND ] $FNAME is not installed, but not running. Please check logs with "docker logs $CONTNAME" !"
 	fi
 done
 
 echo " "
-echo -e "If you installed Muximux, you can access all your apps directly through : ${CYELLOW}http://$Mx_SDOM.$DOMAIN$CEND"
+echo -e "If you installed Muximux, you can access all your apps directly through : ${CYELLOW}https://$Mx_SDOM.$DOMAIN$CEND"
 echo " "
 
