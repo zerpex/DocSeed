@@ -16,7 +16,7 @@ cat <<EOF >> files/includes/muximux.conf
 
 [Headphones]
 name = "Headphones"
-url = "https://192.168.42.52"
+url = "https://192.168.42.52/home"
 scale = 1
 icon = "muximux-headphones"
 color = "#000000"
