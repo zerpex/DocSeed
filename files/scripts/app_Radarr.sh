@@ -17,7 +17,7 @@ cat <<EOF >> files/includes/muximux.conf
 
 [Radarr]
 name = "Radarr"
-url = "http://192.168.42.52"
+url = "https://192.168.42.52"
 scale = 1
 icon = "muximux-sonarr"
 color = "#35c5f4"
