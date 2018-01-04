@@ -67,9 +67,3 @@
       - CONF/nextcloud/redis:/data:rw
     networks:
       - cloud_back
-
-networks:
-  traefik_proxy:
-    external:
-      name: traefik_proxy
-  cloud_back:
