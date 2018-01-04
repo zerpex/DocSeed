@@ -17,7 +17,7 @@
       - redis:redis
     depends_on: [nextcloud_db]
     volumes:
-      - /data/cloud:/data:rw
+      - DATA:/data:rw
       - CONF/nextcloud/conf:/config:rw
       - CONF/nextcloud/apps:/apps2:rw
       - CONF/nextcloud/themes:/nextcloud/themes
