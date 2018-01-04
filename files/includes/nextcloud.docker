@@ -1,0 +1,75 @@
+#############
+# Nextcloud #
+#############
+# Nextcloud instance
+  gnetnextcloud:
+    restart: always
+    image: hoellen/nextcloud
+    container_name: cloud-nextcloud
+    hostname: cloud
+    labels:
+    - traefik.enable=true
+    - traefik.frontend.rule=Host:FQDN
+    - traefik.backend.port=8888
+    - traefik.docker.network=traefik_proxy
+    links:
+      - nextcloud_db:nextcloud_db
+      - redis:redis
+    depends_on: [nextcloud_db]
+    volumes:
+      - /data/cloud:/data:rw
+      - CONF/nextcloud/conf:/config:rw
+      - CONF/nextcloud/apps:/apps2:rw
+      - CONF/nextcloud/themes:/nextcloud/themes
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - UID=1069
+      - GID=1069
+      - DB_TYPE=mysql
+      - DB_NAME=nextcloud
+      - DB_USER=nextcloud
+      - DB_PASSWORD=xxxxxxxxxxxxxxx
+      - DB_HOST=nextcloud_db
+      - UPLOAD_MAX_SIZE=30G
+      - APC_SHM_SIZE=128M
+      - OPCACHE_MEM_SIZE=128
+      - REDIS_MAX_MEMORY=64mb
+      - CRON_PERIOD=15m
+      - TZ=Europe/Paris
+    networks:
+      - traefik_proxy
+      - cloud_back
+
+#Nextcloud database (mariadb)
+  nextcloud_db:
+    restart: always
+    image: mariadb:latest
+    container_name: cloud-nextcloud_db
+    volumes:
+      - CONF/nextcloud/db:/var/lib/mysql:rw
+      - CONF/nextcloud/db/import:/docker-entrypoint-initdb.d:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=xxxxyxxxxxxxxxxxxxxxx
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=xxxxxxxxxxxxxxx
+    networks:
+      - cloud_back
+
+#Nextcloud cache (Redis)
+  redis:
+    image: redis:alpine
+    restart: always
+    container_name: cloud-nextcloud_redis
+    hostname: redis
+    volumes:
+      - CONF/nextcloud/redis:/data:rw
+    networks:
+      - cloud_back
+
+networks:
+  traefik_proxy:
+    external:
+      name: traefik_proxy
+  cloud_back:
