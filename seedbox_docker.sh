@@ -63,7 +63,7 @@ if [ -z $DISPLAY ]
       DIALOG=Xdialog
 fi
 
-if ! is_package_installed docker-ce; then
+if is_package_installed docker-ce; then
   # OK to check and install docker ?
   $DIALOG --title " IMPORTANT " --clear \
           --yesno "This script require docker and docker-compose, it will install it automatically.\n
