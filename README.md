@@ -3,6 +3,9 @@
 ## Description :
 This script automatically install some services to any debian based distro using docker and docker-compose.
 
+**Proxy :**
+-[Traefik](https://github.com/containous/traefik) : Proxy that automatically manage let's encrypt certificates.
+
 **Downloaders :**
 - [rTorrent](https://github.com/rakshasa/rtorrent) : **Torrents** downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood).
 - [SabNZB](https://sabnzbd.org/) : **Newsgroups** downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-sabnzbd).
@@ -10,7 +13,7 @@ This script automatically install some services to any debian based distro using
 
 **Download automation :**
 - [Radarr](https://github.com/Radarr/Radarr) : Automated **movies** downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-headphones).
-- [SickGear](https://github.com/SickGear/SickGear) : Automated **TV Shows** downloader dockerized by [ressu](https://github.com/SickGear/SickGear.Docker).
+- [Medusa](https://github.com/pymedusa/Medusa) : Automated **TV Shows** downloader dockerized by [xataz](https://github.com/xataz/docker-medusa).
 - [Headphones](https://github.com/rembo10/headphones) : Automated **music** downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-headphones).
 - [Mylar](https://github.com/evilhero/mylar) : Automated **comic book** (cbr/cbz) downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-mylar).  
 
@@ -20,6 +23,7 @@ This script automatically install some services to any debian based distro using
 - [Libresonic](https://github.com/Libresonic/libresonic) : Music streaming platform dockerized by [linuxserver.io](https://github.com/linuxserver/docker-libresonic)
 
 **Tools :**
+- [Nextcloud](https://github.com/nextcloud/server) : Cloud interface dockerized by [hoellen](https://github.com/hoellen/dockerfiles/tree/master/nextcloud).
 - [Muximux](https://github.com/mescon/Muximux) : Front-end interface to manage applications dockerized by [linuxserver.io](https://hub.docker.com/r/linuxserver/muximux/).
 - [Watchtower](https://github.com/v2tec/watchtower) : **docker tool** that check and update all other containers automaticaly.
 - [Portainer](https://github.com/portainer/portainer) : **docker tool** that adds a graphical web interface to manage all containers.
