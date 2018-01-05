@@ -2,7 +2,7 @@
 # Nextcloud #
 #############
 # Nextcloud instance
-  gnetnextcloud:
+   gnetnextcloud:
     restart: always
     image: hoellen/nextcloud
     container_name: cloud-nextcloud
@@ -41,7 +41,7 @@
       - cloud_back
 
 #Nextcloud database (mariadb)
-  nextcloud_db:
+   nextcloud_db:
     restart: always
     image: mariadb:latest
     container_name: cloud-nextcloud_db
@@ -58,7 +58,7 @@
       - cloud_back
 
 #Nextcloud cache (Redis)
-  redis:
+   redis:
     image: redis:alpine
     restart: always
     container_name: cloud-nextcloud_redis
