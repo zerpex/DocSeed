@@ -22,16 +22,6 @@ $SUDO apt-get -y install dialog sudo apt-transport-https ca-certificates curl dn
 # Variables includes 
 source config.local
 
-# Check if a package is installed
-# $1 = Package to check
-# 0 = No
-# 1 = Yes
-is_package_installed() {
-    if [[ ! -z $1  ]]; then
-        echo $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c ' installed')
-    fi
-}
-
 # Check if system is debian based
 if [ ! -f /etc/debian_version ];
 then
@@ -63,7 +53,7 @@ if [ -z $DISPLAY ]
       DIALOG=Xdialog
 fi
 
-if is_package_installed docker-ce; then
+if [ ! -z $(docker --version | grep "not found") ]; then
   # OK to check and install docker ?
   $DIALOG --title " IMPORTANT " --clear \
           --yesno "This script require docker and docker-compose, it will install it automatically.\n
