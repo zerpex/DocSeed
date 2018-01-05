@@ -3,7 +3,7 @@
 ##########
    medusa:
     image: xataz/medusa
-    container_name: autodl-tv_sickgear
+    container_name: autodl-tv_medusa
     hostname: medusa
     labels:
       - traefik.enable=true
@@ -24,4 +24,3 @@
       - TZ=Europe/Paris
     networks:
       - traefik_proxy
-
