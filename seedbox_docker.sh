@@ -145,18 +145,15 @@ $SUDO chown -R $SUID:$SGID $DEFAULT_PATH
 $SUDO chown -R $SUID:$SGID $INC_PATH
 $SUDO chown -R $SUID:$SGID $MEDIA_PATH
 
+# Update Muximux conf
+$SUDO mkdir -p $CONF_PATH/muximux/conf/www/muximux
+$SUDO cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+$SUDO chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+
 # Generate and start all needeed containers
 docker network create traefik_proxy
 docker-compose up -d
-sleep 5
-
-# Update Muximux conf
-docker stop $Mx_CNAME
-$SUDO rm $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
-$SUDO cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
-$SUDO chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
-sleep 5
-docker start $Mx_CNAME
+sleep 10
 
 # Writing a beautifull resume
 for APP in "${INSTALLED[@]}"
