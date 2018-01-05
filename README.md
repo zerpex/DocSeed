@@ -4,7 +4,7 @@
 This script automatically install some services to any debian based distro using docker and docker-compose.
 
 **Proxy :**
--[Traefik](https://github.com/containous/traefik) : Proxy that automatically manage let's encrypt certificates.
+- [Traefik](https://github.com/containous/traefik) : Proxy that automatically manage let's encrypt certificates.
 
 **Downloaders :**
 - [rTorrent](https://github.com/rakshasa/rtorrent) : **Torrents** downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood).
