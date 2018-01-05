@@ -28,12 +28,12 @@
       - DB_TYPE=mysql
       - DB_NAME=nextcloud
       - DB_USER=nextcloud
-      - DB_PASSWORD=xxxxxxxxxxxxxxx
+      - DB_PASSWORD=secretpassword
       - DB_HOST=nextcloud_db
+      - DOMAIN=FQDN
       - UPLOAD_MAX_SIZE=30G
       - APC_SHM_SIZE=128M
       - OPCACHE_MEM_SIZE=128
-      - REDIS_MAX_MEMORY=64mb
       - CRON_PERIOD=15m
       - TZ=Europe/Paris
     networks:
@@ -50,10 +50,10 @@
       - CONF/nextcloud/db/import:/docker-entrypoint-initdb.d:ro
       - /etc/localtime:/etc/localtime:ro
     environment:
-      - MYSQL_ROOT_PASSWORD=xxxxyxxxxxxxxxxxxxxxx
+      - MYSQL_ROOT_PASSWORD=supersecretpassword
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=xxxxxxxxxxxxxxx
+      - MYSQL_PASSWORD=secretpassword
     networks:
       - cloud_back
 
