@@ -3,7 +3,7 @@
 
 cat files/includes/nextcloud.docker >> docker-compose.yml
 
-sed -i "s@DATA@$DEFAULT_PATH@g" docker-compose.yml
+sed -i "s@DATASTORE@$DEFAULT_PATH@g" docker-compose.yml
 sed -i "s@FQDN@$Nx_SDOM.$DOMAIN@g" docker-compose.yml
 sed -i "s@cloud-nextcloud@$Nx_CNAME@g" docker-compose.yml
 
