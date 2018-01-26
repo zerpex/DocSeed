@@ -39,11 +39,11 @@ This script help you building a full-featured seedboxon any debian based distro 
 
 2a- MANDATORY 
 - Set `DOMAIN` variable in `config.local` to your domain name.  
-- Set your DNS sub-domains (1 per app) BEFORE running the script.
+- Set your DNS sub-domains (1 per app and according to `config.local`) BEFORE running the script.
 
 2b- OPTIONNAL  
-- You can also set container's names and exposed ports in `config.local`.
-- (_only if you know what you are doing !_) : You can change all docker options in `./files/samples/*.docker` where "*" is the app you want to change.
+- You can also set container's names in `config.local`.
+- (_only if you know what you are doing !_) : You can change all docker options in `./files/includes/*.docker` where "*" is the app you want to change.
 
 3- Execute :  
 `./DocSeed.sh`
