@@ -106,6 +106,7 @@ options=("Traefik" "Proxy and certificates manager (Mandatory)" on
          "Medusa" "Automation : TV shows" off
          "Headphones" "Automation : Music" off
          "Mylar" "Automation : Comics" off
+	 "VPN" "VPN Server using openvpn" off
          "Watchtower" "Tool : Auto-update apps (Heavily recommanded)" on
          "Portainer" "Tool : Containers management through browser (recomanded)" on
          "Syncthing" "Tool : Devices synchronisation" on)
