@@ -1,7 +1,7 @@
 #!/bin/bash
 # rTorrent installation
 
-cat files/includes/rtorrent.docker >> docker-compose.yml
+cat files/includes/rtorrent-f.docker >> docker-compose.yml
 
 sed -i "s@FQDN@$Rt_SDOM.$DOMAIN@g" docker-compose.yml
 sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
