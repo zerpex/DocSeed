@@ -1,13 +1,14 @@
-# seedbox_docker
+# DocSeed
+Your seedbox using docker technology !
 
 ## Description :
-This script automatically install some services to any debian based distro using docker and docker-compose.
+This script help you building a full-featured seedboxon any debian based distro using docker and docker-compose.
 
 **Proxy :**
 - [Traefik](https://github.com/containous/traefik) : Proxy that automatically manage let's encrypt certificates.
 
 **Downloaders :**
-- [rTorrent](https://github.com/rakshasa/rtorrent) : **Torrents** downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [Wonderfall](https://github.com/Wonderfall/dockerfiles/tree/master/rtorrent-flood).
+- [rTorrent](https://github.com/rakshasa/rtorrent) : **Torrents** downloader with a modern web UI ( [Flood](https://github.com/jfurrow/flood) ). Dockerized by [romancin](https://github.com/romancin/rutorrent-flood-docker).
 - [SabNZB](https://sabnzbd.org/) : **Newsgroups** downloader dockerized by [linuxserver.io](https://github.com/linuxserver/docker-sabnzbd).
 - Pyload : **direct download** not yet implemented. Still looking for a good maintainer.
 
@@ -31,17 +32,21 @@ This script automatically install some services to any debian based distro using
 
 ## How to use this script :
 1- Clone this repository :  
-`git clone https://github.com/zerpex/seedbox_docker.git seedbox`
+`git clone https://github.com/zerpex/DocSeed.git`
 
 2- Place yourself on the folder :  
-`cd seedbox`
+`cd DocSeed`
+
+2a- MANDATORY 
+- Set `DOMAIN` variable in `config.local` to your domain name.  
+- Set your DNS sub-domains (1 per app) BEFORE running the script.
 
 2b- OPTIONNAL  
-- Container's names and exposed ports are set in var.sh fell free to change them as you like/need :) (just remember that these elements are needeed to be uniq).
+- You can also set container's names and exposed ports in `config.local`.
 - (_only if you know what you are doing !_) : You can change all docker options in `./files/samples/*.docker` where "*" is the app you want to change.
 
 3- Execute :  
-`./seedbox_docker.sh`
+`./DocSeed.sh`
 
 4- Answer questions :)
 
@@ -49,39 +54,24 @@ This script automatically install some services to any debian based distro using
 - If not found, it will **automatically** install docker and docker-compose
 - Default dirs set to /home/seedbox
 
-**rTorrent** : `http://<your-ip>:5001`  
+**rTorrent** :  
  user and pass will be asked at first start
 
-**SabNZB** : `http://<your-ip>:5002`  
+**SabNZB** :  
  user and pass will be asked at first start
 
-**Emby** : `http://<your-ip>:5200`  
+**Emby** :  
  user and pass will be asked at first start
 
-**Ubooquity** : `http://<your-ip>:5201`  
- Admin interface is availlable at `htpp://<your-ip>:2502/admin`  
+**Ubooquity** :   
  user and pass will be set on the admin interface on first start.
 
-**Libresonic** : `http://<your-ip>:5202`  
+**Libresonic** :  
  user : admin / pass : admin
 
-**Radarr** : `http://<your-ip>:5101`
-
-**SickGear** : `http://<your-ip>:5102`
-
-**Headphones** : `http://<your-ip>:5103`
-
-**Mylar** : `http://<your-ip>:5104`
-
-**Muximux** : `http://<your-ip>`  
+**Muximux** :  
  user : admin / pass : admin
-
-**Portainer** : `http://<your-ip>:9000`
-
-**Syncthing** : `<your-ip>:5550`
 
 ## To do :
-- Add a reverse proxy
 - Add Pyload
-- Add Glances
-- Add Pydio
+- Add Monitoring
