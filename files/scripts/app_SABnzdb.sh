@@ -1,12 +1,11 @@
 #!/bin/bash
 # SabNZB installation
 
-
 cat files/includes/sabnzb.docker >> docker-compose.yml
 
-$SUDO sed -i "s@FQDN@$Sb_SDOM.$DOMAIN@g" docker-compose.yml
-$SUDO sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
-$SUDO sed -i "s@dl-newsgroups_sabnzdb@$Sb_CNAME@g" docker-compose.yml
+sed -i "s@FQDN@$Sb_SDOM.$DOMAIN@g" docker-compose.yml
+sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
+sed -i "s@dl-newsgroups_sabnzdb@$Sb_CNAME@g" docker-compose.yml
 
 # Set Muximux configuration
 cat <<EOF >> files/includes/muximux.conf
@@ -20,6 +19,5 @@ color = "#f5b907"
 enabled = "true"
 EOF
 
-$SUDO sed -i "s@192.168.42.52@$Sb_SDOM.$DOMAIN@g" files/includes/muximux.conf
-
+sed -i "s@192.168.42.52@$Sb_SDOM.$DOMAIN@g" files/includes/muximux.conf
 INSTALLED+=('Sb')
