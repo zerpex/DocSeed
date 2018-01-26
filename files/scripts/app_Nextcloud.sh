@@ -3,9 +3,9 @@
 
 cat files/includes/nextcloud.docker >> docker-compose.yml
 
-$SUDO sed -i "s@DATA@$DEFAULT_PATH@g" docker-compose.yml
-$SUDO sed -i "s@FQDN@$Nx_SDOM.$DOMAIN@g" docker-compose.yml
-$SUDO sed -i "s@cloud-nextcloud@$Nx_CNAME@g" docker-compose.yml
+sed -i "s@DATA@$DEFAULT_PATH@g" docker-compose.yml
+sed -i "s@FQDN@$Nx_SDOM.$DOMAIN@g" docker-compose.yml
+sed -i "s@cloud-nextcloud@$Nx_CNAME@g" docker-compose.yml
 
 cat <<EOF >> files/includes/muximux.conf
 [Nextcloud]
@@ -17,7 +17,7 @@ color = "#f9be03"
 enabled = "true"
 EOF
 
-$SUDO sed -i "s@192.168.42.52@$Nx_SDOM.$DOMAIN@g" files/includes/muximux.conf
+sed -i "s@192.168.42.52@$Nx_SDOM.$DOMAIN@g" files/includes/muximux.conf
 
 ## Set conf for redis
 NEXTCLOUD_CONF=$CONF/files/apps/nextcloud/conf/config.php
