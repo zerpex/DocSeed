@@ -1,14 +1,19 @@
 #!/bin/bash
 
+#### MANDATORY ####
+
+#--- Set your domain and email.
+DOMAIN=myDomain.tld
+MAIL=me@myDomain.tld
+
+#### OPTIONAL ####
+
 #--- Define user and group ID for all apps. Realy important in order to have all apps access the files.
 SUID=1069
 SGID=1069
 
 #--- Generic vars
 TIME_ZONE=Europe/Paris
-
-#--- Domain
-DOMAIN=myDomain.tld
 
 #--- subdomains per app
 Rt_SDOM=rtorrent                 # rTorrent
