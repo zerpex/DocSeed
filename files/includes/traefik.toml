@@ -21,7 +21,7 @@ defaultEntryPoints = ["http", "https"]	# defaultEntryPoints must be at the top b
 # Enable ACME (Let's Encrypt): automatic SSL
 [acme]
   # caServer = "https://acme-staging.api.letsencrypt.org/directory"
-  email = "me@me.com"
+  email = "EMAIL_CH"
   storage = "/etc/traefik/acme/acme.json" 				# or "traefik/acme/account" if using KV store
   entryPoint = "https"
   onDemand = false
