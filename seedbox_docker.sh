@@ -11,39 +11,28 @@
 PWD=$(pwd)
 SCRPATH=$PWD/files/scripts
 
+# Check if system is debian based
+if [ ! -f /etc/debian_version ]; then
+    echo -e "${CRED}This script has been writen for Debian-based distros."
+    exit 1
+fi
+
+# Check if root or sudo:
+if [[ $(id -u) -ne 0 ]] ; then 
+  echo 'Please run me as root or with sudo'
+  exit 1
+fi
+
 # Installation pre-requiresites
 echo " "
-echo -e "${CGREEN}Installing pre-requiresites$CEND"
+echo -e "${CGREEN}Installing pre-requiresites:$CEND"
 echo " "
-$SUDO apt-get update
-$SUDO apt-get -y upgrade
-$SUDO apt-get -y install dialog sudo apt-transport-https ca-certificates curl dnsutils software-properties-common
+apt-get update
+apt-get -y upgrade
+apt-get -y install dialog sudo apt-transport-https ca-certificates curl dnsutils software-properties-common
 
 # Variables includes 
 source config.local
-
-# Check if system is debian based
-if [ ! -f /etc/debian_version ];
-then
-    echo -e "${CRED}This script has been writen for Debian-based distros."
-    exit 0
-fi
-
-# Check user and if sudo is installed
-if [ -f /usr/bin/sudo ]
-then
-    ROOT=`whoami`
-    if [ $ROOT == "root" ]
-    then
-        SUDO=
-    else
-        echo -e "${CRED}sudo is not installed on this system and you are not root.$CEND"
-        echo -e "${CRED}Please either install sudo or execute this script as root.$CEND"
-        exit 1
-    fi
-else
-        SUDO=sudo
-fi
 
 # Installation menu begin
 if [ -z $DISPLAY ]
@@ -72,25 +61,21 @@ if [ ! -z $(docker --version | grep "not found") ]; then
          ;;
   esac
 fi
-
 # Define the root path 
 D_PATH=($DIALOG --title " Root path " --clear \
              --inputbox "Please set the root path of your installation
 ( default to /home/seebox ) :" 16 75 "/home/seebox")
 DEFAULT_PATH=$("${D_PATH[@]}" 2>&1 >/dev/tty)
-
 # Define the incoming path 
 I_PATH=($DIALOG --title " Incoming path " --clear \
         --inputbox "Please set the path of your incoming folder
 ( default to $DEFAULT_PATH/incoming ) :" 16 75 "$DEFAULT_PATH/incoming")
 INC_PATH=$("${I_PATH[@]}" 2>&1 >/dev/tty)
-
 # Define the media path 
 M_PATH=($DIALOG --title " Media path " --clear \
         --inputbox "Please set the path of your media folder
 ( default to $DEFAULT_PATH/media ) :" 16 75 "$DEFAULT_PATH/media")
 MEDIA_PATH=$("${M_PATH[@]}" 2>&1 >/dev/tty)
-
 # Define the containers' configuration path 
 C_PATH=($DIALOG --title " Configuration path " --clear \
         --inputbox "Please set the path where you want to store apps configuration files
@@ -98,7 +83,7 @@ C_PATH=($DIALOG --title " Configuration path " --clear \
 CONF_PATH=$("${C_PATH[@]}" 2>&1 >/dev/tty)
 
 # Create all this directories
-$SUDO mkdir -p $DEFAULT_PATH $INC_PATH $MEDIA_PATH $CONF_PATH
+mkdir -p $DEFAULT_PATH $INC_PATH $MEDIA_PATH $CONF_PATH
 IFACE=$WAN
 
 # Down previously created containers before changing configuration
@@ -136,19 +121,19 @@ done
 cat files/includes/foot.docker >> docker-compose.yml
 
 # Set global variables
-$SUDO sed -i "s@1069@$SUID@g" docker-compose.yml
-$SUDO sed -i "s@1069@$SGID@g" docker-compose.yml
-$SUDO sed -i "s@CONF@$CONF_PATH@g" docker-compose.yml
+sed -i "s@1069@$SUID@g" docker-compose.yml
+sed -i "s@1069@$SGID@g" docker-compose.yml
+sed -i "s@CONF@$CONF_PATH@g" docker-compose.yml
 
 # Set permissions
-$SUDO chown -R $SUID:$SGID $DEFAULT_PATH
-$SUDO chown -R $SUID:$SGID $INC_PATH
-$SUDO chown -R $SUID:$SGID $MEDIA_PATH
+chown -R $SUID:$SGID $DEFAULT_PATH
+chown -R $SUID:$SGID $INC_PATH
+chown -R $SUID:$SGID $MEDIA_PATH
 
 # Update Muximux conf
-$SUDO mkdir -p $CONF_PATH/muximux/conf/www/muximux
-$SUDO cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
-$SUDO chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+mkdir -p $CONF_PATH/muximux/conf/www/muximux
+cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
 
 # Generate and start all needeed containers
 docker network create traefik_proxy
@@ -176,4 +161,3 @@ done
 echo " "
 echo -e "If you installed Muximux, you can access all your apps directly through : ${CYELLOW}https://$Mx_SDOM.$DOMAIN$CEND"
 echo " "
-
