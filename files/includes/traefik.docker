@@ -3,7 +3,7 @@
 ###########
    traefik:
     restart: unless-stopped
-    image: traefik
+    image: traefik:1.5-alpine
     container_name: proxy_traefik
     hostname: traefik
     volumes:
@@ -13,6 +13,6 @@
     ports:
       - "80:80"
       - "443:443"
-      - "8080:8080"
+      #- "8080:8080"
     networks:
        - traefik_proxy
