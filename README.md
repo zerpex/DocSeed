@@ -84,8 +84,8 @@ docker-compose run --rm openvpn ovpn_revokeclient $CLIENTNAME
 docker-compose run --rm openvpn ovpn_revokeclient $CLIENTNAME remove
 ```
 
-* Hosts can "see" each others:
-add the following option in openvpn.conf:
+* Hosts can "see" each others:  
+Add the following option in openvpn.conf:
 ```bash
 client-to-client
 ```
@@ -93,12 +93,13 @@ client-to-client
 ## Notes :
 - If not found, it will **automatically** install docker and docker-compose.
 - Default dirs set to **/home/seedbox**.
+- **Emby** : user & pass will be asked at first start.
+- **Libresonic** : user: admin | pass: admin
+- **Muximux** : user: admin | pass: admin
+- **Pyload** : user: pyload | pass: pyload
 - **rTorrent** : user & pass will be asked at first start.
 - **SabNZB** : user & pass will be asked at first start.
-- **Emby** : user & pass will be asked at first start.
 - **Ubooquity** : user & pass will be set on the admin interface on first start.
-- **Libresonic** : user : admin | pass : admin
-- **Muximux** : user : admin | pass : admin
 
 ## To do :
 - Add Pyload
