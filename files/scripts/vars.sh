@@ -12,6 +12,7 @@ DOMAIN=myDomain.tld
 
 #--- subdomains per app
 Rt_SDOM=rtorrent                 # rTorrent
+Pl_SDOM=pyload                   # Pyload
 Sb_SDOM=sabnzb                   # SabNZB
 Py_SDOM=pyload                   # Pyload
 Rd_SDOM=radarr                   # Radarr
@@ -30,6 +31,7 @@ Mx_SDOM=muximux                  # Muximux
 #--- Docker options
 #- Container names
 Rt_CNAME=dl-torrent_rTorrent            # rTorrent
+Pl_CNAME=dl-ddl_pyload                  # Pyload
 Sb_CNAME=dl-newsgroups_SABnzdb          # SABnzdb
 Py_CNAME=dl-directdl_Pyload             # Pyload
 Rd_CNAME=autodl-movies_Radarr           # Radarr
