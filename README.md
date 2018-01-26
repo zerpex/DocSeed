@@ -51,26 +51,14 @@ This script help you building a full-featured seedboxon any debian based distro 
 4- Answer questions :)
 
 ## Notes :
-- If not found, it will **automatically** install docker and docker-compose
-- Default dirs set to /home/seedbox
-
-**rTorrent** :  
- user and pass will be asked at first start
-
-**SabNZB** :  
- user and pass will be asked at first start
-
-**Emby** :  
- user and pass will be asked at first start
-
-**Ubooquity** :   
- user and pass will be set on the admin interface on first start.
-
-**Libresonic** :  
- user : admin / pass : admin
-
-**Muximux** :  
- user : admin / pass : admin
+- If not found, it will **automatically** install docker and docker-compose.
+- Default dirs set to **/home/seedbox**.
+- **rTorrent** : user & pass will be asked at first start.
+- **SabNZB** : user & pass will be asked at first start.
+- **Emby** : user & pass will be asked at first start.
+- **Ubooquity** : user & pass will be set on the admin interface on first start.
+- **Libresonic** : user : admin | pass : admin
+- **Muximux** : user : admin | pass : admin
 
 ## To do :
 - Add Pyload
