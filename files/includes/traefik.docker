@@ -6,13 +6,28 @@
     image: traefik:1.5-alpine
     container_name: proxy_traefik
     hostname: traefik
+    command: 
+      --defaultEntryPoints='http,https'
+      --web
+      --web.address=:8080
+      --entryPoints='Name:http Address::80  Redirect.EntryPoint:https' 
+      --entryPoints='Name:https Address::443 TLS' 
+      --acme
+      --acme.email=EMAIL_CH
+      --acme.storage=/certs/acme.json 
+      --acme.entryPoint=https 
+      --acme.ondemand=false
+      --acme.onhostrule=true
+      --acme.httpChallenge.entryPoint=http
+      --docker
+      --docker.domain=domain.tld
+      --docker.watch
+      --docker.exposedbydefault=false
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - CONF/traefik/traefik.toml:/traefik.toml
-      - CONF/traefik/acme:/etc/traefik/acme
+      - /var/run/docker.sock:/var/run/docker.sock:ro  
+      - CONF/certs:/certs
     ports:
       - "80:80"
       - "443:443"
-      #- "8080:8080"
     networks:
-       - traefik_proxy
+      - traefik_proxy
