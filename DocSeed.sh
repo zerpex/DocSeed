@@ -97,7 +97,9 @@ cmd=(dialog --separate-output --checklist "Select options:" 22 85 16)
 options=("Traefik" "Proxy and certificates manager (Mandatory)" on
          "Nextcloud" "Cloud (recommanded)" on
          "Muximux" "Application management console (recommanded)" on
-         "rTorrent" "Download : Torrents" off
+	 "Pyload" "Download : Direct download" off
+         "rTorrent-f" "Download : Torrents with flood interface (Choose ONE rtorrent)" off
+         "rTorrent-r" "Download : Torrents with rutorrent interface (Choose ONE rtorrent)" off
          "SABnzdb" "Download : Newsgroups" off
          "Emby" "Streaming : Video" off
          "Libresonic" "Streaming : Music" off
@@ -106,6 +108,7 @@ options=("Traefik" "Proxy and certificates manager (Mandatory)" on
          "Medusa" "Automation : TV shows" off
          "Headphones" "Automation : Music" off
          "Mylar" "Automation : Comics" off
+	 "VPN" "VPN Server using openvpn" off
          "Watchtower" "Tool : Auto-update apps (Heavily recommanded)" on
          "Portainer" "Tool : Containers management through browser (recomanded)" on
          "Syncthing" "Tool : Devices synchronisation" on)

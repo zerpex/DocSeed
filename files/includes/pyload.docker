@@ -1,0 +1,23 @@
+##########
+# Pyload #
+##########
+   pyload:
+    image: writl/pyload:latest
+    container_name: dl-ddl_pyload
+    restart: always
+    hostname: ddl
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.backend.port=80
+      - traefik.docker.network=traefik_proxy
+    volumes:
+      - INCOMING:/opt/pyload/Downloads:rw
+      - CONF/pyload/conf:/opt/pyload/pyload-config:rw
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - UID=1069
+      - GID=1069
+    networks:
+      - traefik_proxy
+      

@@ -17,6 +17,7 @@ TIME_ZONE=Europe/Paris
 
 #--- subdomains per app
 Rt_SDOM=rtorrent                 # rTorrent
+Pl_SDOM=pyload                   # Pyload
 Sb_SDOM=sabnzb                   # SabNZB
 Py_SDOM=pyload                   # Pyload
 Rd_SDOM=radarr                   # Radarr
@@ -28,6 +29,7 @@ Eb_SDOM=emby                     # Emby
 Ub_SDOM=ubooquity                # Ubooquity
 Ua_SDOM=ubooquity-adm            # Ubooquity's admin insterface
 Ls_SDOM=libresonic               # Libresonic
+Ov_SDOM=openvpn                  # OpenVPN
 Pt_SDOM=portainer                # Portainer
 Sy_SDOM=syncthing                # Syncthing
 Mx_SDOM=muximux                  # Muximux
@@ -35,6 +37,7 @@ Mx_SDOM=muximux                  # Muximux
 #--- Docker options
 #- Container names
 Rt_CNAME=dl-torrent_rTorrent            # rTorrent
+Pl_CNAME=dl-ddl_pyload                  # Pyload
 Sb_CNAME=dl-newsgroups_SABnzdb          # SABnzdb
 Py_CNAME=dl-directdl_Pyload             # Pyload
 Rd_CNAME=autodl-movies_Radarr           # Radarr
@@ -45,6 +48,7 @@ My_CNAME=autodl-comics_Mylar            # Mylar
 Eb_CNAME=stream-video_Emby              # Emby
 Ub_CNAME=stream-comics_Ubooquity        # Ubooquity
 Ls_CNAME=stream-music_Libresonic        # Libresonic
+Ov_CNAME=openvpn                        # OpenVPN
 Wt_CNAME=tool-docker_Watchtower         # Watchtower
 Pt_CNAME=tool-docker_Portainer          # Portainer
 Sy_CNAME=tool-syncro_Syncthing          # Syncthing
