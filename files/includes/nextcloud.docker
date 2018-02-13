@@ -2,7 +2,7 @@
 # Nextcloud #
 #############
 # Nextcloud instance
-   gnetnextcloud:
+   nextcloud:
     restart: always
     image: hoellen/nextcloud
     container_name: cloud-nextcloud
