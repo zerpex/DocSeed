@@ -21,6 +21,9 @@ sed -i "s@192.168.42.52@$Nx_SDOM.$DOMAIN@g" files/includes/muximux.conf
 
 ## Set conf for redis
 NEXTCLOUD_CONF=$CONF/files/apps/nextcloud/conf/config.php
+
+mkdir -p $CONF/files/apps/nextcloud/conf
+cp files/includes/nextcloud.conf $NEXTCLOUD_CONF
 sed -i '$ d' $NEXTCLOUD_CONF
 cat >> $NEXTCLOUD_CONF <<- EOM
 'memcache.distributed' => '\OC\Memcache\Redis',
