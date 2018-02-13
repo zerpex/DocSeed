@@ -1,7 +1,7 @@
 ###########
 # OpenVPN #
 ###########
-  openvpn:
+   openvpn:
     restart: always
     image: kylemanna/openvpn
     container_name: openvpn
@@ -11,4 +11,3 @@
      - CONF/openvpn/conf:/etc/openvpn
     ports:
      - "1194:1194/udp"
-     
