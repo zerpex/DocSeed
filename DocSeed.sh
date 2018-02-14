@@ -35,12 +35,7 @@ apt-get -y install dialog sudo apt-transport-https ca-certificates curl dnsutils
 source config.local
 
 # Installation menu begin
-if [ -z $DISPLAY ]
-   then
-      DIALOG=dialog
-   else
-      DIALOG=Xdialog
-fi
+DIALOG=dialog
 
 if [ ! -z $(docker --version | grep "not found") ]; then
   # OK to check and install docker ?
