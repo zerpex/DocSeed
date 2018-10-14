@@ -64,7 +64,7 @@ fi
 # Define the root path 
 D_PATH=($DIALOG --title " Root path " --clear \
              --inputbox "Please set the root path of your installation
-( default to /home/seebox ) :" 16 75 "/home/seebox")
+( default to /home/seedbox ) :" 16 75 "/home/seedbox")
 DEFAULT_PATH=$("${D_PATH[@]}" 2>&1 >/dev/tty)
 # Define the incoming path 
 I_PATH=($DIALOG --title " Incoming path " --clear \
